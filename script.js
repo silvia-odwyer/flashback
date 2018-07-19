@@ -1,77 +1,8 @@
 (function () {
 
-    // Testing for now, will move to its own function later on.
     var c = document.getElementById('canvas');
     var ctx = c.getContext('2d');
 
-    document.getElementById("img").onload = function () {
-        // var c = document.getElementById("canvas");
-        // var ctx = c.getContext("2d");
-        // var img = document.getElementById("img");
-
-        var width = 300;
-        var height = 300;
-        var canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-
-        // // ctx.drawImage(img, 0, 0);
-        // var imgData = ctx.getImageData(0, 0, c.width, c.height);
-        // // invert colors
-        // var i;
-        // var BRIGHTNESS_ADJ = 30;
-        // for (i = 0; i < imgData.data.length; i += 4) {
-        //     imgData.data[i] += BRIGHTNESS_ADJ
-        //     imgData.data[i + 1] += BRIGHTNESS_ADJ
-        //     imgData.data[i + 2] += BRIGHTNESS_ADJ
-    }
-    // ctx.putImageData(imgData, 0, 0);
-    // document.getElementById("img").onload = function () {
-    //     var canvas = document.getElementById("canvas");
-    //     var ctx = canvas.getContext("2d");
-    //     var img = new Image();
-
-    //     img.onload = function () {
-
-    //         canvas.height = canvas.width * (img.height / img.width);
-
-    //         var oc = document.createElement('canvas')
-
-    //         var octx = oc.getContext('2d');
-
-    //         oc.width = img.width * 0.5;
-    //         oc.height = img.height * 0.5;
-    //         octx.drawImage(img, 0, 0, oc.width, oc.height);
-
-    //         octx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5);
-
-    //         ctx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5,
-    //             0, 0, canvas.width, canvas.height);
-
-    //         octx.drawImage(img, 0, 0);
-    //         var imgData = octx.getImageData(0, 0, oc.width, oc.height);
-
-    //         var BRIGHTNESS_ADJ = 20;
-    //         for (var i = 0; i < imgData.data.length; i += 4) {
-    //             imgData.data[i] -= BRIGHTNESS_ADJ
-    //             imgData.data[i + 1] += BRIGHTNESS_ADJ
-    //             imgData.data[i + 2] += BRIGHTNESS_ADJ
-    //         }
-    //         octx.putImageData(imgData, 0, 0);
-    //     }
-    //     img.src = "pic3.PNG";
-
-
-
-    // };
-
-
-
-    function getRandomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
 
     var img = document.createElement('img');
     img.src = 'pic6.jpg';
@@ -118,6 +49,9 @@
 
         var invert_elem = document.getElementById('invert');
         invert_elem.addEventListener("click", function () {invert(img) }, false);
+
+        var a_el = document.getElementById('a');
+        a_el.addEventListener("click", function () {a(img) }, false);
 
     }
 
@@ -379,5 +313,79 @@
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
         ctx.putImageData(imgData, 0, 0);
+    }
+
+    function a() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 80
+            imgData.data[i + 1] = avg + 20
+            imgData.data[i + 2] = avg + 31
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function redPurple() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 80
+            imgData.data[i + 1] = avg + 20
+            imgData.data[i + 2] = avg + 31
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function slate() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 4
+            imgData.data[i + 1] = avg + 3
+            imgData.data[i + 2] = avg + 12
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function purpleScale() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 90
+            imgData.data[i + 1] = avg + 40
+            imgData.data[i + 2] = avg + 80
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function radio() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 5
+            imgData.data[i + 1] = avg + 40
+            imgData.data[i + 2] = avg + 20
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 })();
