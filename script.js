@@ -423,10 +423,82 @@
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
 
         for (var i = 0; i < imgData.data.length; i += 4) {
+            var randomNumber = getRandomNumber(0, 100);
+            if (randomNumber > 10 && randomNumber < 13) {
+                imgData.data[i] = 120
+                imgData.data[i + 1] = 120
+                imgData.data[i + 2] = 120
+            }
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-            imgData.data[i] += 10
+
+            imgData.data[i] = avg + 100
+            imgData.data[i + 1] = avg + 40
+            imgData.data[i + 2] = avg + 20
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function specksRedscale() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var randomNumber = getRandomNumber(0, 100);
+            if (randomNumber > 10 && randomNumber < 13) {
+                imgData.data[i] = 120
+                imgData.data[i + 1] = 120
+                imgData.data[i + 2] = 120
+            }
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+
+            imgData.data[i] = avg + 100
+            imgData.data[i + 1] = avg + 40
+            imgData.data[i + 2] = avg + 20
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function noiseCentre() {
+        
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3;
+
+            if (i < imgData.data.length / 2 ) {
+                imgData.data[i] += 80
+                imgData.data[i + 1] += 40
+                imgData.data[i + 2] += 120
+            }
+
+            else if (i > (imgData.data.length / 2 ) + 100 && (i < (imgData.data.length / 2) + 2900 )){
+                imgData.data[i] = getRandomNumber(0, 255)
+                imgData.data[i + 1] = getRandomNumber(0, 255)
+                imgData.data[i + 2] = getRandomNumber(0, 255)
+            }
+
+            else {
+                imgData.data[i] += 10
+                imgData.data[i + 1] += 20
+                imgData.data[i + 2] += 90
+            }
+
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function perfume() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] += 80
             imgData.data[i + 1] += 40
-            imgData.data[i + 2] += 90
+            imgData.data[i + 2] += 120
         }
         ctx.putImageData(imgData, 0, 0);
     }
