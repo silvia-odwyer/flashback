@@ -71,6 +71,22 @@
         var ocean_el = document.getElementById("ocean");
         ocean_el.addEventListener("click", function() {ocean(img)}, false);
 
+        var pixelate_elem = document.getElementById("pixelate");
+        pixelate_elem.addEventListener("click", function() {pixelate(img)}, false);
+  
+        var solange_elem = document.getElementById("solange");
+        solange_elem.addEventListener("click", function() {solange(img)}, false);
+
+        var zapt_element = document.getElementById("zapt");
+        zapt_element.addEventListener("click", function() {zapt(img)}, false);
+
+        
+        var neue_element = document.getElementById("neue");
+        neue_element.addEventListener("click", function() {neue(img)}, false);
+
+        var ryo_element = document.getElementById("ryo");
+        ryo_element.addEventListener("click", function() {ryo(img)}, false);
+
     }
 
     function darkify(img) {
@@ -333,6 +349,55 @@
         ctx.putImageData(imgData, 0, 0);
     }
 
+    function solange() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = 255 - imgData.data[i];
+            // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+            // imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function zapt() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            // imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 1] = 255 - imgData.data[i + 1];
+            // imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function neue() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            // imgData.data[i] = 255 - imgData.data[i];
+            // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+            imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    
+    function ryo() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = 255 - imgData.data[i];
+            // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+            imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
     function roseTint() {
         ctx.drawImage(img, 10, 10, 220, 277);
 
@@ -544,6 +609,23 @@
         }
         ctx.putImageData(imgData, 0, 0);
     }
+
+    function pixelate() {
+        var size = 27 / 100,
+        w = c.width * size,
+        h = c.height * size;
+
+        // draw the original image at a fraction of the final size
+        ctx.drawImage(img, 0, 0, w, h);
+
+        ctx.msImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+
+        // enlarge the minimized image to full size    
+        ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
+    }
+
     function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
