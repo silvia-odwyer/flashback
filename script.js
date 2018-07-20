@@ -5,7 +5,7 @@
 
 
     var img = document.createElement('img');
-    img.src = 'pic6.PNG';
+    img.src = 'pic7.jpg';
     img.onload = function () {
 
         var inc_brightness_elem = document.getElementById('inc_brightness');
@@ -48,44 +48,53 @@
         specks_elem.addEventListener("click", function () { specks(img) }, false);
 
         var invert_elem = document.getElementById('invert');
-        invert_elem.addEventListener("click", function () {invert(img) }, false);
+        invert_elem.addEventListener("click", function () { invert(img) }, false);
 
         var a_el = document.getElementById('a');
-        a_el.addEventListener("click", function () {a(img) }, false);
+        a_el.addEventListener("click", function () { a(img) }, false);
 
         var twenties_el = document.getElementById('twenties');
-        twenties_el.addEventListener("click", function() {twenties(img)}, false);
+        twenties_el.addEventListener("click", function () { twenties(img) }, false);
 
         var rose_el = document.getElementById("rose");
-        rose_el.addEventListener("click", function() {roseTint(img)}, false);
+        rose_el.addEventListener("click", function () { roseTint(img) }, false);
 
         var slate_el = document.getElementById("slate");
-        slate_el.addEventListener("click", function() {slate(img)}, false);
+        slate_el.addEventListener("click", function () { slate(img) }, false);
 
         var purplescale_el = document.getElementById("purplescale");
-        purplescale_el.addEventListener("click", function() {purpleScale(img)}, false);
-        
+        purplescale_el.addEventListener("click", function () { purpleScale(img) }, false);
+
         var radio_el = document.getElementById("radio");
-        radio_el.addEventListener("click", function() {radio(img)}, false);
+        radio_el.addEventListener("click", function () { radio(img) }, false);
 
         var ocean_el = document.getElementById("ocean");
-        ocean_el.addEventListener("click", function() {ocean(img)}, false);
+        ocean_el.addEventListener("click", function () { ocean(img) }, false);
 
         var pixelate_elem = document.getElementById("pixelate");
-        pixelate_elem.addEventListener("click", function() {pixelate(img)}, false);
-  
+        pixelate_elem.addEventListener("click", function () { pixelate(img) }, false);
+
         var solange_elem = document.getElementById("solange");
-        solange_elem.addEventListener("click", function() {solange(img)}, false);
+        solange_elem.addEventListener("click", function () { solange(img) }, false);
 
         var zapt_element = document.getElementById("zapt");
-        zapt_element.addEventListener("click", function() {zapt(img)}, false);
+        zapt_element.addEventListener("click", function () { zapt(img) }, false);
 
-        
+
         var neue_element = document.getElementById("neue");
-        neue_element.addEventListener("click", function() {neue(img)}, false);
+        neue_element.addEventListener("click", function () { neue(img) }, false);
 
         var ryo_element = document.getElementById("ryo");
-        ryo_element.addEventListener("click", function() {ryo(img)}, false);
+        ryo_element.addEventListener("click", function () { ryo(img) }, false);
+
+        var lix_element = document.getElementById("lix");
+        lix_element.addEventListener("click", function () { lix(img) }, false);
+
+        var eon_element = document.getElementById("eon");
+        eon_element.addEventListener("click", function () { eon(img) }, false);
+
+        var aeon_element = document.getElementById("aeon");
+        aeon_element.addEventListener("click", function () { aeon(img) }, false);
 
     }
 
@@ -385,7 +394,7 @@
         ctx.putImageData(imgData, 0, 0);
     }
 
-    
+
     function ryo() {
         ctx.drawImage(img, 10, 10, 220, 277);
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
@@ -394,6 +403,42 @@
             imgData.data[i] = 255 - imgData.data[i];
             // imgData.data[i + 1] = 255 - imgData.data[i + 1];
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function lix() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 1] = 255 - imgData.data[i + 1];
+            //imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function eon() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            //imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 1] = 120 - imgData.data[i + 1];
+            imgData.data[i + 2] = 100 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function aeon() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            //imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 1] = 60 - imgData.data[i + 1];
+            imgData.data[i + 2] = 100 - imgData.data[i + 2];
         }
         ctx.putImageData(imgData, 0, 0);
     }
@@ -484,21 +529,39 @@
 
     function a() {
         ctx.drawImage(img, 10, 10, 220, 277);
-
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
+        var randomNumber;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomNumber = getRandomNumber(0, 100);
-            if (randomNumber > 10 && randomNumber < 13) {
-                imgData.data[i] = 120
-                imgData.data[i + 1] = 120
-                imgData.data[i + 2] = 120
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 20;
+                addition2 = 30;
             }
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 10;
+                addition2 = 90;
+            }
 
-            imgData.data[i] = avg + 100
-            imgData.data[i + 1] = avg + 40
-            imgData.data[i + 2] = avg + 20
+            else {
+                addition1 = 30;
+                addition2 = 10;
+            }
+
+            if (imgData.data[i] - addition > 255) {
+                imgData.data[i] -= addition
+            }
+            else {
+                imgData.data[i] += addition
+            }
+
+            if (imgData.data[i + 1] + addition > 255) {
+                imgData.data[i + 1] -= addition2;
+            } else {
+                imgData.data[i + 1] += addition2;
+            }
+            // imgData.data[i + 2] += addition2;
         }
         ctx.putImageData(imgData, 0, 0);
     }
@@ -525,7 +588,7 @@
     }
 
     function noiseCentre() {
-        
+
         ctx.drawImage(img, 10, 10, 220, 277);
 
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
@@ -533,13 +596,13 @@
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3;
 
-            if (i < imgData.data.length / 2 ) {
+            if (i < imgData.data.length / 2) {
                 imgData.data[i] += 80
                 imgData.data[i + 1] += 40
                 imgData.data[i + 2] += 120
             }
 
-            else if (i > (imgData.data.length / 2 ) + 100 && (i < (imgData.data.length / 2) + 2900 )){
+            else if (i > (imgData.data.length / 2) + 100 && (i < (imgData.data.length / 2) + 2900)) {
                 imgData.data[i] = getRandomNumber(0, 255)
                 imgData.data[i + 1] = getRandomNumber(0, 255)
                 imgData.data[i + 2] = getRandomNumber(0, 255)
@@ -612,8 +675,8 @@
 
     function pixelate() {
         var size = 27 / 100,
-        w = c.width * size,
-        h = c.height * size;
+            w = c.width * size,
+            h = c.height * size;
 
         // draw the original image at a fraction of the final size
         ctx.drawImage(img, 0, 0, w, h);
@@ -624,6 +687,125 @@
 
         // enlarge the minimized image to full size    
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
+    }
+
+    function mellow() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i + 2] = 120 - imgData.data[i + 2];
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function greenSpecks() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 20;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 10;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 30;
+                addition2 = 10;
+            }
+
+            imgData.data[i] += addition1;
+            imgData.data[i + 1] += addition2;
+            imgData.data[i + 2] += addition1;
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function eclectic() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 20;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 10;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 30;
+                addition2 = 10;
+            }
+
+            if (imgData.data[i] + addition > 255) {
+                imgData.data[i] -= addition
+            }
+            else {
+                imgData.data[i] += addition
+            }
+
+            if (imgData.data[i + 1] + addition > 255) {
+                imgData.data[i + 1] -= addition2;
+            } else {
+                imgData.data[i] += addition2;
+            }
+            // imgData.data[i + 2] += addition2;
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function matrix() {
+        function a() {
+            ctx.drawImage(img, 10, 10, 220, 277);
+            var imgData = ctx.getImageData(0, 0, c.width, c.height);
+            var randomNumber;
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                randomNumber = getRandomNumber(0, 200);
+                var addition;
+                if (randomNumber > 0 && randomNumber < 50) {
+                    addition1 = 20;
+                    addition2 = 30;
+                }
+                else if (randomNumber > 49 && randomNumber < 100) {
+                    addition1 = 10;
+                    addition2 = 90;
+                }
+
+                else {
+                    addition1 = 30;
+                    addition2 = 10;
+                }
+
+                if (imgData.data[i] - addition > 255) {
+                    imgData.data[i] -= addition
+                }
+                else {
+                    imgData.data[i] += addition
+                }
+
+                if (imgData.data[i + 1] + addition > 255) {
+                    imgData.data[i + 1] -= addition2;
+                } else {
+                    imgData.data[i + 1] += addition2;
+                }
+                // imgData.data[i + 2] += addition2;
+            }
+            ctx.putImageData(imgData, 0, 0);
+        }
     }
 
     function getRandomNumber(min, max) {
