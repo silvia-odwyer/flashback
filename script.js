@@ -114,11 +114,23 @@
         var perfume_elem = document.getElementById("perfume");
         perfume_elem.addEventListener("click", function () {perfume(img) }, false);
 
-        var specks_redscale_elem = document.getElementById("specks");
+        var specks_redscale_elem = document.getElementById("specks_redscale");
         specks_redscale_elem.addEventListener("click", function () {specksRedscale(img) }, false);
 
         var noise_centre_elem = document.getElementById("noise_centre");
         noise_centre_elem.addEventListener("click", function () {noiseCentre(img) }, false);
+
+        var mellow_elem = document.getElementById("mellow");
+        mellow_elem.addEventListener("click", function () {mellow(img) }, false);
+        
+        var matrix_elem = document.getElementById("matrix");
+        matrix_elem.addEventListener("click", function () {matrix(img) }, false);
+
+        var green_specks_elem = document.getElementById("green_specks");
+        green_specks_elem.addEventListener("click", function () {greenSpecks(img) }, false);
+
+        var eclectic_elem = document.getElementById("eclectic");
+        eclectic_elem.addEventListener("click", function () {eclectic(img) }, false);
 
     }
 
@@ -792,7 +804,6 @@
     }
 
     function matrix() {
-        function a() {
             ctx.drawImage(img, 10, 10, 220, 277);
             var imgData = ctx.getImageData(0, 0, c.width, c.height);
             var randomNumber;
@@ -829,7 +840,6 @@
                 // imgData.data[i + 2] += addition2;
             }
             ctx.putImageData(imgData, 0, 0);
-        }
     }
 
     function cosmic() {
