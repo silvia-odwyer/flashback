@@ -5,7 +5,7 @@
 
 
     var img = document.createElement('img');
-    img.src = 'pic7.jpg';
+    img.src = 'pic6.PNG';
     img.onload = function () {
 
         var inc_brightness_elem = document.getElementById('inc_brightness');
@@ -95,6 +95,30 @@
 
         var aeon_element = document.getElementById("aeon");
         aeon_element.addEventListener("click", function () { aeon(img) }, false);
+
+        var cosmic_element = document.getElementById("cosmic");
+        cosmic_element.addEventListener("click", function () { cosmic(img) }, false);
+
+        var retro_violet_elem = document.getElementById("retro_violet");
+        retro_violet_elem.addEventListener("click", function () { retroViolet(img) }, false);
+
+        var haze_elem = document.getElementById("haze");
+        haze_elem.addEventListener("click", function () { haze(img) }, false);
+        
+        var pink_aura_elem = document.getElementById("pink_aura");
+        pink_aura_elem.addEventListener("click", function () { pinkAura(img) }, false);
+
+        var serenity_elem = document.getElementById("serenity");
+        serenity_elem.addEventListener("click", function () { serenity(img) }, false);
+
+        var perfume_elem = document.getElementById("perfume");
+        perfume_elem.addEventListener("click", function () {perfume(img) }, false);
+
+        var specks_redscale_elem = document.getElementById("specks");
+        specks_redscale_elem.addEventListener("click", function () {specksRedscale(img) }, false);
+
+        var noise_centre_elem = document.getElementById("noise_centre");
+        noise_centre_elem.addEventListener("click", function () {noiseCentre(img) }, false);
 
     }
 
@@ -534,32 +558,32 @@
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+
             if (randomNumber > 0 && randomNumber < 50) {
-                addition1 = 20;
+                var addition1 = 20;
                 addition2 = 30;
             }
             else if (randomNumber > 49 && randomNumber < 100) {
-                addition1 = 10;
+                var addition1 = 20;
                 addition2 = 90;
             }
 
             else {
-                addition1 = 30;
-                addition2 = 10;
+                var addition1 = 10;
+                addition2 = 50;
             }
 
-            if (imgData.data[i] - addition > 255) {
-                imgData.data[i] -= addition
+            if (imgData.data[i] - addition1 > 255) {
+                imgData.data[i] -= addition1
             }
             else {
-                imgData.data[i] += addition
+                imgData.data[i] += addition1
             }
 
-            if (imgData.data[i + 1] + addition > 255) {
-                imgData.data[i + 1] -= addition2;
+            if (imgData.data[i + 2] + addition2 > 255) {
+                imgData.data[i + 2] -= addition2;
             } else {
-                imgData.data[i + 1] += addition2;
+                imgData.data[i + 2] += addition2;
             }
             // imgData.data[i + 2] += addition2;
         }
@@ -807,6 +831,86 @@
             ctx.putImageData(imgData, 0, 0);
         }
     }
+
+    function cosmic() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition1;
+            var addition2;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 20;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 10;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 30;
+                addition2 = 10;
+            }
+
+            if (imgData.data[i + 1] + addition2 > 255) {
+                imgData.data[i + 1] -= addition2;
+            } else {
+                imgData.data[i + 1] += addition2;
+            }
+
+            if (imgData.data[i + 2] + addition2 > 255) {
+                imgData.data[i + 2] -= 130;
+            } else {
+                imgData.data[i + 2] += 130;
+            }
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function retroViolet() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+
+            var addition1;
+            var addition2;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 20;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 20;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 10;
+                addition2 = 50;
+            }
+
+            if (imgData.data[i] - addition1 > 255) {
+                imgData.data[i] -= addition1
+            }
+            else {
+                imgData.data[i] += addition1
+            }
+
+            if (imgData.data[i + 2] + addition2 > 255) {
+                imgData.data[i + 2] -= addition2;
+            } else {
+                imgData.data[i + 2] += addition2;
+            }
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+
 
     function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
