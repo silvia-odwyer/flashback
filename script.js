@@ -138,6 +138,21 @@
         var vintage_elem = document.getElementById("vintage");
         vintage_elem.addEventListener("click", function () {vintage(img) }, false);
 
+        var horizon_elem = document.getElementById("horizon");
+        horizon_elem.addEventListener("click", function () {horizon(img) }, false);
+
+        var evening_elem = document.getElementById("evening");
+        evening_elem.addEventListener("click", function () {evening(img) }, false);
+
+        assembleFilteredPhotos();
+
+    }
+
+    function assembleFilteredPhotos() {
+        var tile_one = document.getElementById("tile_one");
+        var solange_c = solange();
+        console.log(solange_c);
+        tile_one.appendChild(solange_c);
     }
 
     function darkify(img) {
@@ -400,6 +415,9 @@
     }
 
     function solange() {
+        var canvas_new = document.createElement("canvas");
+        var new_ctx = canvas_new.getContext("2d");
+        new_ctx.drawImage(img, 1, 1, 40, 30);
         ctx.drawImage(img, 10, 10, 220, 277);
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
 
@@ -408,7 +426,10 @@
             // imgData.data[i + 1] = 255 - imgData.data[i + 1];
             // imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
+        new_ctx.putImageData(imgData, 0, 0);
         ctx.putImageData(imgData, 0, 0);
+
+        return canvas_new;
     }
 
     function zapt() {
