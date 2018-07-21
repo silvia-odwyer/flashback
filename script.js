@@ -132,6 +132,12 @@
         var eclectic_elem = document.getElementById("eclectic");
         eclectic_elem.addEventListener("click", function () {eclectic(img) }, false);
 
+        var confetti_elem = document.getElementById("confetti");
+        confetti_elem.addEventListener("click", function () {confetti(img) }, false);
+
+        var vintage_elem = document.getElementById("vintage");
+        vintage_elem.addEventListener("click", function () {vintage(img) }, false);
+
     }
 
     function darkify(img) {
@@ -148,7 +154,6 @@
         }
         ctx.putImageData(imgData, 0, 0);
     }
-
 
     function incBrightness(img) {
         ctx.drawImage(img, 10, 10, 220, 277);
@@ -565,42 +570,18 @@
 
     function a() {
         ctx.drawImage(img, 10, 10, 220, 277);
+
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
-        var randomNumber;
 
-        for (i = 0; i < imgData.data.length; i += 4) {
-            randomNumber = getRandomNumber(0, 200);
-
-            if (randomNumber > 0 && randomNumber < 50) {
-                var addition1 = 20;
-                addition2 = 30;
-            }
-            else if (randomNumber > 49 && randomNumber < 100) {
-                var addition1 = 20;
-                addition2 = 90;
-            }
-
-            else {
-                var addition1 = 10;
-                addition2 = 50;
-            }
-
-            if (imgData.data[i] - addition1 > 255) {
-                imgData.data[i] -= addition1
-            }
-            else {
-                imgData.data[i] += addition1
-            }
-
-            if (imgData.data[i + 2] + addition2 > 255) {
-                imgData.data[i + 2] -= addition2;
-            } else {
-                imgData.data[i + 2] += addition2;
-            }
-            // imgData.data[i + 2] += addition2;
+        var SAT_ADJ = 150;
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] -= SAT_ADJ
+            imgData.data[i + 1] -= SAT_ADJ
+            imgData.data[i + 2] -= SAT_ADJ
         }
         ctx.putImageData(imgData, 0, 0);
-    }
+        console.log(imgData.data);
+}
 
     function specksRedscale() {
         ctx.drawImage(img, 10, 10, 220, 277);
@@ -920,7 +901,74 @@
         ctx.putImageData(imgData, 0, 0);
     }
 
+    function vintage() {
+        ctx.drawImage(img, 10, 10, 220, 277);
 
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] += 120
+            imgData.data[i + 1] += 70
+            imgData.data[i + 2] += 13
+        }
+        ctx.putImageData(imgData, 0, 0);
+        console.log(imgData.data);
+    }
+
+    function confetti() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            
+            var randomNumber = getRandomNumber(0, 200);
+
+            if (randomNumber > 0 && randomNumber < 10) {
+                imgData.data[i] = getRandomNumber(0, 255)
+                imgData.data[i + 1] = getRandomNumber(0, 255)
+                imgData.data[i + 2] = getRandomNumber(0, 255)
+            }
+
+            else {
+                imgData.data[i] += 10
+                imgData.data[i + 1] += 20
+                imgData.data[i + 2] += 90
+            }
+
+        }
+        ctx.putImageData(imgData, 0, 0);
+    }
+
+    function horizon() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        var SAT_ADJ = 150;
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] -= SAT_ADJ
+            imgData.data[i + 1] -= SAT_ADJ
+            imgData.data[i + 2] -= SAT_ADJ
+        }
+        ctx.putImageData(imgData, 0, 0);
+        console.log(imgData.data);
+    }
+
+    function evening() {
+        ctx.drawImage(img, 10, 10, 220, 277);
+
+        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+        var SAT_ADJ = 60;
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] -= SAT_ADJ
+            imgData.data[i + 1] -= SAT_ADJ
+            imgData.data[i + 2] -= SAT_ADJ
+        }
+        ctx.putImageData(imgData, 0, 0);
+        console.log(imgData.data);
+    }
 
     function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
