@@ -1,8 +1,12 @@
 (function () {
     var c = document.getElementById("canvas");
     var img;
+    var canvas_list = [];
     var ctx = c.getContext("2d");
     var current_img_url = "pic.PNG"
+
+    var tiles = document.getElementsByClassName("tile is-child box check");
+    console.log(tiles);
     document.addEventListener('DOMContentLoaded', init, false);
 
     function init() {
@@ -18,12 +22,34 @@
 
         document.getElementById('img_uploader').addEventListener('change', readURL, true);
 
-        assembleFilteredPhotos()
+
+        
+        appendCanvases();
+
+        // assembleFilteredPhotos();
+
 
     }
 
     function drawImage2Canvas(img) {
 
+
+    }
+
+    function appendCanvases() {
+        // Create for loop which creates canvases and then appends them to a list. 
+
+        for (i = 0; i < tiles.length; i++) {
+            var appended_canvas = document.createElement("canvas");
+            appended_canvas.width = c.width;
+            appended_canvas.height = c.height;
+            var tile_elem = tiles[i];
+            canvas_list.push(appended_canvas);
+            tile_elem.appendChild(appended_canvas);
+            
+        }
+        console.log(canvas_list);
+   
 
     }
 
@@ -113,20 +139,17 @@
 
         const group = [solange_func]
 
-        var tiles = document.getElementsByClassName("tile is-child box check");
-        console.log(tiles);
         var tile_elem;
 
         for (var i = 0; i < group.length; i += 1) {
             console.log("I is on:", i)
-             // var new_canvas = group[i]();
-    //         // console.log(new_canvas);
-    //         // tile_elem = tiles[i];
-    //         // tile_elem.appendChild(new_canvas)
+             var new_canvas = group[i]();
+             tile_elem = tiles[i];
+             tile_elem.appendChild(new_canvas)
         }
-        var one = group[0]()
-        var tile_un = tiles[0]
-        tile_un.appendChild(one);
+        // var one = group[0]()
+        // var tile_un = tiles[0]
+        // tile_un.appendChild(one);
 
     //     one = group[1]()
     //     tile_un = tiles[1]
