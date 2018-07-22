@@ -102,32 +102,30 @@
         }
 
 
-        //     const cool_twilight = function () {
-        //         console.log("hi");
+        const cool_twilight = function () {
+            var new_ctx = current_canvas.getContext("2d");
 
-        //         img2 = document.createElement("img")
+            console.log("solange called");
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
 
-        //         img.onload = function() {
 
-        //             new_ctx = canvas_new.getContext("2d");
-        //             console.log("hi2")
-        //             new_ctx.drawImage(img, 10, 10, 50, 80);
+                newImgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+                console.log(newImgData);
 
-        //             newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
+                for (var i = 0; i < newImgData.data.length; i += 4) {
+                    newImgData.data[i + 1] = 255 - newImgData.data[i + 1];
+                }
+                new_ctx.putImageData(newImgData, 0, 0);
+                console.log(newImgData)
+                return new_canvas;
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
 
-        //             for (i = 0; i < newImgData.data.length; i += 4) {
-        //                 newImgData.data[i] = 120 - newImgData.data[i];
-
-        //                 // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-        //                 // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-        //             }
-        //             new_ctx.putImageData(newImgData, 0, 0);
-
-        //         }
-        //         return canvas_new;
-        //     }
-
-        const group = [solange_func]
+        const group = [solange_func, cool_twilight]
 
         var tile_elem;
 
