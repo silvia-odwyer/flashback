@@ -367,10 +367,66 @@
             img.crossOrigin = "Anonymous";
         }
 
+        const pane_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+
+                var inc = 0;
+                for (var i = 0; i < imgData.data.length; i += 4) {
+                    inc += 200;
+                    if (inc > 255) {
+                        inc = 0;
+                    }
+                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                    imgData.data[i] = avg + 5;
+                    imgData.data[i + 1] = avg + inc;
+                    imgData.data[i + 2] = avg + 20
+                }
         
 
+                new_ctx.putImageData(imgData, 0, 0);
 
-        const group = [add_green_diagonal_lines_filtergrid, add_diagonal_lines_filtergrid, add_horizontal_line_filtergrid, greenscale_filtergrid, solange_func, cool_twilight_filtergrid, blues, darkify_filtergrid, incbrightness_filtergrid, greyscale_filtergrid, redgreyscale_filtergrid, bluescale_filtergrid]
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const casino_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+                var inc = 0;
+
+                for (var i = 0; i < imgData.data.length; i += 4) {
+                    inc = getRandomNumber(0, 255);
+                    if (inc > 255) {
+                        inc = 0;
+                    }
+        
+                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                    imgData.data[i] = avg + inc;
+                    imgData.data[i + 1] = avg + 2;
+                    imgData.data[i + 2] = avg + 5;
+                }
+
+                new_ctx.putImageData(imgData, 0, 0);
+
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+
+        const group = [casino_filtergrid, pane_filtergrid, add_green_diagonal_lines_filtergrid, add_diagonal_lines_filtergrid, add_horizontal_line_filtergrid, greenscale_filtergrid, solange_func, cool_twilight_filtergrid, blues, darkify_filtergrid, incbrightness_filtergrid, greyscale_filtergrid, redgreyscale_filtergrid, bluescale_filtergrid]
 
         var tile_elem;
 
