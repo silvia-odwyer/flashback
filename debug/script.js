@@ -2,7 +2,7 @@
     var c = document.getElementById("canvas");
     var img;
     var ctx = c.getContext("2d");
-
+    var current_img_url = "pic.PNG"
     document.addEventListener('DOMContentLoaded', init, false);
 
     function init() {
@@ -18,6 +18,8 @@
 
         document.getElementById('img_uploader').addEventListener('change', readURL, true);
 
+        assembleFilteredPhotos()
+
     }
 
     function drawImage2Canvas(img) {
@@ -26,39 +28,47 @@
     }
 
     function readURL() {
-        var file = document.getElementById("img_uploader").files[0];
+        file = document.getElementById("img_uploader").files[0];
 
         console.log(file);
 
         if (file) {
             ctx.clearRect(0, 0, c.width, c.height);
-            var img = new Image();
+            img = new Image();
             img.addEventListener("load", function () {
                     ctx.drawImage(img, 0, 0, 220, 277);
                 });
             img.src = file.name;
+            current_img_url = file.name;
             img.crossOrigin = "Anonymous";
 
+            assembleFilteredPhotos();
 
-
-            
         }
         else {
             console.log("No image found.")
         }
     }
 
-    // function assembleFilteredPhotos() {   
-    //     var newImgData;
-    //     const solange_func = function () {
-    //         console.log("solange called")
-    //         new_ctx = canvas_new.getContext("2d");     
-    //         var img2 = document.createElement("img");
+    function assembleFilteredPhotos() {   
+        var newImgData;
+        var new_canvas = document.createElement("canvas");
 
-    //         img2.onload = function() {
+        var new_ctx = new_canvas.getContext("2d");
 
-    //             new_ctx.drawImage(img2, 10, 10, 50, 80);
-    //         }
+        const solange_func = function () {
+
+            console.log("solange called");
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+
+            return new_canvas;
+
+        }
 
     //         img2.src = "img.PNG"
 
@@ -101,22 +111,22 @@
     //         return canvas_new;
     //     }
 
-    //     const group = [cool_twilight, solange_func]
+        const group = [solange_func]
 
-    //     var tiles = document.getElementsByClassName("tile is-child box check");
-    //     console.log(tiles);
-    //     var tile_elem;
+        var tiles = document.getElementsByClassName("tile is-child box check");
+        console.log(tiles);
+        var tile_elem;
 
-    //     for (var i = 0; i < group.length; i += 1) {
-    //         console.log("I is on:", i)
-    //         // var new_canvas = group[i]();
+        for (var i = 0; i < group.length; i += 1) {
+            console.log("I is on:", i)
+             // var new_canvas = group[i]();
     //         // console.log(new_canvas);
     //         // tile_elem = tiles[i];
     //         // tile_elem.appendChild(new_canvas)
-    //     }
-    //     var one = group[0]()
-    //     var tile_un = tiles[0]
-    //     tile_un.appendChild(one);
+        }
+        var one = group[0]()
+        var tile_un = tiles[0]
+        tile_un.appendChild(one);
 
     //     one = group[1]()
     //     tile_un = tiles[1]
@@ -138,7 +148,7 @@
     //         imgData.data[i + 2] -= BRIGHTNESS_ADJ
     //     }
     //     ctx.putImageData(imgData, 0, 0);
-    // }
+    }
 
 
     // function blueGreyScale() {
