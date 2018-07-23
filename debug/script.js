@@ -6,6 +6,7 @@
     var current_img_url = "pic.PNG"
     var current_canvas;
     var imgData;
+    var original_img_data;
     var tiles = document.getElementsByClassName("tile is-child box check");
     console.log(tiles);
     document.addEventListener('DOMContentLoaded', init, false);
@@ -19,18 +20,20 @@
 
         img.onload = function () {
             ctx.drawImage(img, 0, 0, 220, 277);
+            original_img_data = ctx.getImageData(0, 0, c.width, c.height);
+            console.log(original_img_data)
+            appendCanvases();
+            assembleFilteredPhotos();
 
         }
 
-        img.src = "pic6.PNG"
 
+        img.src = "pic6.PNG"
+      
         document.getElementById('img_uploader').addEventListener('change', readURL, true);
 
 
 
-        appendCanvases();
-
-        assembleFilteredPhotos();
 
 
     }
@@ -52,6 +55,8 @@
             tile_elem.appendChild(appended_canvas);
         }
         console.log(canvas_list);
+
+
     }
 
     function readURL() {
@@ -544,11 +549,11 @@
 
                 for (i = 0; i < imgData.data.length; i += 4) {
                     imgData.data[i] = 200 - imgData.data[i];
-        
+
                     // imgData.data[i + 1] = 255 - imgData.data[i + 1];
                     // imgData.data[i + 2] = 255 - imgData.data[i + 2];
                 }
-        
+
 
                 new_ctx.putImageData(imgData, 0, 0);
             });
@@ -568,7 +573,7 @@
                     // imgData.data[i] = 255 - imgData.data[i];
                     imgData.data[i + 1] = 255 - imgData.data[i + 1];
                     // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-                }        
+                }
 
                 new_ctx.putImageData(imgData, 0, 0);
             });
@@ -616,7 +621,7 @@
 
         // Image data converter functions
         // Converts image data of the canvas 
-        const lix_conv = function() {
+        const lix_conv = function () {
             console.log("Lix conv called")
             for (i = 0; i < imgData.data.length; i += 4) {
                 imgData.data[i] = 255 - imgData.data[i];
@@ -626,48 +631,30 @@
             return imgData;
         }
 
-        const lix_conv1 = function() {
-            console.log("Lix conv called")
-            for (i = 0; i < imgData.data.length; i += 4) {
-                imgData.data[i] = 255 - imgData.data[i];
-                // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-                imgData.data[i + 2] = 255 - imgData.data[i + 2];
-            }
-            return imgData;
-        }
+        
 
-        const lix_conv2 = function() {
-            console.log("Lix conv called")
-            for (i = 0; i < imgData.data.length; i += 4) {
-                // imgData.data[i] = 255 - imgData.data[i];
-                // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-                imgData.data[i + 2] = 255 - imgData.data[i + 2];
-            }
-            return imgData;
-        }
 
         const group = [lix_conv, lix_conv1, lix_conv2]
         var listdata = [];
         var tile_elem;
 
-        for (let i = 0; i < group.length; i += 1) {
-            var current_canvas = canvas_list[i];
-            console.log(canvas)
-            console.log("I is on:", i)
-            
-            var new_ctx = current_canvas.getContext("2d");
+        var resImgData;
+        var current_canvas;
 
-            let img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-                var resImgData = group[i]();
-                console.log(resImgData);
-                
-                new_ctx.putImageData(resImgData, 0, 0);
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";        }
+        for (let j = 0; j < canvas_list.length; j += 1) {
+            current_canvas = canvas_list[j]
+            console.log(current_canvas);
+
+            var getctx = current_canvas.getContext("2d");
+            imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+            resImgData = group[j]();
+            console.log(resImgData);
+            getctx.putImageData(resImgData, 0, 0);
+
+        }
+
+
     }
 
     // function darkify(img) {
