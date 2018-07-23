@@ -29,7 +29,7 @@
 
 
         img.src = "pic6.PNG"
-      
+
         document.getElementById('img_uploader').addEventListener('change', readURL, true);
 
 
@@ -69,13 +69,11 @@
             img = new Image();
             img.addEventListener("load", function () {
                 ctx.drawImage(img, 0, 0, 220, 277);
+                assembleFilteredPhotos();
             });
             img.src = file.name;
             current_img_url = file.name;
             img.crossOrigin = "Anonymous";
-
-            assembleFilteredPhotos();
-
         }
         else {
             console.log("No image found.")
@@ -84,235 +82,128 @@
 
     function assembleFilteredPhotos() {
 
-
-        const solange_func = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            console.log("solange called");
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-
-
-                newImgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-                console.log(newImgData);
-
-                for (var i = 0; i < newImgData.data.length; i += 4) {
-                    newImgData.data[i] = 255 - newImgData.data[i];
-                }
-                new_ctx.putImageData(newImgData, 0, 0);
-                console.log(newImgData)
-                return new_canvas;
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const solange_imgdata = function () {
+            console.log("Lix conv called")
+            for (var i = 0; i < newImgData.data.length; i += 4) {
+                newImgData.data[i] = 255 - newImgData.data[i];
+            }
+            return imgData;
         }
 
-
-        const cool_twilight_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            console.log("solange called");
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-
-
-                newImgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-                console.log(newImgData);
-
-                for (var i = 0; i < newImgData.data.length; i += 4) {
-                    newImgData.data[i + 1] = 255 - newImgData.data[i + 1];
-                }
-                new_ctx.putImageData(newImgData, 0, 0);
-                console.log(newImgData)
-                return new_canvas;
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const cool_twilight_imgdata = function () {
+            for (var i = 0; i < newImgData.data.length; i += 4) {
+                newImgData.data[i + 1] = 255 - newImgData.data[i + 1];
+            }
+            return imgData;
         }
 
-        const blues = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            console.log("solange called");
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-
-
-                newImgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-                console.log(newImgData);
-
-                for (var i = 0; i < newImgData.data.length; i += 4) {
-                    newImgData.data[i + 2] = 255 - newImgData.data[i + 2];
-                }
-                new_ctx.putImageData(newImgData, 0, 0);
-                console.log(newImgData)
-                return new_canvas;
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const blues_imgdata = function () {
+            for (var i = 0; i < newImgData.data.length; i += 4) {
+                newImgData.data[i + 2] = 255 - newImgData.data[i + 2];
+            }
+            return imgData;
         }
 
-        const darkify_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            console.log("solange called");
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                var BRIGHTNESS_ADJ = 20;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    imgData.data[i] -= BRIGHTNESS_ADJ
-                    imgData.data[i + 1] -= BRIGHTNESS_ADJ
-                    imgData.data[i + 2] -= BRIGHTNESS_ADJ
-                }
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const darkify_imgdata = function () {
+            var BRIGHTNESS_ADJ = 20;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] -= BRIGHTNESS_ADJ
+                imgData.data[i + 1] -= BRIGHTNESS_ADJ
+                imgData.data[i + 2] -= BRIGHTNESS_ADJ
+            }
+            return imgData;
         }
 
-        const incbrightness_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            console.log("solange called");
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                var BRIGHTNESS_ADJ = 50;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    imgData.data[i] += BRIGHTNESS_ADJ
-                    imgData.data[i + 1] += BRIGHTNESS_ADJ
-                    imgData.data[i + 2] += BRIGHTNESS_ADJ
-                }
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const incbrightness_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] += BRIGHTNESS_ADJ
+                imgData.data[i + 1] += BRIGHTNESS_ADJ
+                imgData.data[i + 2] += BRIGHTNESS_ADJ
+            }
+            return imgData;
         }
 
-        const greyscale_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            console.log("solange called");
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                for (i = 0; i < imgData.data.length; i += 4) {
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg
-                    imgData.data[i + 1] = avg
-                    imgData.data[i + 2] = avg
-                }
-
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const greyscale_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg
+                imgData.data[i + 1] = avg
+                imgData.data[i + 2] = avg
+            }
+            return imgData;
         }
 
-        const redgreyscale_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + 100
-                    imgData.data[i + 1] = avg + 40
-                    imgData.data[i + 2] = avg + 20
-                }
-
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const greyscale_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg
+                imgData.data[i + 1] = avg
+                imgData.data[i + 2] = avg
+            }
+            return imgData;
         }
 
-        const bluescale_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + 20
-                    imgData.data[i + 1] = avg + 30
-                    imgData.data[i + 2] = avg + 60
-                }
-
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const redgreyscale_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 100
+                imgData.data[i + 1] = avg + 40
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
         }
 
-        const greenscale_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + 20
-                    imgData.data[i + 1] = avg + 70
-                    imgData.data[i + 2] = avg + 20
-                }
-
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+        const redgreyscale_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 20
+                imgData.data[i + 1] = avg + 30
+                imgData.data[i + 2] = avg + 60
+            }
+            return imgData;
         }
 
-        const add_horizontal_line_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
+        
+        const greengreyscale_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 20
+                imgData.data[i + 1] = avg + 70
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
+        }
 
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+        const greengreyscale_imgdata = function () {
+            var BRIGHTNESS_ADJ = 50;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 20
+                imgData.data[i + 1] = avg + 70
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
+        }
 
-                var inc = 0;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    inc += 1;
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + inc;
-                    imgData.data[i + 1] = avg + 70
-                    imgData.data[i + 2] = avg + 20
+        const add_horizontal_line_imgdata = function () {
+            var inc = 0;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                inc += 1;
+                if (inc > 255) {
+                    inc = 0;
                 }
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + inc;
+                imgData.data[i + 1] = avg + 70
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
         }
 
         const add_diagonal_lines_filtergrid = function () {
@@ -626,15 +517,19 @@
             for (i = 0; i < imgData.data.length; i += 4) {
                 imgData.data[i] = 255 - imgData.data[i];
                 imgData.data[i + 1] = 255 - imgData.data[i + 1];
-                //imgData.data[i + 2] = 255 - imgData.data[i + 2];
             }
             return imgData;
         }
 
-        
+        const ryo_conv = function () {
+            for (i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] = 255 - imgData.data[i];
+                imgData.data[i + 2] = 255 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
 
-
-        const group = [lix_conv, lix_conv1, lix_conv2]
+        const group = [lix_conv, ryo_conv]
         var listdata = [];
         var tile_elem;
 
