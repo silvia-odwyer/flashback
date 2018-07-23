@@ -5,7 +5,7 @@
     var ctx = c.getContext("2d");
     var current_img_url = "pic.PNG"
     var current_canvas;
-
+    var imgData;
     var tiles = document.getElementsByClassName("tile is-child box check");
     console.log(tiles);
     document.addEventListener('DOMContentLoaded', init, false);
@@ -78,7 +78,6 @@
     }
 
     function assembleFilteredPhotos() {
-        var newImgData;
 
 
         const solange_func = function () {
@@ -387,7 +386,7 @@
                     imgData.data[i + 1] = avg + inc;
                     imgData.data[i + 2] = avg + 20
                 }
-        
+
 
                 new_ctx.putImageData(imgData, 0, 0);
 
@@ -411,7 +410,7 @@
                     if (inc > 255) {
                         inc = 0;
                     }
-        
+
                     var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
                     imgData.data[i] = avg + inc;
                     imgData.data[i + 1] = avg + 2;
@@ -425,17 +424,250 @@
             img.crossOrigin = "Anonymous";
         }
 
+        const yellow_casino_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
 
-        const group = [casino_filtergrid, pane_filtergrid, add_green_diagonal_lines_filtergrid, add_diagonal_lines_filtergrid, add_horizontal_line_filtergrid, greenscale_filtergrid, solange_func, cool_twilight_filtergrid, blues, darkify_filtergrid, incbrightness_filtergrid, greyscale_filtergrid, redgreyscale_filtergrid, bluescale_filtergrid]
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
 
+                var inc = 0;
+                var inc2 = 0;
+                for (var i = 0; i < imgData.data.length; i += 4) {
+                    inc = getRandomNumber(0, 255);
+                    inc2 = getRandomNumber(0, 255);
+
+                    if (inc > 255) {
+                        inc = 0;
+                    }
+
+                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                    imgData.data[i] = avg + inc;
+                    imgData.data[i + 1] = avg + inc2;
+                    imgData.data[i + 2] = avg + 5;
+                }
+
+                new_ctx.putImageData(imgData, 0, 0);
+
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const specks_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+
+                var inc = 0;
+                var inc2 = 0;
+                for (var i = 0; i < imgData.data.length; i += 4) {
+                    i = getRandomNumber(0, imgData.data.length);
+                    inc = getRandomNumber(0, 255);
+                    inc2 = getRandomNumber(0, 255);
+                    inc3 = getRandomNumber(0, 255)
+                    if (inc > 255) {
+                        inc = 0;
+                    }
+
+                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                    imgData.data[i] = (avg + inc);
+                    imgData.data[i + 1] = avg + inc2;
+                    imgData.data[i + 2] = avg + 5;
+                }
+
+
+                new_ctx.putImageData(imgData, 0, 0);
+
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const incbrightness_two_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+
+
+                var BRIGHTNESS_ADJ = 30;
+                for (var i = 0; i < imgData.data.length; i += 4) {
+                    imgData.data[i] += BRIGHTNESS_ADJ
+                    imgData.data[i + 1] += BRIGHTNESS_ADJ
+                    imgData.data[i + 2] += BRIGHTNESS_ADJ
+                }
+
+
+                new_ctx.putImageData(imgData, 0, 0);
+
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const invert_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+                for (i = 0; i < imgData.data.length; i += 4) {
+                    imgData.data[i] = 255 - imgData.data[i];
+                    imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                    imgData.data[i + 2] = 255 - imgData.data[i + 2];
+                }
+
+                new_ctx.putImageData(imgData, 0, 0);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const solange_dark_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+                for (i = 0; i < imgData.data.length; i += 4) {
+                    imgData.data[i] = 200 - imgData.data[i];
+        
+                    // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                    // imgData.data[i + 2] = 255 - imgData.data[i + 2];
+                }
+        
+
+                new_ctx.putImageData(imgData, 0, 0);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const zapt_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+                for (i = 0; i < imgData.data.length; i += 4) {
+                    // imgData.data[i] = 255 - imgData.data[i];
+                    imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                    // imgData.data[i + 2] = 255 - imgData.data[i + 2];
+                }        
+
+                new_ctx.putImageData(imgData, 0, 0);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const neue_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+                for (i = 0; i < imgData.data.length; i += 4) {
+                    // imgData.data[i] = 255 - imgData.data[i];
+                    // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                    imgData.data[i + 2] = 255 - imgData.data[i + 2];
+                }
+                new_ctx.putImageData(imgData, 0, 0);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        const ryo_filtergrid = function () {
+            var new_ctx = current_canvas.getContext("2d");
+
+            img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+
+                for (i = 0; i < imgData.data.length; i += 4) {
+                    imgData.data[i] = 255 - imgData.data[i];
+                    // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                    imgData.data[i + 2] = 255 - imgData.data[i + 2];
+                }
+                new_ctx.putImageData(imgData, 0, 0);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";
+        }
+
+        // Image data converter functions
+        // Converts image data of the canvas 
+        const lix_conv = function() {
+            console.log("Lix conv called")
+            for (i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] = 255 - imgData.data[i];
+                imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                //imgData.data[i + 2] = 255 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
+
+        const lix_conv1 = function() {
+            console.log("Lix conv called")
+            for (i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] = 255 - imgData.data[i];
+                // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                imgData.data[i + 2] = 255 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
+
+        const lix_conv2 = function() {
+            console.log("Lix conv called")
+            for (i = 0; i < imgData.data.length; i += 4) {
+                // imgData.data[i] = 255 - imgData.data[i];
+                // imgData.data[i + 1] = 255 - imgData.data[i + 1];
+                imgData.data[i + 2] = 255 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
+
+        const group = [lix_conv, lix_conv1, lix_conv2]
+        var listdata = [];
         var tile_elem;
 
-        for (var i = 0; i < group.length; i += 1) {
-            current_canvas = canvas_list[i];
+        for (let i = 0; i < group.length; i += 1) {
+            var current_canvas = canvas_list[i];
             console.log(canvas)
             console.log("I is on:", i)
-            var new_canvas = group[i]();
-        }
+            
+            var new_ctx = current_canvas.getContext("2d");
+
+            let img = new Image();
+            img.addEventListener("load", function () {
+                new_ctx.drawImage(img, 0, 0, 220, 277);
+                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
+                var resImgData = group[i]();
+                console.log(resImgData);
+                
+                new_ctx.putImageData(resImgData, 0, 0);
+            });
+            img.src = current_img_url;
+            img.crossOrigin = "Anonymous";        }
     }
 
     // function darkify(img) {
