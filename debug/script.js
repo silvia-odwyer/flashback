@@ -91,15 +91,15 @@
         }
 
         const cool_twilight_imgdata = function () {
-            for (var i = 0; i < newImgData.data.length; i += 4) {
-                newImgData.data[i + 1] = 255 - newImgData.data[i + 1];
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i + 1] = 255 - imgData.data[i + 1];
             }
             return imgData;
         }
 
         const blues_imgdata = function () {
-            for (var i = 0; i < newImgData.data.length; i += 4) {
-                newImgData.data[i + 2] = 255 - newImgData.data[i + 2];
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i + 2] = 255 - imgData.data[i + 2];
             }
             return imgData;
         }
@@ -135,16 +135,6 @@
             return imgData;
         }
 
-        const greyscale_imgdata = function () {
-            var BRIGHTNESS_ADJ = 50;
-            for (i = 0; i < imgData.data.length; i += 4) {
-                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                imgData.data[i] = avg
-                imgData.data[i + 1] = avg
-                imgData.data[i + 2] = avg
-            }
-            return imgData;
-        }
 
         const redgreyscale_imgdata = function () {
             var BRIGHTNESS_ADJ = 50;
@@ -157,16 +147,6 @@
             return imgData;
         }
 
-        const redgreyscale_imgdata = function () {
-            var BRIGHTNESS_ADJ = 50;
-            for (var i = 0; i < imgData.data.length; i += 4) {
-                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                imgData.data[i] = avg + 20
-                imgData.data[i + 1] = avg + 30
-                imgData.data[i + 2] = avg + 60
-            }
-            return imgData;
-        }
 
         
         const greengreyscale_imgdata = function () {
@@ -180,16 +160,6 @@
             return imgData;
         }
 
-        const greengreyscale_imgdata = function () {
-            var BRIGHTNESS_ADJ = 50;
-            for (var i = 0; i < imgData.data.length; i += 4) {
-                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                imgData.data[i] = avg + 20
-                imgData.data[i + 1] = avg + 70
-                imgData.data[i + 2] = avg + 20
-            }
-            return imgData;
-        }
 
         const add_horizontal_line_imgdata = function () {
             var inc = 0;
@@ -206,183 +176,111 @@
             return imgData;
         }
 
-        const add_diagonal_lines_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                var inc = 0;
-
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    inc += 20;
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + inc;
-                    imgData.data[i + 1] = avg + 70
-                    imgData.data[i + 2] = avg + 20
+        const add_diagonal_lines_imgdata = function () {
+            var inc = 0;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                inc += 20;
+                if (inc > 255) {
+                    inc = 0;
                 }
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + inc;
+                imgData.data[i + 1] = avg + 70
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
         }
 
-        const add_green_diagonal_lines_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-
-                var inc = 0;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    inc += 20;
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + 5;
-                    imgData.data[i + 1] = avg + inc;
-                    imgData.data[i + 2] = avg + 20
+        const add_green_diagonal_lines_imgdata = function () {
+            var inc = 0;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                inc += 20;
+                if (inc > 255) {
+                    inc = 0;
                 }
-
-
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 5;
+                imgData.data[i + 1] = avg + inc;
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
         }
 
-        const pane_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-
-                var inc = 0;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    inc += 200;
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + 5;
-                    imgData.data[i + 1] = avg + inc;
-                    imgData.data[i + 2] = avg + 20
+        const pane_imgdata = function () {
+            var inc = 0;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                inc += 200;
+                if (inc > 255) {
+                    inc = 0;
                 }
-
-
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 5;
+                imgData.data[i + 1] = avg + inc;
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
         }
 
-        const casino_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
+        
+        const casino_imgdata = function () {
+          
+            var inc = 0;
 
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                var inc = 0;
-
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    inc = getRandomNumber(0, 255);
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + inc;
-                    imgData.data[i + 1] = avg + 2;
-                    imgData.data[i + 2] = avg + 5;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                inc = getRandomNumber(0, 255);
+                if (inc > 255) {
+                    inc = 0;
                 }
 
-                new_ctx.putImageData(imgData, 0, 0);
-
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + inc;
+                imgData.data[i + 1] = avg + 2;
+                imgData.data[i + 2] = avg + 5;
+            }
+            return imgData;
         }
 
-        const yellow_casino_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
+        const yellow_casino_imgdata = function () {
+          
+            var inc = 0;
+            var inc2 = 0;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                inc = getRandomNumber(0, 255);
+                inc2 = getRandomNumber(0, 255);
 
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-                var inc = 0;
-                var inc2 = 0;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    inc = getRandomNumber(0, 255);
-                    inc2 = getRandomNumber(0, 255);
-
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = avg + inc;
-                    imgData.data[i + 1] = avg + inc2;
-                    imgData.data[i + 2] = avg + 5;
+                if (inc > 255) {
+                    inc = 0;
                 }
 
-                new_ctx.putImageData(imgData, 0, 0);
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + inc;
+                imgData.data[i + 1] = avg + inc2;
+                imgData.data[i + 2] = avg + 5;
+            }
 
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+            return imgData;
         }
 
-        const specks_filtergrid = function () {
-            var new_ctx = current_canvas.getContext("2d");
-
-            img = new Image();
-            img.addEventListener("load", function () {
-                new_ctx.drawImage(img, 0, 0, 220, 277);
-                imgData = new_ctx.getImageData(0, 0, current_canvas.width, current_canvas.height);
-
-
-                var inc = 0;
-                var inc2 = 0;
-                for (var i = 0; i < imgData.data.length; i += 4) {
-                    i = getRandomNumber(0, imgData.data.length);
-                    inc = getRandomNumber(0, 255);
-                    inc2 = getRandomNumber(0, 255);
-                    inc3 = getRandomNumber(0, 255)
-                    if (inc > 255) {
-                        inc = 0;
-                    }
-
-                    var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-                    imgData.data[i] = (avg + inc);
-                    imgData.data[i + 1] = avg + inc2;
-                    imgData.data[i + 2] = avg + 5;
+        const specks_imgdata = function () {
+            var inc = 0;
+            var inc2 = 0;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                i = getRandomNumber(0, imgData.data.length);
+                inc = getRandomNumber(0, 255);
+                inc2 = getRandomNumber(0, 255);
+                inc3 = getRandomNumber(0, 255)
+                if (inc > 255) {
+                    inc = 0;
                 }
 
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = (avg + inc);
+                imgData.data[i + 1] = avg + inc2;
+                imgData.data[i + 2] = avg + 5;
+            }
 
-                new_ctx.putImageData(imgData, 0, 0);
 
-            });
-            img.src = current_img_url;
-            img.crossOrigin = "Anonymous";
+            return imgData;
         }
 
         const incbrightness_two_filtergrid = function () {
@@ -529,7 +427,7 @@
             return imgData;
         }
 
-        const group = [lix_conv, ryo_conv]
+        const group = [lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_filtergrid, add_diagonal_lines_filtergrid, add_horizontal_line_imgdata]
         var listdata = [];
         var tile_elem;
 
