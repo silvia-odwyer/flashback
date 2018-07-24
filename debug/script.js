@@ -422,7 +422,308 @@
             return imgData;
         }
 
-        const group = [radio_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata]
+        const twenties_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 18
+                imgData.data[i + 1] = avg + 12
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
+        }
+
+        const ocean_imgdata = function () {
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] += 10
+                imgData.data[i + 1] += 20
+                imgData.data[i + 2] += 90
+            }
+            return imgData;
+        }
+
+        const sat_adj_imgdata = function () {
+            var SAT_ADJ = 150;
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] -= SAT_ADJ
+                imgData.data[i + 1] -= SAT_ADJ
+                imgData.data[i + 2] -= SAT_ADJ
+            }
+            return imgData;
+        }
+
+        const specksredscale_imgdata = function () {
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var randomNumber = getRandomNumber(0, 100);
+                if (randomNumber > 10 && randomNumber < 13) {
+                    imgData.data[i] = 120
+                    imgData.data[i + 1] = 120
+                    imgData.data[i + 2] = 120
+                }
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+    
+                imgData.data[i] = avg + 100
+                imgData.data[i + 1] = avg + 40
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
+        }
+
+        const noise_centre_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+
+                if (i < imgData.data.length / 2) {
+                    imgData.data[i] += 80
+                    imgData.data[i + 1] += 40
+                    imgData.data[i + 2] += 120
+                }
+    
+                else if (i > (imgData.data.length / 2) + 100 && (i < (imgData.data.length / 2) + 2900)) {
+                    imgData.data[i] = getRandomNumber(0, 255)
+                    imgData.data[i + 1] = getRandomNumber(0, 255)
+                    imgData.data[i + 2] = getRandomNumber(0, 255)
+                }
+    
+                else {
+                    imgData.data[i] += 10
+                    imgData.data[i + 1] += 20
+                    imgData.data[i + 2] += 90
+                }
+            return imgData;
+        }
+    }
+
+        const perfume_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] += 80
+                imgData.data[i + 1] += 40
+                imgData.data[i + 2] += 120
+            }
+            return imgData;
+        }
+
+        const serenity_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] += 10
+                imgData.data[i + 1] += 40
+                imgData.data[i + 2] += 90
+            }
+            return imgData;
+        }
+
+        const pink_aura_imgdata = function () {
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] += 90
+                imgData.data[i + 1] += 10
+                imgData.data[i + 2] += 90
+            }
+            return imgData;
+        }
+
+        const haze_imgdata = function () {
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] += 90
+                imgData.data[i + 1] += 90
+                imgData.data[i + 2] += 10
+            }
+            return imgData;
+        }
+
+        const mellow_imgdata = function () {
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i + 2] = 120 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
+
+        const green_specks_imgdata = function () {
+
+            var randomNumber;
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                randomNumber = getRandomNumber(0, 200);
+                var addition;
+                if (randomNumber > 0 && randomNumber < 50) {
+                    addition1 = 20;
+                    addition2 = 30;
+                }
+                else if (randomNumber > 49 && randomNumber < 100) {
+                    addition1 = 10;
+                    addition2 = 90;
+                }
+    
+                else {
+                    addition1 = 30;
+                    addition2 = 10;
+                }
+    
+                imgData.data[i] += addition1;
+                imgData.data[i + 1] += addition2;
+                imgData.data[i + 2] += addition1;
+            }
+            return imgData;
+        }
+
+        const eclectic_imgdata = function () {
+
+            var randomNumber;
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                randomNumber = getRandomNumber(0, 200);
+                var addition;
+                if (randomNumber > 0 && randomNumber < 50) {
+                    addition1 = 20;
+                    addition2 = 30;
+                }
+                else if (randomNumber > 49 && randomNumber < 100) {
+                    addition1 = 10;
+                    addition2 = 90;
+                }
+    
+                else {
+                    addition1 = 30;
+                    addition2 = 10;
+                }
+    
+                if (imgData.data[i] + addition > 255) {
+                    imgData.data[i] -= addition
+                }
+                else {
+                    imgData.data[i] += addition
+                }
+    
+                if (imgData.data[i + 1] + addition > 255) {
+                    imgData.data[i + 1] -= addition2;
+                } else {
+                    imgData.data[i] += addition2;
+                }
+                // imgData.data[i + 2] += addition2;
+            }
+            return imgData;
+        }
+
+        const matrix_imgdata = function () {
+            var randomNumber;
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                randomNumber = getRandomNumber(0, 200);
+                var addition;
+                if (randomNumber > 0 && randomNumber < 50) {
+                    addition1 = 20;
+                    addition2 = 30;
+                }
+                else if (randomNumber > 49 && randomNumber < 100) {
+                    addition1 = 10;
+                    addition2 = 90;
+                }
+    
+                else {
+                    addition1 = 30;
+                    addition2 = 10;
+                }
+    
+                if (imgData.data[i] - addition > 255) {
+                    imgData.data[i] -= addition
+                }
+                else {
+                    imgData.data[i] += addition
+                }
+    
+                if (imgData.data[i + 1] + addition > 255) {
+                    imgData.data[i + 1] -= addition2;
+                } else {
+                    imgData.data[i + 1] += addition2;
+                }
+                // imgData.data[i + 2] += addition2;
+            }
+            return imgData;
+        }
+
+        const cosmic_imgdata = function () {
+            var randomNumber;
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                randomNumber = getRandomNumber(0, 200);
+                var addition;
+                if (randomNumber > 0 && randomNumber < 50) {
+                    addition1 = 20;
+                    addition2 = 30;
+                }
+                else if (randomNumber > 49 && randomNumber < 100) {
+                    addition1 = 10;
+                    addition2 = 90;
+                }
+    
+                else {
+                    addition1 = 30;
+                    addition2 = 10;
+                }
+    
+                if (imgData.data[i] - addition > 255) {
+                    imgData.data[i] -= addition
+                }
+                else {
+                    imgData.data[i] += addition
+                }
+    
+                if (imgData.data[i + 1] + addition > 255) {
+                    imgData.data[i + 1] -= addition2;
+                } else {
+                    imgData.data[i + 1] += addition2;
+                }
+                // imgData.data[i + 2] += addition2;
+            }
+            return imgData;
+        }
+
+        
+        const retroviolet_imgdata = function () {
+
+            var randomNumber;
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                randomNumber = getRandomNumber(0, 200);
+    
+                var addition1;
+                var addition2;
+                if (randomNumber > 0 && randomNumber < 50) {
+                    addition1 = 20;
+                    addition2 = 30;
+                }
+                else if (randomNumber > 49 && randomNumber < 100) {
+                    addition1 = 20;
+                    addition2 = 90;
+                }
+    
+                else {
+                    addition1 = 10;
+                    addition2 = 50;
+                }
+    
+                if (imgData.data[i] - addition1 > 255) {
+                    imgData.data[i] -= addition1
+                }
+                else {
+                    imgData.data[i] += addition1
+                }
+    
+                if (imgData.data[i + 2] + addition2 > 255) {
+                    imgData.data[i + 2] -= addition2;
+                } else {
+                    imgData.data[i + 2] += addition2;
+                }
+            }
+            return imgData;
+        }
+
+        const group = [retroviolet_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, mellow_imgdata, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, noise_centre_imgdata, specksredscale_imgdata, sat_adj_imgdata, ocean_imgdata, twenties_imgdata, radio_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata]
         var listdata = [];
         var tile_elem;
 
@@ -440,6 +741,21 @@
             console.log(resImgData);
             getctx.putImageData(resImgData, 0, 0);
         }
+    }
+
+    // Canvas-specific functions
+    function pixelate() {
+        var size = 27 / 100,
+            w = c.width * size,
+            h = c.height * size;
+
+        ctx.drawImage(img, 0, 0, w, h);
+
+        ctx.msImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+
+        ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
     }
 
     // function darkify(img) {
