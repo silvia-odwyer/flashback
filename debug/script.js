@@ -358,7 +358,71 @@
             return imgData;
         }
 
-        const group = [neue_imgdata, zapt_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata]
+        const eon_imgdata = function () {
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                //imgData.data[i] = 255 - imgData.data[i];
+                imgData.data[i + 1] = 120 - imgData.data[i + 1];
+                imgData.data[i + 2] = 100 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
+
+        const aeon_imgdata = function () {
+
+            for (i = 0; i < imgData.data.length; i += 4) {
+                //imgData.data[i] = 255 - imgData.data[i];
+                imgData.data[i + 1] = 60 - imgData.data[i + 1];
+                imgData.data[i + 2] = 100 - imgData.data[i + 2];
+            }
+            return imgData;
+        }
+
+        const rosetint_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 80
+                imgData.data[i + 1] = avg + 20
+                imgData.data[i + 2] = avg + 31
+            }
+            return imgData;
+        }
+
+        const slate_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 4
+                imgData.data[i + 1] = avg + 3
+                imgData.data[i + 2] = avg + 12
+            }
+            return imgData;
+        }
+
+        const purplescale_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 90
+                imgData.data[i + 1] = avg + 40
+                imgData.data[i + 2] = avg + 80
+            }
+            return imgData;
+        }
+
+        const radio_imgdata = function () {
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+                imgData.data[i] = avg + 5
+                imgData.data[i + 1] = avg + 40
+                imgData.data[i + 2] = avg + 20
+            }
+            return imgData;
+        }
+
+        const group = [radio_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata]
         var listdata = [];
         var tile_elem;
 
@@ -366,7 +430,7 @@
         var current_canvas;
 
         for (let j = 0; j < canvas_list.length; j += 1) {
-            current_canvas = canvas_list[j]
+            current_canvas = canvas_list[j];
             console.log(current_canvas);
 
             var getctx = current_canvas.getContext("2d");
@@ -375,10 +439,7 @@
             resImgData = group[j]();
             console.log(resImgData);
             getctx.putImageData(resImgData, 0, 0);
-
         }
-
-
     }
 
     // function darkify(img) {
