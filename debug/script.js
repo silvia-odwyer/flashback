@@ -60,82 +60,35 @@
         if (file) {
             reader.readAsDataURL(file);
         } else {
+            /// Error message TODO
+            console.log("Could not read file. :(")
         }
-
-        // file = document.getElementById("img_uploader").files[0];
-
-        // console.log(file);
-        // if (file) {
-        //     ctx.clearRect(0, 0, c.width, c.height);
-        //     img = new Image();
-        //     img.addEventListener("load", function () {
-
-        //         var reader  = new FileReader();
-        //         reader.onloadend = function () {
-        //             current_img_url = reader.result;
-        //             img.src = current_img_url;
-
-        //         ctx.drawImage(img, 0, 0, 220, 277);
-        //         assembleFilteredPhotos();
-
-        //         }
-
-
-
-        //     });
-        //     console.log("File is: ", file);
-        //     img.src = current_img_url;
-        //     console.log(current_img_url);
-        //     img.crossOrigin = "Anonymous";
-        // }
-        // else {
-        //     console.log("No image found.")
-        // }
-
-        //
-
-        // 
-
-        // reader.onloadend = function () {
-
-        //     img = new Image();
-        //          img.addEventListener("load", function () {
-        //              ctx.drawImage(img, 0, 0, 220, 277);
-
-        //         });
-
-        //     img.width = c.width;
-        //     img.height = c.height;
-        //     img.src = reader.result;
-        // }
-
-        // if (file) {
-        //     reader.readAsDataURL(file); //reads the data as a URL
-        //     current_img_url = reader.result;
-        //     assembleFilteredPhotos();
-        // } else {
-        //     preview.src = "";
-        // }
-
-        // if (file) {
-        //     ctx.clearRect(0, 0, c.width, c.height);
-        //     img = new Image();
-        //     img.addEventListener("load", function () {
-        //         ctx.drawImage(img, 0, 0, 220, 277);
-        //         
-        //     });
-        //     console.log("File is: ", file);
-        //     img.src = file.name;
-        //     current_img_url = file.name;
-        //     img.crossOrigin = "Anonymous";
-        // }
-        // else {
-        //     console.log("No image found.")
-        // }
     }
 
 
-    //
+    function assembleFilteredPhotos() {
+        const group = [blue_greyscale_imgdata, evening_imgdata, greyscale_imgdata, horizon_imgdata, confetti_imgdata, vintage_imgdata, retroviolet_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, mellow_imgdata, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, noise_centre_imgdata, specksredscale_imgdata, sat_adj_imgdata, ocean_imgdata, twenties_imgdata, radio_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
+        var listdata = [];
+        var tile_elem;
+
+        var resImgData;
+        var current_canvas;
+
+        for (let j = 0; j < canvas_list.length; j += 1) {
+            current_canvas = canvas_list[j];
+            console.log(current_canvas);
+
+            var getctx = current_canvas.getContext("2d");
+            imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+            resImgData = group[j]();
+            console.log(resImgData);
+            getctx.putImageData(resImgData, 0, 0);
+        }
+    }
+
+
+    // 48 filters total - 24th July 2018 <silviaod>
 
     /**
  * Filter Functions 
@@ -163,10 +116,20 @@
         }
         return imgData;
     }
+
+    const blue_greyscale_imgdata = function () {
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 20
+            imgData.data[i + 1] = avg + 30
+            imgData.data[i + 2] = avg + 60
+        }
+        return imgData;
+    }
     const solange_imgdata = function () {
         console.log("Lix conv called")
-        for (var i = 0; i < newImgData.data.length; i += 4) {
-            newImgData.data[i] = 255 - newImgData.data[i];
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = 255 - imgData.data[i];
         }
         return imgData;
     }
@@ -834,26 +797,6 @@
     }
 
 
-    function assembleFilteredPhotos() {
-        const group = [evening_imgdata, horizon_imgdata, confetti_imgdata, vintage_imgdata, retroviolet_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, mellow_imgdata, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, noise_centre_imgdata, specksredscale_imgdata, sat_adj_imgdata, ocean_imgdata, twenties_imgdata, radio_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, redgreyscale_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata]
-        var listdata = [];
-        var tile_elem;
-
-        var resImgData;
-        var current_canvas;
-
-        for (let j = 0; j < canvas_list.length; j += 1) {
-            current_canvas = canvas_list[j];
-            console.log(current_canvas);
-
-            var getctx = current_canvas.getContext("2d");
-            imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-            resImgData = group[j]();
-            console.log(resImgData);
-            getctx.putImageData(resImgData, 0, 0);
-        }
-    }
 
     // Canvas-specific functions
     function pixelate() {
@@ -869,22 +812,6 @@
 
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
     }
-
-    // function darkify(img) {
-
-    //     ctx.drawImage(img, 10, 10, 220, 277);
-
-    //     var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-    //     var BRIGHTNESS_ADJ = 10;
-    //     for (var i = 0; i < imgData.data.length; i += 4) {
-    //         imgData.data[i] -= BRIGHTNESS_ADJ
-    //         imgData.data[i + 1] -= BRIGHTNESS_ADJ
-    //         imgData.data[i + 2] -= BRIGHTNESS_ADJ
-    //     }
-    //     ctx.putImageData(imgData, 0, 0);
-    //}
-
 
 
     function blueGreyScale() {
