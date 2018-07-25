@@ -4,19 +4,24 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 ![GitHub top language](https://img.shields.io/github/languages/top/badges/shields.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)
-![Image Filters]()
+
+![Flashback logo.](https://github.com/silvia-odwyer/flashback/blob/master/media/logo-glitch2.gif "Flashback logo.")
+
 
 Flashback is a powerful image filtering web app that sends your photos back in time. 
 
 Whether you're looking for chic 80s filters, want to add wear & tear, or want to add some 1920s glamour
 to your pix, flashback has you covered.
 
-Image filtering comprises vintage filters, solarizers, inverters, and over ninety more. 
+Image filtering comprises vintage filters, solarizers, inverters, and over fifty more. 
 
 ## Flashback In Action
 ![Flashback can transform an image into a retro or vintage lookalike.](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-2.gif "Flashback can transform an image into a retro or vintage lookalike.")
 
-![Flashback can transform an image into a retro or vintage lookalike.](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-city.gif "Flashback can transform an image into a retro or vintage lookalike.")
+![Flashback can transform even this image of a city into a scene from a cyberpunk film!](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-city.gif "Flashback can transform even this image of a city into a scene from a cyberpunk film!")
+
+## Try It Out
+Flashback is live. 
 
 ## Filters
 - Vintage: 1920s chic, sepia, hazy vintage, perfumed imagery
