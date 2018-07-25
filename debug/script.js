@@ -67,7 +67,7 @@
 
 
     function assembleFilteredPhotos() {
-        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, blue_greyscale_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, greyscale_imgdata, specksredscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, horizon_imgdata, confetti_imgdata, retroviolet_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, ocean_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
+        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, blue_greyscale_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, greyscale_imgdata, specksredscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, horizon_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
         var listdata = [];
         var tile_elem;
 
@@ -808,19 +808,17 @@
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
     }
 
+    var filter_dict = {"bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata}
 
-    function blueGreyScale() {
+
+    function updateMainCanvas() {
 
         ctx.drawImage(img, 0, 0, 220, 277);
         var imgData = ctx.getImageData(0, 0, c.width, c.height);
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-            imgData.data[i] = avg + 20
-            imgData.data[i + 1] = avg + 30
-            imgData.data[i + 2] = avg + 60
-        }
-        ctx.putImageData(imgData, 0, 0);
+        var resultingImgData = filter_dict[chosenFilter]();
+        console.log(resultingImgData)
+        ctx.putImageData(resultingImgData, 0, 0);
     }
 
 
