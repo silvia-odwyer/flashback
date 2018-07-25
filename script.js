@@ -1,388 +1,344 @@
 (function () {
-
-
-    document.addEventListener('DOMContentLoaded', init, false);
-    var c = document.getElementById('canvas');
-    var ctx = c.getContext('2d');
+    var c = document.getElementById("canvas");
     var img;
+    var canvas_list = [];
+    var ctx = c.getContext("2d");
+    var current_img_url = "pic.PNG"
+    var current_canvas;
+    var imgData;
+    var original_img_data;
+    var change = 0;
+    var tiles = document.getElementsByClassName("tile is-child box check");
+    console.log(tiles);
+    document.addEventListener('DOMContentLoaded', init, false);
+
     function init() {
-        document.getElementById('getval').addEventListener('change', readURL, true);
-        
+        document.getElementById('img_uploader').addEventListener('change', readURL, true);
+
+        addFilterButtonEventListeners();
+
+        var blue_grey_scale = document.getElementById('blue_greyscale');
+        blue_grey_scale.addEventListener("click", function () { blueGreyScale(img) }, false);
+
+        // Init default image
+        img = document.createElement("img");
+
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0, 220, 277);
+            original_img_data = ctx.getImageData(0, 0, c.width, c.height);
+            console.log(original_img_data)
+            if (change === 0) {
+                appendCanvases();
+                change += 1;
+            }
+            assembleFilteredPhotos();
+        }
+        img.src = "pic6.PNG"
     }
 
-    function readURL(){
-        var file = document.getElementById("getval").files[0];
+    function addFilterButtonEventListeners() {
+        
+        var inc_brightness_elem = document.getElementById('inc_brightness');
+        inc_brightness_elem.addEventListener("click", function () { updateMainCanvas("retroviolet") }, false);
+
+
+        var darkify_el = document.getElementById('darkify');
+        darkify_el.addEventListener("click", function () { updateMainCanvas("bluegreyscale") }, false);
+
+        var greyscale_elem = document.getElementById('greyscale');
+        greyscale_elem.addEventListener("click", function () { updateMainCanvas("greyscale") }, false);
+
+        var red_greyscale_elem = document.getElementById('red_greyscale');
+        red_greyscale_elem.addEventListener("click", function () { updateMainCanvas("redgreyscale") }, false);
+
+        var green_greyscale_elem = document.getElementById('green_greyscale');
+        green_greyscale_elem.addEventListener("click", function () { updateMainCanvas("greengreyscale") }, false);
+
+        var horizontal_lines_elem = document.getElementById('horizontal_lines');
+        horizontal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_horizontal_lines") }, false);
+
+        var diagonal_lines_elem = document.getElementById('diagonal_lines');
+        diagonal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_diagonal_lines") }, false);
+
+        var green_diagonal_lines_elem = document.getElementById('green_diagonal_lines');
+        green_diagonal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_green_diagonal_lines") }, false);
+
+        var pane_elem = document.getElementById('pane');
+        pane_elem.addEventListener("click", function () { updateMainCanvas("pane") }, false);
+
+        var casino_elem = document.getElementById('casino');
+        casino_elem.addEventListener("click", function () { updateMainCanvas("casino") }, false);
+
+        var yellow_casino_elem = document.getElementById('yellow_casino');
+        yellow_casino_elem.addEventListener("click", function () { updateMainCanvas("yellow_casino") }, false);
+
+        var specks_elem = document.getElementById('specks');
+        specks_elem.addEventListener("click", function () { updateMainCanvas("specks") }, false);
+
+        var invert_elem = document.getElementById('invert');
+        invert_elem.addEventListener("click", function () { updateMainCanvas("invert") }, false);
+
+        // var a_el = document.getElementById('a');
+        // a_el.addEventListener("click", function () { a(img) }, false);
+
+        var twenties_el = document.getElementById('twenties');
+        twenties_el.addEventListener("click", function () { updateMainCanvas("twenties") }, false);
+
+        var rose_el = document.getElementById("rose");
+        rose_el.addEventListener("click", function () { updateMainCanvas("rosetint") }, false);
+
+        var slate_el = document.getElementById("slate");
+        slate_el.addEventListener("click", function () { updateMainCanvas("slate") }, false);
+
+        var purplescale_el = document.getElementById("purplescale");
+        purplescale_el.addEventListener("click", function () { updateMainCanvas("purplescale") }, false);
+
+        var radio_el = document.getElementById("radio");
+        radio_el.addEventListener("click", function () { updateMainCanvas("radio") }, false);
+
+        var ocean_el = document.getElementById("ocean");
+        ocean_el.addEventListener("click", function () { updateMainCanvas("ocean") }, false);
+
+        var pixelate_elem = document.getElementById("pixelate");
+        pixelate_elem.addEventListener("click", function () { pixelate(img) }, false);
+
+        var solange_elem = document.getElementById("solange");
+        solange_elem.addEventListener("click", function () { updateMainCanvas("solange") }, false);
+
+        var zapt_element = document.getElementById("zapt");
+        zapt_element.addEventListener("click", function () { updateMainCanvas("zapt") }, false);
+
+        var neue_element = document.getElementById("neue");
+        neue_element.addEventListener("click", function () { updateMainCanvas("neue") }, false);
+
+        var ryo_element = document.getElementById("ryo");
+        ryo_element.addEventListener("click", function () { updateMainCanvas("ryo") }, false);
+
+        var lix_element = document.getElementById("lix");
+        lix_element.addEventListener("click", function () { updateMainCanvas("lix") }, false);
+
+        var eon_element = document.getElementById("eon");
+        eon_element.addEventListener("click", function () { updateMainCanvas("eon") }, false);
+
+        var aeon_element = document.getElementById("aeon");
+        aeon_element.addEventListener("click", function () { updateMainCanvas("aeon") }, false);
+
+        var cosmic_element = document.getElementById("cosmic");
+        cosmic_element.addEventListener("click", function () { updateMainCanvas("cosmic") }, false);
+
+        var retro_violet_elem = document.getElementById("retro_violet");
+        retro_violet_elem.addEventListener("click", function () { updateMainCanvas("retroviolet") }, false);
+
+        var haze_elem = document.getElementById("haze");
+        haze_elem.addEventListener("click", function () { updateMainCanvas("haze") }, false);
+
+        var pink_aura_elem = document.getElementById("pink_aura");
+        pink_aura_elem.addEventListener("click", function () { updateMainCanvas("pink_aura") }, false);
+
+        var serenity_elem = document.getElementById("serenity");
+        serenity_elem.addEventListener("click", function () { updateMainCanvas("serenity") }, false);
+
+        var perfume_elem = document.getElementById("perfume");
+        perfume_elem.addEventListener("click", function () { updateMainCanvas("perfume") }, false);
+
+        var specks_redscale_elem = document.getElementById("specks_redscale");
+        specks_redscale_elem.addEventListener("click", function () { updateMainCanvas("specks_redscale") }, false);
+
+        var noise_centre_elem = document.getElementById("noise_centre");
+        noise_centre_elem.addEventListener("click", function () { updateMainCanvas("noise_centre") }, false);
+
+        var mellow_elem = document.getElementById("mellow");
+        mellow_elem.addEventListener("click", function () { updateMainCanvas("mellow") }, false);
+
+        var matrix_elem = document.getElementById("matrix");
+        matrix_elem.addEventListener("click", function () { updateMainCanvas("matrix") }, false);
+
+        var green_specks_elem = document.getElementById("green_specks");
+        green_specks_elem.addEventListener("click", function () { updateMainCanvas("greenspecks") }, false);
+
+        var eclectic_elem = document.getElementById("eclectic");
+        eclectic_elem.addEventListener("click", function () { updateMainCanvas("eclectic") }, false);
+
+        var confetti_elem = document.getElementById("confetti");
+        confetti_elem.addEventListener("click", function () { updateMainCanvas("confetti") }, false);
+
+        var vintage_elem = document.getElementById("vintage");
+        vintage_elem.addEventListener("click", function () { updateMainCanvas("vintage") }, false);
+
+        var horizon_elem = document.getElementById("horizon");
+        horizon_elem.addEventListener("click", function () { updateMainCanvas("horizon") }, false);
+
+        var evening_elem = document.getElementById("evening");
+        evening_elem.addEventListener("click", function () { updateMainCanvas("evening") }, false);
+    }
+
+    function appendCanvases() {
+        // Create for loop which creates canvases and then appends them to a list. 
+
+        for (i = 0; i < tiles.length; i++) {
+            var appended_canvas = document.createElement("canvas");
+            appended_canvas.width = c.width;
+            appended_canvas.height = c.height;
+            var tile_elem = tiles[i];
+            canvas_list.push(appended_canvas);
+            tile_elem.appendChild(appended_canvas);
+        }
+        console.log(canvas_list);
+
+
+    }
+
+    function readURL() {
+        var file = document.getElementById("img_uploader").files[0];
+
         var reader = new FileReader();
-
-        console.log(file);
-
-        var uploaded_img = document.createElement("img");
-        uploaded_img.src = file.name;
-        console.log(uploaded_img.src)
-        document.body.appendChild(uploaded_img)
-        if(file){
-           reader.readAsDataURL(file);
-         }else{
-             console.log("No image found.")
-         }
-     }
-    // var img;
-    // var filterFunctions = {
-    //     solange: function () {
-    //         console.log("solange called")
-    //         var canvas_new = document.createElement("canvas");
-    //         var new_ctx = canvas_new.getContext("2d");
-    //         ctx.drawImage(img, 10, 10, 220, 277);
-    //         new_ctx.drawImage(img, 10, 10, 50, 80);
-    //         var imgData = ctx.getImageData(0, 0, c.width, c.height);
-    //         var newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
-
-    //         for (i = 0; i < imgData.data.length; i += 4) {
-    //             imgData.data[i] = 255 - imgData.data[i];
-    //             newImgData.data[i] = 255 - newImgData.data[i];
-
-    //             // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-    //             // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-    //         }
-    //         new_ctx.putImageData(newImgData, 0, 0);
-    //         ctx.putImageData(imgData, 0, 0);
-
-    //         return canvas_new;
-    //     },
-
-    //     foo: function () {
-    //         var canvas_new = document.createElement("canvas");
-    //         var new_ctx = canvas_new.getContext("2d");
-    //         ctx.drawImage(img, 10, 10, 220, 277);
-    //         new_ctx.drawImage(img, 10, 10, 50, 80);
-    //         var imgData = ctx.getImageData(0, 0, c.width, c.height);
-    //         var newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
-
-    //         for (i = 0; i < imgData.data.length; i += 4) {
-    //             imgData.data[i] = 120 - imgData.data[i];
-    //             newImgData.data[i] = 120 - newImgData.data[i];
-
-    //             // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-    //             // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-    //         }
-    //         new_ctx.putImageData(newImgData, 0, 0);
-    //         ctx.putImageData(imgData, 0, 0);
-
-    //         return canvas_new;
-    //     }
-    // };
-
+        reader.onloadend = function () {
+            img.src = reader.result; // Set the global image to the path of the file on the client's PC.
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            /// Error message TODO
+            console.log("Could not read file. :(")
+        }
+    }
 
 
     function assembleFilteredPhotos() {
-        img = document.createElement('img');
-        img.src = 'pic6.PNG';
-    
-    
-            var inc_brightness_elem = document.getElementById('inc_brightness');
-            inc_brightness_elem.addEventListener("click", function () { incBrightness(img) }, false);
-    
-            var blue_grey_scale = document.getElementById('blue_greyscale');
-            blue_grey_scale.addEventListener("click", function () { blueGreyScale(img) }, false);
-    
-            var darkify_el = document.getElementById('darkify');
-            darkify_el.addEventListener("click", function () { darkify(img) }, false);
-    
-            var greyscale_elem = document.getElementById('greyscale');
-            greyscale_elem.addEventListener("click", function () { greyscale(img) }, false);
-    
-            var red_greyscale_elem = document.getElementById('red_greyscale');
-            red_greyscale_elem.addEventListener("click", function () { redGreyScale(img) }, false);
-    
-            var green_greyscale_elem = document.getElementById('green_greyscale');
-            green_greyscale_elem.addEventListener("click", function () { greenGreyScale(img) }, false);
-    
-            var horizontal_lines_elem = document.getElementById('horizontal_lines');
-            horizontal_lines_elem.addEventListener("click", function () { addHorizontalLines(img) }, false);
-    
-            var diagonal_lines_elem = document.getElementById('diagonal_lines');
-            diagonal_lines_elem.addEventListener("click", function () { addDiagonalLines(img) }, false);
-    
-            var green_diagonal_lines_elem = document.getElementById('green_diagonal_lines');
-            green_diagonal_lines_elem.addEventListener("click", function () { addGreenDiagonalLines(img) }, false);
-    
-            var pane_elem = document.getElementById('pane');
-            pane_elem.addEventListener("click", function () { pane(img) }, false);
-    
-            var casino_elem = document.getElementById('casino');
-            casino_elem.addEventListener("click", function () { casino(img) }, false);
-    
-            var yellow_casino_elem = document.getElementById('yellow_casino');
-            yellow_casino_elem.addEventListener("click", function () { yellowCasino(img) }, false);
-    
-            var specks_elem = document.getElementById('specks');
-            specks_elem.addEventListener("click", function () { specks(img) }, false);
-    
-            var invert_elem = document.getElementById('invert');
-            invert_elem.addEventListener("click", function () { invert(img) }, false);
-    
-            var a_el = document.getElementById('a');
-            a_el.addEventListener("click", function () { a(img) }, false);
-    
-            var twenties_el = document.getElementById('twenties');
-            twenties_el.addEventListener("click", function () { twenties(img) }, false);
-    
-            var rose_el = document.getElementById("rose");
-            rose_el.addEventListener("click", function () { roseTint(img) }, false);
-    
-            var slate_el = document.getElementById("slate");
-            slate_el.addEventListener("click", function () { slate(img) }, false);
-    
-            var purplescale_el = document.getElementById("purplescale");
-            purplescale_el.addEventListener("click", function () { purpleScale(img) }, false);
-    
-            var radio_el = document.getElementById("radio");
-            radio_el.addEventListener("click", function () { radio(img) }, false);
-    
-            var ocean_el = document.getElementById("ocean");
-            ocean_el.addEventListener("click", function () { ocean(img) }, false);
-    
-            var pixelate_elem = document.getElementById("pixelate");
-            pixelate_elem.addEventListener("click", function () { pixelate(img) }, false);
-    
-            var solange_elem = document.getElementById("solange");
-            solange_elem.addEventListener("click", function () { solange(img) }, false);
-    
-            var zapt_element = document.getElementById("zapt");
-            zapt_element.addEventListener("click", function () { zapt(img) }, false);
-    
-    
-            var neue_element = document.getElementById("neue");
-            neue_element.addEventListener("click", function () { neue(img) }, false);
-    
-            var ryo_element = document.getElementById("ryo");
-            ryo_element.addEventListener("click", function () { ryo(img) }, false);
-    
-            var lix_element = document.getElementById("lix");
-            lix_element.addEventListener("click", function () { lix(img) }, false);
-    
-            var eon_element = document.getElementById("eon");
-            eon_element.addEventListener("click", function () { eon(img) }, false);
-    
-            var aeon_element = document.getElementById("aeon");
-            aeon_element.addEventListener("click", function () { aeon(img) }, false);
-    
-            var cosmic_element = document.getElementById("cosmic");
-            cosmic_element.addEventListener("click", function () { cosmic(img) }, false);
-    
-            var retro_violet_elem = document.getElementById("retro_violet");
-            retro_violet_elem.addEventListener("click", function () { retroViolet(img) }, false);
-    
-            var haze_elem = document.getElementById("haze");
-            haze_elem.addEventListener("click", function () { haze(img) }, false);
-    
-            var pink_aura_elem = document.getElementById("pink_aura");
-            pink_aura_elem.addEventListener("click", function () { pinkAura(img) }, false);
-    
-            var serenity_elem = document.getElementById("serenity");
-            serenity_elem.addEventListener("click", function () { serenity(img) }, false);
-    
-            var perfume_elem = document.getElementById("perfume");
-            perfume_elem.addEventListener("click", function () { perfume(img) }, false);
-    
-            var specks_redscale_elem = document.getElementById("specks_redscale");
-            specks_redscale_elem.addEventListener("click", function () { specksRedscale(img) }, false);
-    
-            var noise_centre_elem = document.getElementById("noise_centre");
-            noise_centre_elem.addEventListener("click", function () { noiseCentre(img) }, false);
-    
-            var mellow_elem = document.getElementById("mellow");
-            mellow_elem.addEventListener("click", function () { mellow(img) }, false);
-    
-            var matrix_elem = document.getElementById("matrix");
-            matrix_elem.addEventListener("click", function () { matrix(img) }, false);
-    
-            var green_specks_elem = document.getElementById("green_specks");
-            green_specks_elem.addEventListener("click", function () { greenSpecks(img) }, false);
-    
-            var eclectic_elem = document.getElementById("eclectic");
-            eclectic_elem.addEventListener("click", function () { eclectic(img) }, false);
-    
-            var confetti_elem = document.getElementById("confetti");
-            confetti_elem.addEventListener("click", function () { confetti(img) }, false);
-    
-            var vintage_elem = document.getElementById("vintage");
-            vintage_elem.addEventListener("click", function () { vintage(img) }, false);
-    
-            var horizon_elem = document.getElementById("horizon");
-            horizon_elem.addEventListener("click", function () { horizon(img) }, false);
-    
-            var evening_elem = document.getElementById("evening");
-            evening_elem.addEventListener("click", function () { evening(img) }, false);
-    
-    
-        
-        const solange_func = function () {
-            console.log("solange called")
-            var canvas_new = document.createElement("canvas");
-            var new_ctx = canvas_new.getContext("2d");
-            ctx.drawImage(img, 10, 10, 220, 277);
-            new_ctx.drawImage(img, 10, 10, 50, 80);
-            var imgData = ctx.getImageData(0, 0, c.width, c.height);
-            var newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
-
-            for (i = 0; i < imgData.data.length; i += 4) {
-                imgData.data[i] = 255 - imgData.data[i];
-                newImgData.data[i] = 255 - newImgData.data[i];
-
-                // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-                // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-            }
-            new_ctx.putImageData(newImgData, 0, 0);
-            ctx.putImageData(imgData, 0, 0);
-
-            return canvas_new;
-        }
-
-
-
-        const cool_twilight = function () {
-            console.log("hi");
-            var canvas_new = document.createElement("canvas");
-            var new_ctx = canvas_new.getContext("2d");
-            ctx.drawImage(img, 10, 10, 220, 277);
-            new_ctx.drawImage(img, 10, 10, 50, 80);
-            var imgData = ctx.getImageData(0, 0, c.width, c.height);
-            var newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
-
-            for (i = 0; i < imgData.data.length; i += 4) {
-                imgData.data[i] = 120 - imgData.data[i];
-                newImgData.data[i] = 120 - newImgData.data[i];
-
-                // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-                // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-            }
-            new_ctx.putImageData(newImgData, 0, 0);
-            ctx.putImageData(imgData, 0, 0);
-
-            return canvas_new;
-        }
-
-        const group = [solange_func, cool_twilight]
-
-        var tiles = document.getElementsByClassName("tile is-child box check");
-        console.log(tiles);
+        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, blue_greyscale_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, greyscale_imgdata, specksredscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, horizon_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
+        var listdata = [];
         var tile_elem;
 
-        for (var i = 0; i < group.length; i += 1) {
-            console.log("I is on:", i)
-            // var new_canvas = group[i]();
-            // console.log(new_canvas);
-            // tile_elem = tiles[i];
-            // tile_elem.appendChild(new_canvas)
+        var resImgData;
+        var current_canvas;
+
+        for (let j = 0; j < canvas_list.length; j += 1) {
+            current_canvas = canvas_list[j];
+            console.log(current_canvas);
+
+            var getctx = current_canvas.getContext("2d");
+            imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+            resImgData = group[j]();
+            console.log(resImgData);
+            getctx.putImageData(resImgData, 0, 0);
         }
-        var one = group[1]()
-        var tile_un = tiles[1]
-        tile_un.appendChild(one);
-
-        one = group[0]()
-        tile_un = tiles[0]
-        tile_un.appendChild(one);
-
-
     }
 
-    function darkify(img) {
+    // 48 filters total - 24th July 2018 <silviaod>
 
-        ctx.drawImage(img, 10, 10, 220, 277);
+    /**
+ * Filter Functions 
+ * Each of the functions transform the individual RGBA values of each pixel.
+ * The for loop iterates over each pixel in the original canvas 
+ * and then changes the RGBA values of that pixel. 
+ * At the moment, I'm using 8-bit pixel manipulation, but 32-bit pixel manipulation
+ * may be faster, so I may use that in the future, although the performance 
+ * gains would be very minimal, since the images are static, and are not animating, etc.,
+ */
 
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-        var BRIGHTNESS_ADJ = 10;
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] -= BRIGHTNESS_ADJ
-            imgData.data[i + 1] -= BRIGHTNESS_ADJ
-            imgData.data[i + 2] -= BRIGHTNESS_ADJ
-        }
-        ctx.putImageData(imgData, 0, 0);
-    }
-
-    function incBrightness(img) {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-        var BRIGHTNESS_ADJ = 50;
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] += BRIGHTNESS_ADJ
-            imgData.data[i + 1] += BRIGHTNESS_ADJ
-            imgData.data[i + 2] += BRIGHTNESS_ADJ
-        }
-        ctx.putImageData(imgData, 0, 0);
-        console.log(imgData.data);
-    }
-
-    function greyscale() {
-
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-
+    const lix_conv = function () {
+        console.log("Lix conv called")
         for (i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-            imgData.data[i] = avg
-            imgData.data[i + 1] = avg
-            imgData.data[i + 2] = avg
+            imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 1] = 255 - imgData.data[i + 1];
         }
-        console.log(imgData.data)
-        ctx.putImageData(imgData, 0, 0);
-
+        return imgData;
     }
 
-    function redGreyScale() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
-            imgData.data[i] = avg + 100
-            imgData.data[i + 1] = avg + 40
-            imgData.data[i + 2] = avg + 20
+    const ryo_conv = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = 255 - imgData.data[i];
+            imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-
-    function blueGreyScale() {
-
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const blue_greyscale_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 20
             imgData.data[i + 1] = avg + 30
             imgData.data[i + 2] = avg + 60
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
+    }
+    const solange_imgdata = function () {
+        console.log("Lix conv called")
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = 255 - imgData.data[i];
+        }
+        return imgData;
     }
 
-    function greenGreyScale() {
-        ctx.drawImage(img, 10, 10, 220, 277);
+    const cool_twilight_imgdata = function () {
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i + 1] = 255 - imgData.data[i + 1];
+        }
+        return imgData;
+    }
 
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const blues_imgdata = function () {
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i + 2] = 255 - imgData.data[i + 2];
+        }
+        return imgData;
+    }
 
+    const darkify_imgdata = function () {
+        var BRIGHTNESS_ADJ = 20;
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] -= BRIGHTNESS_ADJ
+            imgData.data[i + 1] -= BRIGHTNESS_ADJ
+            imgData.data[i + 2] -= BRIGHTNESS_ADJ
+        }
+        return imgData;
+    }
+
+    const incbrightness_imgdata = function () {
+        var BRIGHTNESS_ADJ = 50;
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] += BRIGHTNESS_ADJ
+            imgData.data[i + 1] += BRIGHTNESS_ADJ
+            imgData.data[i + 2] += BRIGHTNESS_ADJ
+        }
+        return imgData;
+    }
+
+    const greyscale_imgdata = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg
+            imgData.data[i + 1] = avg
+            imgData.data[i + 2] = avg
+        }
+        return imgData;
+    }
+
+    const redgreyscale_imgdata = function () {
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = avg + 100
+            imgData.data[i + 1] = avg + 40
+            imgData.data[i + 2] = avg + 20
+        }
+        return imgData;
+    }
+
+
+
+    const greengreyscale_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 20
             imgData.data[i + 1] = avg + 70
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function addHorizontalLines() {
 
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const add_horizontal_line_imgdata = function () {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 1;
@@ -394,13 +350,10 @@
             imgData.data[i + 1] = avg + 70
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function addDiagonalLines(img) {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const add_diagonal_lines_imgdata = function () {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 20;
@@ -412,13 +365,10 @@
             imgData.data[i + 1] = avg + 70
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function addGreenDiagonalLines() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const add_green_diagonal_lines_imgdata = function () {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 20;
@@ -430,14 +380,10 @@
             imgData.data[i + 1] = avg + inc;
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function pane() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const pane_imgdata = function () {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 200;
@@ -449,13 +395,11 @@
             imgData.data[i + 1] = avg + inc;
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function casino(img) {
-        console.log("Casino called.")
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+    const casino_imgdata = function () {
 
         var inc = 0;
 
@@ -470,13 +414,10 @@
             imgData.data[i + 1] = avg + 2;
             imgData.data[i + 2] = avg + 5;
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function yellowCasino(img) {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const yellow_casino_imgdata = function () {
 
         var inc = 0;
         var inc2 = 0;
@@ -493,15 +434,11 @@
             imgData.data[i + 1] = avg + inc2;
             imgData.data[i + 2] = avg + 5;
         }
-        ctx.putImageData(imgData, 0, 0);
+
+        return imgData;
     }
 
-
-    function specks() {
-
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const specks_imgdata = function () {
         var inc = 0;
         var inc2 = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -518,153 +455,89 @@
             imgData.data[i + 1] = avg + inc2;
             imgData.data[i + 2] = avg + 5;
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function incBrightness2() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-        var BRIGHTNESS_ADJ = 30;
+    const incbrightness_two_imgdata = function () {
+        var inc = 0;
+        var inc2 = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] += BRIGHTNESS_ADJ
-            imgData.data[i + 1] += BRIGHTNESS_ADJ
-            imgData.data[i + 2] += BRIGHTNESS_ADJ
+            i = getRandomNumber(0, imgData.data.length);
+            inc = getRandomNumber(0, 255);
+            inc2 = getRandomNumber(0, 255);
+            inc3 = getRandomNumber(0, 255)
+            if (inc > 255) {
+                inc = 0;
+            }
+
+            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            imgData.data[i] = (avg + inc);
+            imgData.data[i + 1] = avg + inc2;
+            imgData.data[i + 2] = avg + 5;
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function invert() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const wyo_imgdata = function () {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function addToPixels(addition) {
-        var canvas_new = document.createElement("canvas");
-        var new_ctx = canvas_new.getContext("2d");
-        ctx.drawImage(img, 10, 10, 220, 277);
-        new_ctx.drawImage(img, 10, 10, 50, 80);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-        var newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
-
+    const solange_dark_imgdata = function () {
         for (i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] = 255 - imgData.data[i];
-            newImgData.data[i] = 255 - newImgData.data[i];
+            imgData.data[i] = 200 - imgData.data[i];
 
             // imgData.data[i + 1] = 255 - imgData.data[i + 1];
             // imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
-        new_ctx.putImageData(newImgData, 0, 0);
-        ctx.putImageData(imgData, 0, 0);
-
-        return canvas_new;
+        return imgData;
     }
 
-    function solange() {
-        var canvas_new = document.createElement("canvas");
-        var new_ctx = canvas_new.getContext("2d");
-        ctx.drawImage(img, 10, 10, 220, 277);
-        new_ctx.drawImage(img, 10, 10, 50, 80);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-        var newImgData = new_ctx.getImageData(0, 0, canvas_new.width, canvas_new.height);
-
-        for (i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] = 255 - imgData.data[i];
-            newImgData.data[i] = 255 - newImgData.data[i];
-
-            // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-            // imgData.data[i + 2] = 255 - imgData.data[i + 2];
-        }
-        new_ctx.putImageData(newImgData, 0, 0);
-        ctx.putImageData(imgData, 0, 0);
-
-        return canvas_new;
-    }
-
-    function zapt() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const zapt_imgdata = function () {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             // imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
             // imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function neue() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const neue_imgdata = function () {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             // imgData.data[i] = 255 - imgData.data[i];
             // imgData.data[i + 1] = 255 - imgData.data[i + 1];
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-
-    function ryo() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-        for (i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] = 255 - imgData.data[i];
-            // imgData.data[i + 1] = 255 - imgData.data[i + 1];
-            imgData.data[i + 2] = 255 - imgData.data[i + 2];
-        }
-        ctx.putImageData(imgData, 0, 0);
-    }
-
-    function lix() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-        for (i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] = 255 - imgData.data[i];
-            imgData.data[i + 1] = 255 - imgData.data[i + 1];
-            //imgData.data[i + 2] = 255 - imgData.data[i + 2];
-        }
-        ctx.putImageData(imgData, 0, 0);
-    }
-
-    function eon() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const eon_imgdata = function () {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             //imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 120 - imgData.data[i + 1];
             imgData.data[i + 2] = 100 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function aeon() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const aeon_imgdata = function () {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             //imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 60 - imgData.data[i + 1];
             imgData.data[i + 2] = 100 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function roseTint() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const rosetint_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -672,13 +545,10 @@
             imgData.data[i + 1] = avg + 20
             imgData.data[i + 2] = avg + 31
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function slate() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const slate_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -686,13 +556,10 @@
             imgData.data[i + 1] = avg + 3
             imgData.data[i + 2] = avg + 12
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function purpleScale() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const purplescale_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -700,13 +567,10 @@
             imgData.data[i + 1] = avg + 40
             imgData.data[i + 2] = avg + 80
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function radio() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const radio_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -714,13 +578,10 @@
             imgData.data[i + 1] = avg + 40
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function twenties() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const twenties_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -728,43 +589,29 @@
             imgData.data[i + 1] = avg + 12
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function ocean() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const ocean_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] += 10
             imgData.data[i + 1] += 20
             imgData.data[i + 2] += 90
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function a() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const sat_adj_imgdata = function () {
         var SAT_ADJ = 150;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
             imgData.data[i + 1] -= SAT_ADJ
             imgData.data[i + 2] -= SAT_ADJ
         }
-        ctx.putImageData(imgData, 0, 0);
-        console.log(imgData.data);
+        return imgData;
     }
 
-    function specksRedscale() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const specksredscale_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var randomNumber = getRandomNumber(0, 100);
             if (randomNumber > 10 && randomNumber < 13) {
@@ -778,17 +625,12 @@
             imgData.data[i + 1] = avg + 40
             imgData.data[i + 2] = avg + 20
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function noiseCentre() {
-
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const noise_centre_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3;
 
             if (i < imgData.data.length / 2) {
                 imgData.data[i] += 80
@@ -807,95 +649,58 @@
                 imgData.data[i + 1] += 20
                 imgData.data[i + 2] += 90
             }
-
+            return imgData;
         }
-        ctx.putImageData(imgData, 0, 0);
     }
 
-    function perfume() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const perfume_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 80
             imgData.data[i + 1] += 40
             imgData.data[i + 2] += 120
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function serenity() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const serenity_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] += 10
             imgData.data[i + 1] += 40
             imgData.data[i + 2] += 90
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-
-    function pinkAura() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const pink_aura_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] += 90
             imgData.data[i + 1] += 10
             imgData.data[i + 2] += 90
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function haze() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const haze_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 90
             imgData.data[i + 1] += 90
             imgData.data[i + 2] += 10
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function pixelate() {
-        var size = 27 / 100,
-            w = c.width * size,
-            h = c.height * size;
-
-        // draw the original image at a fraction of the final size
-        ctx.drawImage(img, 0, 0, w, h);
-
-        ctx.msImageSmoothingEnabled = false;
-        ctx.webkitImageSmoothingEnabled = false;
-        ctx.imageSmoothingEnabled = false;
-
-        // enlarge the minimized image to full size    
-        ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
-    }
-
-    function mellow() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const mellow_imgdata = function () {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 2] = 120 - imgData.data[i + 2];
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function greenSpecks() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const green_specks_imgdata = function () {
+
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -919,12 +724,11 @@
             imgData.data[i + 1] += addition2;
             imgData.data[i + 2] += addition1;
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function eclectic() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const eclectic_imgdata = function () {
+
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -958,12 +762,10 @@
             }
             // imgData.data[i + 2] += addition2;
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function matrix() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const matrix_imgdata = function () {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -995,20 +797,16 @@
             } else {
                 imgData.data[i + 1] += addition2;
             }
-            // imgData.data[i + 2] += addition2;
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function cosmic() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const cosmic_imgdata = function () {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition1;
-            var addition2;
+            var addition;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 20;
                 addition2 = 30;
@@ -1023,24 +821,25 @@
                 addition2 = 10;
             }
 
-            if (imgData.data[i + 1] + addition2 > 255) {
+            if (imgData.data[i] - addition > 255) {
+                imgData.data[i] -= addition
+            }
+            else {
+                imgData.data[i] += addition
+            }
+
+            if (imgData.data[i + 1] + addition > 255) {
                 imgData.data[i + 1] -= addition2;
             } else {
                 imgData.data[i + 1] += addition2;
             }
-
-            if (imgData.data[i + 2] + addition2 > 255) {
-                imgData.data[i + 2] -= 130;
-            } else {
-                imgData.data[i + 2] += 130;
-            }
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function retroViolet() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+    const retroviolet_imgdata = function () {
+
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -1075,28 +874,21 @@
                 imgData.data[i + 2] += addition2;
             }
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function vintage() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+    const vintage_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 120
             imgData.data[i + 1] += 70
             imgData.data[i + 2] += 13
         }
-        ctx.putImageData(imgData, 0, 0);
-        console.log(imgData.data);
+
+        return imgData;
     }
 
-    function confetti() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const confetti_imgdata = function () {
         for (var i = 0; i < imgData.data.length; i += 4) {
 
             var randomNumber = getRandomNumber(0, 200);
@@ -1114,38 +906,58 @@
             }
 
         }
-        ctx.putImageData(imgData, 0, 0);
+        return imgData;
     }
 
-    function horizon() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const horizon_imgdata = function () {
         var SAT_ADJ = 150;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
             imgData.data[i + 1] -= SAT_ADJ
             imgData.data[i + 2] -= SAT_ADJ
         }
-        ctx.putImageData(imgData, 0, 0);
-        console.log(imgData.data);
+        return imgData;
     }
 
-    function evening() {
-        ctx.drawImage(img, 10, 10, 220, 277);
-
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
+    const evening_imgdata = function () {
         var SAT_ADJ = 60;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
             imgData.data[i + 1] -= SAT_ADJ
             imgData.data[i + 2] -= SAT_ADJ
         }
-        ctx.putImageData(imgData, 0, 0);
-        console.log(imgData.data);
+        return imgData;
     }
+
+
+
+    // Canvas-specific functions
+    function pixelate() {
+        var size = 27 / 100,
+            w = c.width * size,
+            h = c.height * size;
+
+        ctx.drawImage(img, 0, 0, w, h);
+
+        ctx.msImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+
+        ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
+    }
+
+    var filter_dict = {"pane" : pane_imgdata, "add_horizontal_lines" : add_horizontal_line_imgdata, "add_diagonal_lines" : add_diagonal_lines_imgdata, "add_green_diagonal_lines" : add_green_diagonal_lines_imgdata, "greengreyscale" : greengreyscale_imgdata, "darkify" : darkify_imgdata, "incbrightness" : incbrightness_imgdata, "cool_twilight" : cool_twilight_imgdata, "blues" : blues_imgdata, "ryo_conv" : ryo_conv, "lix" : lix_conv, "casino" : casino_imgdata, "yellow_casino" : yellow_casino_imgdata, "specks" : specks_imgdata, "sat_adj" : sat_adj_imgdata, "noise_centre" : noise_centre_imgdata, "greenspecks" : green_specks_imgdata, "eclectic" : eclectic_imgdata, "matrix" : matrix_imgdata, "cosmic" : cosmic_imgdata, "wyo" : wyo_imgdata, "solange_dark" : solange_dark_imgdata, "solange" : solange_imgdata, "zapt" : zapt_imgdata, "neue" : neue_imgdata, "eon" : eon_imgdata, "aeon" : aeon_imgdata, "ocean" : ocean_imgdata, "confetti" : confetti_imgdata, "horizon" : horizon_imgdata, "rosetint" : rosetint_imgdata, "slate" : slate_imgdata, "purplescale" : purplescale_imgdata, "redgreyscale" : redgreyscale_imgdata, "radio" : radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties" : twenties_imgdata, "greyscale" : greyscale_imgdata, "mellow" : mellow_imgdata, "vintage" : vintage_imgdata, "evening" : evening_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "perfume" : perfume_imgdata, "pink_aura" : pink_aura_imgdata, "serenity" : serenity_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata, "haze" : haze_imgdata}
+
+    function updateMainCanvas(chosenFilter) {
+
+        ctx.drawImage(img, 0, 0, 220, 277);
+        imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
+
+        var resultingImgData = filter_dict[chosenFilter]();
+        console.log(resultingImgData)
+        ctx.putImageData(resultingImgData, 0, 0);
+    }
+
 
     function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
