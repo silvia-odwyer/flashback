@@ -145,31 +145,31 @@
         specks_redscale_elem.addEventListener("click", function () { updateMainCanvas("specks_redscale") }, false);
 
         var noise_centre_elem = document.getElementById("noise_centre");
-        noise_centre_elem.addEventListener("click", function () { noiseCentre(img) }, false);
+        noise_centre_elem.addEventListener("click", function () { updateMainCanvas("noise_centre") }, false);
 
         var mellow_elem = document.getElementById("mellow");
-        mellow_elem.addEventListener("click", function () { mellow(img) }, false);
+        mellow_elem.addEventListener("click", function () { updateMainCanvas("mellow") }, false);
 
         var matrix_elem = document.getElementById("matrix");
-        matrix_elem.addEventListener("click", function () { matrix(img) }, false);
+        matrix_elem.addEventListener("click", function () { updateMainCanvas("matrix") }, false);
 
         var green_specks_elem = document.getElementById("green_specks");
-        green_specks_elem.addEventListener("click", function () { greenSpecks(img) }, false);
+        green_specks_elem.addEventListener("click", function () { updateMainCanvas("greenspecks") }, false);
 
         var eclectic_elem = document.getElementById("eclectic");
-        eclectic_elem.addEventListener("click", function () { eclectic(img) }, false);
+        eclectic_elem.addEventListener("click", function () { updateMainCanvas("eclectic") }, false);
 
         var confetti_elem = document.getElementById("confetti");
-        confetti_elem.addEventListener("click", function () { confetti(img) }, false);
+        confetti_elem.addEventListener("click", function () { updateMainCanvas("confetti") }, false);
 
         var vintage_elem = document.getElementById("vintage");
-        vintage_elem.addEventListener("click", function () { vintage(img) }, false);
+        vintage_elem.addEventListener("click", function () { updateMainCanvas("vintage") }, false);
 
         var horizon_elem = document.getElementById("horizon");
-        horizon_elem.addEventListener("click", function () { horizon(img) }, false);
+        horizon_elem.addEventListener("click", function () { updateMainCanvas("horizon") }, false);
 
         var evening_elem = document.getElementById("evening");
-        evening_elem.addEventListener("click", function () { evening(img) }, false);
+        evening_elem.addEventListener("click", function () { updateMainCanvas("evening") }, false);
     }
 
     function appendCanvases() {
@@ -946,12 +946,12 @@
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
     }
 
-    var filter_dict = {"pane" : pane_imgdata, "add_horizontal_line" : add_horizontal_line_imgdata, "add_diagonal_lines" : add_diagonal_lines_imgdata, "add_green_diagonal_lines" : add_green_diagonal_lines_imgdata, "greengreyscale" : greengreyscale_imgdata, "darkify" : darkify_imgdata, "incbrightness" : incbrightness_imgdata, "cool_twilight" : cool_twilight_imgdata, "blues" : blues_imgdata, "ryo_conv" : ryo_conv, "lix" : lix_conv, "casino" : casino_imgdata, "yellow_casino" : yellow_casino_imgdata, "specks" : specks_imgdata, "sat_adj" : sat_adj_imgdata, "noise_centre" : noise_centre_imgdata, "greenspecks" : green_specks_imgdata, "eclectic" : eclectic_imgdata, "matrix" : matrix_imgdata, "cosmic" : cosmic_imgdata, "wyo" : wyo_imgdata, "solange_dark" : solange_dark_imgdata, "solange" : solange_imgdata, "zapt" : zapt_imgdata, "neue" : neue_imgdata, "eon" : eon_imgdata, "aeon" : aeon_imgdata, "ocean" : ocean_imgdata, "confetti" : confetti_imgdata, "horizon" : horizon_imgdata, "rosetint" : rosetint_imgdata, "slate" : slate_imgdata, "purplescale" : purplescale_imgdata, "redgreyscale" : redgreyscale_imgdata, "radio" : radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties" : twenties_imgdata, "greyscale" : greyscale_imgdata, "mellow" : mellow_imgdata, "vintage" : vintage_imgdata, "evening" : evening_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "perfume" : perfume_imgdata, "pink_aura" : pink_aura_imgdata, "serenity" : serenity_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata, "haze" : haze_imgdata}
+    var filter_dict = {"pane" : pane_imgdata, "add_horizontal_lines" : add_horizontal_line_imgdata, "add_diagonal_lines" : add_diagonal_lines_imgdata, "add_green_diagonal_lines" : add_green_diagonal_lines_imgdata, "greengreyscale" : greengreyscale_imgdata, "darkify" : darkify_imgdata, "incbrightness" : incbrightness_imgdata, "cool_twilight" : cool_twilight_imgdata, "blues" : blues_imgdata, "ryo_conv" : ryo_conv, "lix" : lix_conv, "casino" : casino_imgdata, "yellow_casino" : yellow_casino_imgdata, "specks" : specks_imgdata, "sat_adj" : sat_adj_imgdata, "noise_centre" : noise_centre_imgdata, "greenspecks" : green_specks_imgdata, "eclectic" : eclectic_imgdata, "matrix" : matrix_imgdata, "cosmic" : cosmic_imgdata, "wyo" : wyo_imgdata, "solange_dark" : solange_dark_imgdata, "solange" : solange_imgdata, "zapt" : zapt_imgdata, "neue" : neue_imgdata, "eon" : eon_imgdata, "aeon" : aeon_imgdata, "ocean" : ocean_imgdata, "confetti" : confetti_imgdata, "horizon" : horizon_imgdata, "rosetint" : rosetint_imgdata, "slate" : slate_imgdata, "purplescale" : purplescale_imgdata, "redgreyscale" : redgreyscale_imgdata, "radio" : radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties" : twenties_imgdata, "greyscale" : greyscale_imgdata, "mellow" : mellow_imgdata, "vintage" : vintage_imgdata, "evening" : evening_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "perfume" : perfume_imgdata, "pink_aura" : pink_aura_imgdata, "serenity" : serenity_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata, "haze" : haze_imgdata}
 
     function updateMainCanvas(chosenFilter) {
 
         ctx.drawImage(img, 0, 0, 220, 277);
-        var imgData = ctx.getImageData(0, 0, c.width, c.height);
+        imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
 
         var resultingImgData = filter_dict[chosenFilter]();
         console.log(resultingImgData)
