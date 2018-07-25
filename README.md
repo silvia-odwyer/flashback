@@ -16,7 +16,7 @@ to your pix, flashback has you covered.
 Image filtering comprises vintage filters, solarizers, inverters, and over fifty more. 
 
 ## Flashback In Action
-![Flashback can transform an image into a retro or vintage lookalike.](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-2.gif "Flashback can transform an image into a retro or vintage lookalike.")
+![Flashback can transform an image into a retro or vintage lookalike.](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-3.gif "Flashback can transform an image into a retro or vintage lookalike.")
 
 ![Flashback can transform even this image of a city into a scene from a cyberpunk film!](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-city.gif "Flashback can transform even this image of a city into a scene from a cyberpunk film!")
 
