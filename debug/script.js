@@ -46,104 +46,103 @@
         darkify_el.addEventListener("click", function () { updateMainCanvas("bluegreyscale") }, false);
 
         var greyscale_elem = document.getElementById('greyscale');
-        greyscale_elem.addEventListener("click", function () { greyscale(img) }, false);
+        greyscale_elem.addEventListener("click", function () { updateMainCanvas("greyscale") }, false);
 
         var red_greyscale_elem = document.getElementById('red_greyscale');
-        red_greyscale_elem.addEventListener("click", function () { redGreyScale(img) }, false);
+        red_greyscale_elem.addEventListener("click", function () { updateMainCanvas("redgreyscale") }, false);
 
         var green_greyscale_elem = document.getElementById('green_greyscale');
-        green_greyscale_elem.addEventListener("click", function () { greenGreyScale(img) }, false);
+        green_greyscale_elem.addEventListener("click", function () { updateMainCanvas("greengreyscale") }, false);
 
         var horizontal_lines_elem = document.getElementById('horizontal_lines');
-        horizontal_lines_elem.addEventListener("click", function () { addHorizontalLines(img) }, false);
+        horizontal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_horizontal_lines") }, false);
 
         var diagonal_lines_elem = document.getElementById('diagonal_lines');
-        diagonal_lines_elem.addEventListener("click", function () { addDiagonalLines(img) }, false);
+        diagonal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_diagonal_lines") }, false);
 
         var green_diagonal_lines_elem = document.getElementById('green_diagonal_lines');
-        green_diagonal_lines_elem.addEventListener("click", function () { addGreenDiagonalLines(img) }, false);
+        green_diagonal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_green_diagonal_lines") }, false);
 
         var pane_elem = document.getElementById('pane');
-        pane_elem.addEventListener("click", function () { pane(img) }, false);
+        pane_elem.addEventListener("click", function () { updateMainCanvas("pane") }, false);
 
         var casino_elem = document.getElementById('casino');
-        casino_elem.addEventListener("click", function () { casino(img) }, false);
+        casino_elem.addEventListener("click", function () { updateMainCanvas("casino") }, false);
 
         var yellow_casino_elem = document.getElementById('yellow_casino');
-        yellow_casino_elem.addEventListener("click", function () { yellowCasino(img) }, false);
+        yellow_casino_elem.addEventListener("click", function () { updateMainCanvas("yellow_casino") }, false);
 
         var specks_elem = document.getElementById('specks');
-        specks_elem.addEventListener("click", function () { specks(img) }, false);
+        specks_elem.addEventListener("click", function () { updateMainCanvas("specks") }, false);
 
         var invert_elem = document.getElementById('invert');
-        invert_elem.addEventListener("click", function () { invert(img) }, false);
+        invert_elem.addEventListener("click", function () { updateMainCanvas("invert") }, false);
 
-        var a_el = document.getElementById('a');
-        a_el.addEventListener("click", function () { a(img) }, false);
+        // var a_el = document.getElementById('a');
+        // a_el.addEventListener("click", function () { a(img) }, false);
 
         var twenties_el = document.getElementById('twenties');
-        twenties_el.addEventListener("click", function () { twenties(img) }, false);
+        twenties_el.addEventListener("click", function () { updateMainCanvas("twenties") }, false);
 
         var rose_el = document.getElementById("rose");
-        rose_el.addEventListener("click", function () { roseTint(img) }, false);
+        rose_el.addEventListener("click", function () { updateMainCanvas("rosetint") }, false);
 
         var slate_el = document.getElementById("slate");
-        slate_el.addEventListener("click", function () { slate(img) }, false);
+        slate_el.addEventListener("click", function () { updateMainCanvas("slate") }, false);
 
         var purplescale_el = document.getElementById("purplescale");
-        purplescale_el.addEventListener("click", function () { purpleScale(img) }, false);
+        purplescale_el.addEventListener("click", function () { updateMainCanvas("purplescale") }, false);
 
         var radio_el = document.getElementById("radio");
-        radio_el.addEventListener("click", function () { radio(img) }, false);
+        radio_el.addEventListener("click", function () { updateMainCanvas("radio") }, false);
 
         var ocean_el = document.getElementById("ocean");
-        ocean_el.addEventListener("click", function () { ocean(img) }, false);
+        ocean_el.addEventListener("click", function () { updateMainCanvas("ocean") }, false);
 
         var pixelate_elem = document.getElementById("pixelate");
         pixelate_elem.addEventListener("click", function () { pixelate(img) }, false);
 
         var solange_elem = document.getElementById("solange");
-        solange_elem.addEventListener("click", function () { solange(img) }, false);
+        solange_elem.addEventListener("click", function () { updateMainCanvas("solange") }, false);
 
         var zapt_element = document.getElementById("zapt");
-        zapt_element.addEventListener("click", function () { zapt(img) }, false);
-
+        zapt_element.addEventListener("click", function () { updateMainCanvas("zapt") }, false);
 
         var neue_element = document.getElementById("neue");
-        neue_element.addEventListener("click", function () { neue(img) }, false);
+        neue_element.addEventListener("click", function () { updateMainCanvas("neue") }, false);
 
         var ryo_element = document.getElementById("ryo");
-        ryo_element.addEventListener("click", function () { ryo(img) }, false);
+        ryo_element.addEventListener("click", function () { updateMainCanvas("ryo") }, false);
 
         var lix_element = document.getElementById("lix");
-        lix_element.addEventListener("click", function () { lix(img) }, false);
+        lix_element.addEventListener("click", function () { updateMainCanvas("lix") }, false);
 
         var eon_element = document.getElementById("eon");
-        eon_element.addEventListener("click", function () { eon(img) }, false);
+        eon_element.addEventListener("click", function () { updateMainCanvas("eon") }, false);
 
         var aeon_element = document.getElementById("aeon");
-        aeon_element.addEventListener("click", function () { aeon(img) }, false);
+        aeon_element.addEventListener("click", function () { updateMainCanvas("aeon") }, false);
 
         var cosmic_element = document.getElementById("cosmic");
-        cosmic_element.addEventListener("click", function () { cosmic(img) }, false);
+        cosmic_element.addEventListener("click", function () { updateMainCanvas("cosmic") }, false);
 
         var retro_violet_elem = document.getElementById("retro_violet");
-        retro_violet_elem.addEventListener("click", function () { retroViolet(img) }, false);
+        retro_violet_elem.addEventListener("click", function () { updateMainCanvas("retroviolet") }, false);
 
         var haze_elem = document.getElementById("haze");
-        haze_elem.addEventListener("click", function () { haze(img) }, false);
+        haze_elem.addEventListener("click", function () { updateMainCanvas("haze") }, false);
 
         var pink_aura_elem = document.getElementById("pink_aura");
-        pink_aura_elem.addEventListener("click", function () { pinkAura(img) }, false);
+        pink_aura_elem.addEventListener("click", function () { updateMainCanvas("pink_aura") }, false);
 
         var serenity_elem = document.getElementById("serenity");
-        serenity_elem.addEventListener("click", function () { serenity(img) }, false);
+        serenity_elem.addEventListener("click", function () { updateMainCanvas("serenity") }, false);
 
         var perfume_elem = document.getElementById("perfume");
-        perfume_elem.addEventListener("click", function () { perfume(img) }, false);
+        perfume_elem.addEventListener("click", function () { updateMainCanvas("perfume") }, false);
 
         var specks_redscale_elem = document.getElementById("specks_redscale");
-        specks_redscale_elem.addEventListener("click", function () { specksRedscale(img) }, false);
+        specks_redscale_elem.addEventListener("click", function () { updateMainCanvas("specks_redscale") }, false);
 
         var noise_centre_elem = document.getElementById("noise_centre");
         noise_centre_elem.addEventListener("click", function () { noiseCentre(img) }, false);
@@ -947,9 +946,7 @@
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
     }
 
-    var filter_dict = {"wyo" : wyo_imgdata, "solange_dark" : solange_dark_imgdata, "solange" : solange_imgdata, "zapt" : zapt_imgdata, "neue" : neue_imgdata, "eon" : eon_imgdata, "aeon" : aeon_imgdata, "ocean" : ocean_imgdata, "confetti" : confetti_imgdata, "horizon" : horizon_imgdata, "rosetint" : rosetint_imgdata, "slate" : slate_imgdata, "purplescale" : purplescale_imgdata, "redgreyscale" : redgreyscale_imgdata, "radio" : radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties" : twenties_imgdata, "greyscale" : greyscale_imgdata, "mellow" : mellow_imgdata, "vintage" : vintage_imgdata, "evening" : evening_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "perfume" : perfume_imgdata, "pink_aura" : pink_aura_imgdata, "serenity" : serenity_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata, "haze" : haze_imgdata}
-    // const group = [cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
-
+    var filter_dict = {"pane" : pane_imgdata, "add_horizontal_line" : add_horizontal_line_imgdata, "add_diagonal_lines" : add_diagonal_lines_imgdata, "add_green_diagonal_lines" : add_green_diagonal_lines_imgdata, "greengreyscale" : greengreyscale_imgdata, "darkify" : darkify_imgdata, "incbrightness" : incbrightness_imgdata, "cool_twilight" : cool_twilight_imgdata, "blues" : blues_imgdata, "ryo_conv" : ryo_conv, "lix" : lix_conv, "casino" : casino_imgdata, "yellow_casino" : yellow_casino_imgdata, "specks" : specks_imgdata, "sat_adj" : sat_adj_imgdata, "noise_centre" : noise_centre_imgdata, "greenspecks" : green_specks_imgdata, "eclectic" : eclectic_imgdata, "matrix" : matrix_imgdata, "cosmic" : cosmic_imgdata, "wyo" : wyo_imgdata, "solange_dark" : solange_dark_imgdata, "solange" : solange_imgdata, "zapt" : zapt_imgdata, "neue" : neue_imgdata, "eon" : eon_imgdata, "aeon" : aeon_imgdata, "ocean" : ocean_imgdata, "confetti" : confetti_imgdata, "horizon" : horizon_imgdata, "rosetint" : rosetint_imgdata, "slate" : slate_imgdata, "purplescale" : purplescale_imgdata, "redgreyscale" : redgreyscale_imgdata, "radio" : radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties" : twenties_imgdata, "greyscale" : greyscale_imgdata, "mellow" : mellow_imgdata, "vintage" : vintage_imgdata, "evening" : evening_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "perfume" : perfume_imgdata, "pink_aura" : pink_aura_imgdata, "serenity" : serenity_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata, "haze" : haze_imgdata}
 
     function updateMainCanvas(chosenFilter) {
 
