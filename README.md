@@ -5,7 +5,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/badges/shields.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)
 
-![Flashback logo.](https://github.com/silvia-odwyer/flashback/blob/master/media/logo-glitch2.gif "Flashback logo.")
+![Flashback logo.](https://github.com/silvia-odwyer/flashback/blob/master/media/logo-waves.gif "Flashback logo.")
 
 
 Flashback is a powerful image filtering web app that sends your photos back in time. 
@@ -21,7 +21,7 @@ Image filtering comprises vintage filters, solarizers, inverters, and over fifty
 ![Flashback can transform even this image of a city into a scene from a cyberpunk film!](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-city.gif "Flashback can transform even this image of a city into a scene from a cyberpunk film!")
 
 ## Try It Out
-Flashback is live. 
+Flashback is live here. 
 
 ## Filters
 - Vintage: 1920s chic, sepia, hazy vintage, perfumed imagery
