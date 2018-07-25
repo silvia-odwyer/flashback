@@ -37,7 +37,7 @@
     }
 
     function addFilterButtonEventListeners() {
-        
+
         var inc_brightness_elem = document.getElementById('inc_brightness');
         inc_brightness_elem.addEventListener("click", function () { updateMainCanvas("retroviolet") }, false);
 
@@ -78,8 +78,8 @@
         var invert_elem = document.getElementById('invert');
         invert_elem.addEventListener("click", function () { updateMainCanvas("invert") }, false);
 
-        // var a_el = document.getElementById('a');
-        // a_el.addEventListener("click", function () { a(img) }, false);
+        var a_el = document.getElementById('a');
+        a_el.addEventListener("click", function () { updateMainCanvas("a") }, false);
 
         var twenties_el = document.getElementById('twenties');
         twenties_el.addEventListener("click", function () { updateMainCanvas("twenties") }, false);
@@ -170,6 +170,9 @@
 
         var evening_elem = document.getElementById("evening");
         evening_elem.addEventListener("click", function () { updateMainCanvas("evening") }, false);
+
+        var min_noise_elem = document.getElementById("min_noise");
+        min_noise_elem.addEventListener("click", function () { updateMainCanvas("min_noise") }, false);
     }
 
     function appendCanvases() {
@@ -205,7 +208,8 @@
 
 
     function assembleFilteredPhotos() {
-        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, blue_greyscale_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, greyscale_imgdata, specksredscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, horizon_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, incbrightness_two_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
+
+        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, min_noise_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, horizon_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata]
         var listdata = [];
         var tile_elem;
 
@@ -223,6 +227,8 @@
             console.log(resImgData);
             getctx.putImageData(resImgData, 0, 0);
         }
+
+
     }
 
     // 48 filters total - 24th July 2018 <silviaod>
@@ -267,6 +273,53 @@
         console.log("Lix conv called")
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
+        }
+        return imgData;
+    }
+
+    const solange_grey_imgdata = function () {
+        console.log("Lix conv called")
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = imgData.data[i + 2];
+            imgData.data[i + 1] = imgData.data[i + 1]
+            imgData.data[i + 2] = imgData.data[i]
+
+        }
+        return imgData;
+    }
+
+    const min_noise_imgdata = function () {
+        var rand = (0.5 - Math.random()) * 53;
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var randomColor1 = 0.6 + Math.random() * 0.4;
+
+            var randomColor2 = 0.6 + Math.random() * 0.4;
+
+            var randomColor3 = 0.6 + Math.random() * 0.4;
+
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
+
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+        }
+        return imgData;
+    }
+
+    const min_red_noise_imgdata = function () {
+        var rand = (0.5 - Math.random()) * 1;
+
+        for (var i = 0; i < imgData.data.length; i += 4) {
+            var randomColor1 = 0.6 + Math.random() * 0.6;
+
+            var randomColor2 = 0.6 + Math.random() * 0.4;
+
+            var randomColor3 = 0.6 + Math.random() * 0.4;
+
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
+
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
         }
         return imgData;
     }
@@ -929,8 +982,6 @@
         return imgData;
     }
 
-
-
     // Canvas-specific functions
     function pixelate() {
         var size = 27 / 100,
@@ -946,7 +997,7 @@
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
     }
 
-    var filter_dict = {"pane" : pane_imgdata, "add_horizontal_lines" : add_horizontal_line_imgdata, "add_diagonal_lines" : add_diagonal_lines_imgdata, "add_green_diagonal_lines" : add_green_diagonal_lines_imgdata, "greengreyscale" : greengreyscale_imgdata, "darkify" : darkify_imgdata, "incbrightness" : incbrightness_imgdata, "cool_twilight" : cool_twilight_imgdata, "blues" : blues_imgdata, "ryo_conv" : ryo_conv, "lix" : lix_conv, "casino" : casino_imgdata, "yellow_casino" : yellow_casino_imgdata, "specks" : specks_imgdata, "sat_adj" : sat_adj_imgdata, "noise_centre" : noise_centre_imgdata, "greenspecks" : green_specks_imgdata, "eclectic" : eclectic_imgdata, "matrix" : matrix_imgdata, "cosmic" : cosmic_imgdata, "wyo" : wyo_imgdata, "solange_dark" : solange_dark_imgdata, "solange" : solange_imgdata, "zapt" : zapt_imgdata, "neue" : neue_imgdata, "eon" : eon_imgdata, "aeon" : aeon_imgdata, "ocean" : ocean_imgdata, "confetti" : confetti_imgdata, "horizon" : horizon_imgdata, "rosetint" : rosetint_imgdata, "slate" : slate_imgdata, "purplescale" : purplescale_imgdata, "redgreyscale" : redgreyscale_imgdata, "radio" : radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties" : twenties_imgdata, "greyscale" : greyscale_imgdata, "mellow" : mellow_imgdata, "vintage" : vintage_imgdata, "evening" : evening_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "perfume" : perfume_imgdata, "pink_aura" : pink_aura_imgdata, "serenity" : serenity_imgdata, "bluegreyscale" : blue_greyscale_imgdata, "retroviolet" : retroviolet_imgdata, "haze" : haze_imgdata}
+    var filter_dict = { "a": a, "min_red_noise" : min_red_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "wyo": wyo_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
 
     function updateMainCanvas(chosenFilter) {
 
