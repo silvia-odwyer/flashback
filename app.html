@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-
+  <title>Flashback Image Editor</title>
 
 </head>
 
@@ -54,46 +54,77 @@
 
   <article class="media">
     <section class="media-left">
-      <ul class="">
+      <ul id="sidebar">
         <li id="a">A</li>
-          <li id="inc_brightness">Click to increase brightness!</li>
+        <li class="menu-label">Retro</li>
+        <li id="inc_brightness">
+          <span class="icon">
+            <i class="fas fa-sun"></i>
+          </span>Increase Brightness</li>
+
+        <li id="blue_greyscale">          <span class="icon">
+            <i class="fas fa-square-full has-text-info"></i>
+          </span>Blue Greyscale</li>
+
+        <li id="casino">          <span class="icon">
+            <i class="fas fa-dice has-text-danger"></i>
+          </span>Casino</li>
+
+        <li id="greyscale"><span class="icon">
+            <i class="fas fa-film"></i>
+          </span>Greyscale!</li>
+
+        <li id="darkify"><span class="icon">
+            <i class="fas fa-moon"></i>
+          </span>Darkify</li>
+
+        <li id="red_greyscale"><span class="icon">
+            <i class="fas fa-square has-text-danger"></i>
+          </span>Redscale</li>
+
+        <li id="green_greyscale"><span class="icon">
+            <i class="fas fa-leaf has-text-success"></i>
+          </span>Greenscale</li>
 
 
-          <li id="blue_greyscale">Click for blue greyscale!</li>
+        <li id="horizontal_lines"><span class="icon">
+            <i class="fas fa-align-justify"></i>
+          </span>Horizontal Lines</li>
 
-          <li id="casino">Click for casino!</li>
+        <li id="diagonal_lines">Diagonal Lines</li>
 
-          <li id="greyscale">Click for greyscale!</li>
-
-          <li id="darkify">Click to darkify!</li>
-
-          <li id="red_greyscale">Redscale</li>
-
-          <li id="green_greyscale">Greenscale</li>
-
-
-          <li id="horizontal_lines">Horizontal Lines</li>
-
-          <li id="diagonal_lines">Diagonal Lines</li>
-
-        <li id="yellow_casino">Yellow Casino</li>
+        <li id="yellow_casino"> <span class="icon">
+            <i class="fas fa-dice has-text-warning"></i>
+          </span>Yellow Casino</li>
         <li id="green_diagonal_lines">Green Diagonal Lines</li>
         <li id="pane">Pane</li>
         <li id="specks">Specks</li>
-        <li id="invert">Invert</li>
+        <li id="invert"><span class="icon">
+            <i class="fas fa-undo"></i>
+          </span>Invert</li>
+          <li class="menu-label">1920s Glamour</li>
         <li id="twenties">Twenties</li>
         <li id="rose">Rose</li>
         <li id="slate">Slate</li>
-        <li id="purplescale">Purple Scale</li>
-        <li id="radio">Radio</li>
-        <li id="ocean">Ocean</li>
+        <li id="purplescale"> <span class="icon">
+            <i class="fas fa-square has-text-danger"></i>
+          </span>Purple Scale</li>
+        <li id="radio"><span class="icon">
+            <i class="fas fa-broadcast-tower"></i>
+          </span>Radio</li>
+        <li id="ocean"><span class="icon">
+            <i class="fas fa-swimmer has-text-link"></i>
+          </span>Ocean</li>
 
         <li id="pixelate">Pixelate</li>
 
         <li id="solange">Solange</li>
-        <li id="zapt">Zapt</li>
+        <li id="zapt"><span class="icon">
+            <i class="fas fa-bolt has-text-warning"></i>
+          </span>Zapt</li>
         <li id="neue">Neue</li>
         <li id="ryo">Ryo</li>
+        <li class="menu-label">Cyberpunk</li>
         <li id="lix">Lix</li>
         <li id="eon">Eon</li>
         <li id="aeon">Aeon</li>
@@ -101,11 +132,15 @@
         <li id="retro_violet">Retro Violet</li>
         <li id="specks_redscale">Specks Redscale</li>
         <li id="noise_centre">Noise Centre</li>
-        <li id="perfume">Perfume</li>
+        <li id="perfume"> <span class="icon">
+            <i class="fas fa-spray-can has-text-danger"></i>
+          </span>Perfume</li>
         <li id="serenity">Serenity</li>
         <li id="pink_aura">Pink Aura</li>
         <li id="haze">Haze</li>
         <li id="mellow">Mellow</li>
+        <li class="menu-label">Post-War US (Fallout)</li>
+
         <li id="green_specks">Green Specks</li>
         <li id="matrix">Matrix</li>
         <li id="eclectic">Eclectic</li>
@@ -113,9 +148,14 @@
         <li id="vintage">Vintage</li>
         <li id="evening">Evening</li>
         <li id="horizon">Horizon</li>
-        <li id="min_noise">Minimal Noise</li>
-        <li id="lemon">Lemon</li>
+        <li id="min_noise"><span class="icon">
+            <i class="fas fa-file-medical-alt has-text-link"></i>
+          </span>Minimal Noise</li>
+        <li id="lemon"><span class="icon">
+            <i class="fas fa-lemon has-text-warning"></i>
+          </span>Lemon</li>
         <li id="coral">Coral</li>
+        <li class="menu-label">Noise Generators</li>
         <li id="dark_purple_min_noise">Dark Purple Min. Noise</li>
         <li id="green_med_noise">Green Medium Noise</li>
         <li id="teal_min_noise">Teal Min. Noise</li>
@@ -127,22 +167,36 @@
 
       </ul>
     </section>
+
     <div class="media-content is-link" id="grid">
       <div class="content">
         <section>
-          <h1>Upload Your Image</h1>
+          <h1>Flashback Image Editor</h1>
           <p>We've uploaded a sample image, so you can see the filters available, but feel free to upload your own.</p>
           <p>NOTE: Only portrait images are supported for now.</p>
         </section>
-        <canvas id="canvas" width="220" height="300" id="canvas"></canvas>
-        <input type='file' id='img_uploader' name="upload-image" />
+        <section id="live_area">
+          <section id="canvas_area">
+            <canvas id="canvas" width="220" height="277" id="canvas"></canvas>
+            <input type='file' id='img_uploader' name="upload-image" />
+
+          </section>
+
+          <section>
+            <h1>Steps</h1>
+            <p>1. Upload your image by clicking "Browse".</p>
+            <p>2. Scroll down to see the applied filters.</p>
+            <p>3. To add filters to each other, click on "Enable Filter Stacking" and click on filters on the LHS.</p>
+          </section>
+        </section>
+
         <br/>
         <br/>
         <section>
           <h1>Retro</h1>
         </section>
         <div class="tile is-ancestor" id="parent1">
-          
+
           <div class="tile is-parent">
             <article class="tile is-child box check">
 
@@ -514,83 +568,6 @@
           </div>
         </div>
 
-        <div class="tile is-ancestor">
-          <div class="tile is-vertical is-9">
-            <div class="tile">
-              <div class="tile is-parent">
-                <article class="tile is-child box">
-                  <p class="title">Five</p>
-                  <p class="subtitle">Subtitle</p>
-                  <div class="content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar
-                      felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus,
-                      leo sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
-                  </div>
-                </article>
-              </div>
-              <div class="tile is-8 is-vertical">
-                <div class="tile">
-                  <div class="tile is-parent">
-                    <article class="tile is-child box">
-                      <p class="title">Six</p>
-                      <p class="subtitle">Subtitle</p>
-                    </article>
-                  </div>
-                  <div class="tile is-parent">
-                    <article class="tile is-child box">
-                      <p class="title">Seven</p>
-                      <p class="subtitle">Subtitle</p>
-                    </article>
-                  </div>
-                </div>
-                <div class="tile is-parent">
-                  <article class="tile is-child box">
-                    <p class="title">Eight</p>
-                    <p class="subtitle">Subtitle</p>
-                  </article>
-                </div>
-              </div>
-            </div>
-            <div class="tile">
-              <div class="tile is-8 is-parent">
-                <article class="tile is-child box">
-                  <p class="title">Nine</p>
-                  <p class="subtitle">Subtitle</p>
-                  <div class="content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor
-                      vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                  </div>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box">
-                  <p class="title">Ten</p>
-                  <p class="subtitle">Subtitle</p>
-                  <div class="content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor
-                      vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                  </div>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-              <div class="content">
-                <p class="title">Eleven</p>
-                <p class="subtitle">Subtitle</p>
-                <div class="content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar
-                    felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus, leo
-                    sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
-                  <p>Integer sollicitudin, tortor a mattis commodo, velit urna rhoncus erat, vitae congue lectus dolor consequat
-                    libero. Donec leo ligula, maximus et pellentesque sed, gravida a metus. Cras ullamcorper a nunc ac porta.
-                    Aliquam ut aliquet lacus, quis faucibus libero. Quisque non semper leo.</p>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
 
         <div class="tile is-ancestor">
           <div class="tile is-parent">
@@ -645,9 +622,7 @@
         </div>
       </nav>
     </div>
-    <div class="media-right">
-      <button class="delete"></button>
-    </div>
+
   </article>
   <script defer src="script.js"></script>
 </body>
