@@ -1,3 +1,46 @@
+* {
+	box-sizing: border-box;
+	background-color: white;
+}
+
 ul li {
 	cursor: pointer;
+}
+
+
+ul li:hover {
+
+}
+
+#canvas {
+	margin-left: 5em;
+}
+
+
+.media-left ul {
+	background-color: black;
+}
+
+#landing1 {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 55% 45%;
+	grid-template-rows: auto;
+	grid-template-areas: "middle-left middle-right";
+	height: 100vh;
+
+}
+
+#landing1 section {
+	grid-area: middle-right;
+}
+
+#landing_text {
+	grid-area: middle-left;
+	margin-top:10em;
+	width: 90%;
+}
+
+#landing1 section img {
+	margin-top: 8em;
 }
