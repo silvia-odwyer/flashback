@@ -17,9 +17,6 @@
 
         addFilterButtonEventListeners();
 
-        var blue_grey_scale = document.getElementById('blue_greyscale');
-        blue_grey_scale.addEventListener("click", function () { blueGreyScale(img) }, false);
-
         // Init default image
         img = document.createElement("img");
 
@@ -36,10 +33,67 @@
         img.src = "pic6.PNG"
     }
 
+    function appendCanvases() {
+        // Create for loop which creates canvases and then appends them to a list. 
+
+        for (i = 0; i < tiles.length; i++) {
+            var appended_canvas = document.createElement("canvas");
+            appended_canvas.width = c.width;
+            appended_canvas.height = c.height;
+            var tile_elem = tiles[i];
+            canvas_list.push(appended_canvas);
+            tile_elem.appendChild(appended_canvas);
+        }
+        console.log(canvas_list);
+    }
+
+    function readURL() {
+        var file = document.getElementById("img_uploader").files[0];
+
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            img.src = reader.result; // Set the global image to the path of the file on the client's PC.
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            /// Error message TODO
+            console.log("Could not read file. :(")
+        }
+    }
+
+
+    function assembleFilteredPhotos() {
+
+        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, min_red_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata, lemon_imgdata, coral_imgdata, darkify_imgdata]
+        var listdata = [];
+        var tile_elem;
+
+        var resImgData;
+        var current_canvas;
+
+        for (let j = 0; j < canvas_list.length; j += 1) {
+            current_canvas = canvas_list[j];
+            console.log(current_canvas);
+
+            var getctx = current_canvas.getContext("2d");
+            imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+            resImgData = group[j]();
+            console.log(resImgData);
+            getctx.putImageData(resImgData, 0, 0);
+        }
+
+
+    }
+
     function addFilterButtonEventListeners() {
 
+        var blue_grey_scale = document.getElementById('blue_greyscale');
+        blue_grey_scale.addEventListener("click", function () { updateMainCanvas("bluegreyscale") }, false);
+
         var inc_brightness_elem = document.getElementById('inc_brightness');
-        inc_brightness_elem.addEventListener("click", function () { updateMainCanvas("retroviolet") }, false);
+        inc_brightness_elem.addEventListener("click", function () { updateMainCanvas("incbrightness") }, false);
 
 
         var darkify_el = document.getElementById('darkify');
@@ -173,74 +227,35 @@
 
         var min_noise_elem = document.getElementById("min_noise");
         min_noise_elem.addEventListener("click", function () { updateMainCanvas("min_noise") }, false);
-    }
 
-    function appendCanvases() {
-        // Create for loop which creates canvases and then appends them to a list. 
+        var lemon_elem = document.getElementById("lemon");
+        lemon_elem.addEventListener("click", function () { updateMainCanvas("lemon") }, false);
 
-        for (i = 0; i < tiles.length; i++) {
-            var appended_canvas = document.createElement("canvas");
-            appended_canvas.width = c.width;
-            appended_canvas.height = c.height;
-            var tile_elem = tiles[i];
-            canvas_list.push(appended_canvas);
-            tile_elem.appendChild(appended_canvas);
-        }
-        console.log(canvas_list);
+        var coral_elem = document.getElementById("coral");
+        coral_elem.addEventListener("click", function () { updateMainCanvas("coral") }, false);
 
+        var dark_purple_min_noise_elem = document.getElementById("coral");
+        dark_purple_min_noise_elem.addEventListener("click", function () { updateMainCanvas("dark_purple_min_noise") }, false);
 
-    }
+        var green_med_noise_elem = document.getElementById("green_med_noise");
+        green_med_noise_elem.addEventListener("click", function () { updateMainCanvas("green_med_noise") }, false);
 
-    function readURL() {
-        var file = document.getElementById("img_uploader").files[0];
+        var teal_min_noise = document.getElementById("teal_min_noise");
+        teal_min_noise.addEventListener("click", function () { updateMainCanvas("teal_min_noise") }, false);
 
-        var reader = new FileReader();
-        reader.onloadend = function () {
-            img.src = reader.result; // Set the global image to the path of the file on the client's PC.
-        }
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            /// Error message TODO
-            console.log("Could not read file. :(")
-        }
-    }
+        var blue_min_noise_elem = document.getElementById("blue_min_noise");
+        blue_min_noise_elem.addEventListener("click", function () { updateMainCanvas("blue_min_noise") }, false);
 
+        var green_min_noise_elem = document.getElementById("green_min_noise");
+        green_min_noise_elem.addEventListener("click", function () { updateMainCanvas("green_min_noise") }, false);
 
-    function assembleFilteredPhotos() {
+        var pink_min_noise_elem = document.getElementById("pink_min_noise");
+        pink_min_noise_elem.addEventListener("click", function () { updateMainCanvas("pink_min_noise") }, false);
 
-        const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, min_red_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, wyo_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, darkify_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata]
-        var listdata = [];
-        var tile_elem;
-
-        var resImgData;
-        var current_canvas;
-
-        for (let j = 0; j < canvas_list.length; j += 1) {
-            current_canvas = canvas_list[j];
-            console.log(current_canvas);
-
-            var getctx = current_canvas.getContext("2d");
-            imgData = ctx.getImageData(0, 0, c.width, c.height);
-
-            resImgData = group[j]();
-            console.log(resImgData);
-            getctx.putImageData(resImgData, 0, 0);
-        }
-
+        var red_min_noise_elem = document.getElementById("red_min_noise");
+        red_min_noise_elem.addEventListener("click", function () { updateMainCanvas("red_min_noise") }, false);
 
     }
-
-    function updateMainCanvas(chosenFilter) {
-
-        ctx.drawImage(img, 0, 0, 220, 277);
-        imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
-
-        var resultingImgData = filter_dict[chosenFilter]();
-        console.log(resultingImgData)
-        ctx.putImageData(resultingImgData, 0, 0);
-    }
-
 
     // 48 filters total - 24th July 2018 <silviaod>
 
@@ -255,7 +270,6 @@
  */
 
     const lix_conv = function () {
-        console.log("Lix conv called")
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
@@ -281,7 +295,6 @@
         return imgData;
     }
     const solange_imgdata = function () {
-        console.log("Lix conv called")
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
         }
@@ -289,7 +302,6 @@
     }
 
     const solange_grey_imgdata = function () {
-        console.log("Lix conv called")
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = imgData.data[i + 2];
             imgData.data[i + 1] = imgData.data[i + 1]
@@ -866,7 +878,7 @@
         return imgData;
     }
 
-    const cosmic_imgdata = function () {
+    const matrix2 =  function() {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -882,7 +894,7 @@
             }
 
             else {
-                addition1 = 30;
+                addition1 = 70;
                 addition2 = 10;
             }
 
@@ -902,6 +914,41 @@
         return imgData;
     }
 
+    const cosmic_imgdata = function () {
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 0;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 100;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 70;
+                addition2 = 10;
+            }
+
+            if (imgData.data[i] - addition > 255) {
+                imgData.data[i] -= addition
+            }
+            else {
+                imgData.data[i] += addition
+            }
+
+            if (imgData.data[i + 1] + addition > 255) {
+                imgData.data[i + 1] -= addition2;
+            } else {
+                imgData.data[i + 2] += addition2;
+            }
+        }
+        return imgData;
+    }
 
     const retroviolet_imgdata = function () {
 
@@ -997,8 +1044,73 @@
 
     // An experimental function that is used for the testing of image filtering.
     const a = function () {
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] += 50;
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 0;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 100;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 70;
+                addition2 = 10;
+            }
+
+            if (imgData.data[i] - addition > 255) {
+                imgData.data[i] -= addition
+            }
+            else {
+                imgData.data[i] += addition
+            }
+
+            if (imgData.data[i + 1] + addition > 255) {
+                imgData.data[i + 1] -= addition2;
+            } else {
+                imgData.data[i + 2] += addition2;
+            }
+        }
+        return imgData;
+    }
+
+    const pixel_blue_imgdata = function () {
+        var randomNumber;
+
+        for (i = 0; i < imgData.data.length; i += 4) {
+            randomNumber = getRandomNumber(0, 200);
+            var addition;
+            if (randomNumber > 0 && randomNumber < 50) {
+                addition1 = 0;
+                addition2 = 30;
+            }
+            else if (randomNumber > 49 && randomNumber < 100) {
+                addition1 = 100;
+                addition2 = 90;
+            }
+
+            else {
+                addition1 = 70;
+                addition2 = 10;
+            }
+
+            if (imgData.data[i] - addition > 255) {
+                imgData.data[i] -= addition
+            }
+            else {
+                imgData.data[i] += addition
+            }
+
+            if (imgData.data[i + 1] + addition > 255) {
+                imgData.data[i + 1] -= addition2;
+            } else {
+                imgData.data[i + 2] += addition2;
+            }
         }
         return imgData;
     }
@@ -1019,7 +1131,6 @@
     }
 
     const frontward_imgdata = function () {
-        console.log("Lix conv called")
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = imgData.data[i + 2];
             imgData.data[i + 2] = imgData.data[i + 1] + 50;
@@ -1152,9 +1263,21 @@
         }
         return imgData;
     }
+    
+    var filter_dict = { "a": a, "lemon" : lemon, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "pink_min_noise_imgdata" : pink_min_noise_imgdata, "min_red_noise" : min_red_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "wyo": wyo_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
 
 
-    var filter_dict = { "a": a, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "pink_min_noise_imgdata" : pink_min_noise_imgdata, "min_red_noise" : min_red_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "wyo": wyo_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
+    function updateMainCanvas(chosenFilter) {
+        filter_dict = { "a": a, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "pink_min_noise_imgdata" : pink_min_noise_imgdata, "min_red_noise" : min_red_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "wyo": wyo_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
+
+        ctx.drawImage(img, 0, 0, 220, 277);
+        imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
+
+        var resultingImgData = filter_dict[chosenFilter]();
+        console.log(resultingImgData)
+        ctx.putImageData(resultingImgData, 0, 0);
+    }
+
 
 
     // Canvas-specific functions
