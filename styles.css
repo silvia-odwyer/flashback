@@ -1,10 +1,14 @@
 * {
 	box-sizing: border-box;
-	background-color: white;
 }
 
+#sidebar {
+    overflow-y: scroll;
+	max-height: 80vh;
+}
 ul li {
 	cursor: pointer;
+	
 }
 
 
@@ -18,7 +22,6 @@ ul li:hover {
 
 
 .media-left ul {
-	background-color: black;
 }
 
 #landing1 {
@@ -28,6 +31,7 @@ ul li:hover {
 	grid-template-rows: auto;
 	grid-template-areas: "middle-left middle-right";
 	height: 100vh;
+	background-color: white;
 
 }
 
@@ -43,4 +47,51 @@ ul li:hover {
 
 #landing1 section img {
 	margin-top: 8em;
+}
+
+
+footer {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 65% 35%;
+	grid-template-rows: auto;
+	grid-template-areas: "fleft fright"
+}
+footer p {
+	grid-area: fleft;
+}
+footer ul {
+	grid-area: fright;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+footer ul a {
+	margin: 0;
+	padding: 0;
+	padding-left: 1.1em;
+	text-decoration: underline;
+}
+
+.fas {
+	margin-right: 1em;
+}
+
+#img_uploader {
+	background-color: "black"
+}
+#live_area {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 45% 55%;
+	grid-template-rows: auto;
+	grid-template-areas: "canvas_area steps_area"
+}
+
+#live_area #canvas_area {
+	grid-area: "canvas_area";
+}
+
+#live_area section {
+	grid-area: "steps_area";
 }
