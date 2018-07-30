@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   <link rel="stylesheet" href="styles.css">
-
+  <script src="https://unpkg.com/ionicons@4.2.6/dist/ionicons.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <title>Flashback Image Editor</title>
 
@@ -15,10 +15,11 @@
 
   <section class="hero is-primary is-medium">
     <div class="hero-head is-link">
-      <nav class="navbar is-link">
+      <nav class="navbar">
         <div class="container">
           <div class="navbar-brand">
-            <a class="navbar-item" href="index.html">Flashback
+            <a class="navbar-item">
+              <p>flashback</p>
             </a>
             <span class="navbar-burger burger" data-target="navbarMenuHeroA">
               <span></span>
@@ -29,11 +30,20 @@
           <div id="navbarMenuHeroA" class="navbar-menu">
             <div class="navbar-end">
               <a class="navbar-item" href="index.html">
-                Home
+
+                <span class="icon">
+                  <i class="fas fa-home"></i>
+                </span>
+                <span>Home</span>
               </a>
               <a class="navbar-item is-active" href="">
-                App
+
+                <span class="icon">
+                  <i class="fas fa-camera "></i>
+                </span>
+                <span>App</span>
               </a>
+
               <a class="navbar-item" href="filters.html">
                 Filters
               </a>
@@ -42,7 +52,7 @@
                   <span class="icon">
                     <i class="fab fa-github"></i>
                   </span>
-                  <span href="https://github.com/silvia-odwyer/flashback">GitHub</span>
+                  <span>GitHub</span>
                 </a>
               </span>
             </div>
@@ -62,107 +72,232 @@
             <i class="fas fa-sun"></i>
           </span>Increase Brightness</li>
 
-        <li id="blue_greyscale">          <span class="icon">
+        <li id="blue_greyscale">
+          <span class="icon">
             <i class="fas fa-square-full has-text-info"></i>
           </span>Blue Greyscale</li>
 
-        <li id="casino">          <span class="icon">
+        <li id="casino">
+          <span class="icon">
             <i class="fas fa-dice has-text-danger"></i>
           </span>Casino</li>
 
-        <li id="greyscale"><span class="icon">
+        <li id="greyscale">
+          <span class="icon">
             <i class="fas fa-film"></i>
           </span>Greyscale!</li>
 
-        <li id="darkify"><span class="icon">
+        <li id="darkify">
+          <span class="icon">
             <i class="fas fa-moon"></i>
           </span>Darkify</li>
 
-        <li id="red_greyscale"><span class="icon">
+        <li id="red_greyscale">
+          <span class="icon">
             <i class="fas fa-square has-text-danger"></i>
           </span>Redscale</li>
 
-        <li id="green_greyscale"><span class="icon">
+        <li id="green_greyscale">
+          <span class="icon">
             <i class="fas fa-leaf has-text-success"></i>
           </span>Greenscale</li>
 
-
-        <li id="horizontal_lines"><span class="icon">
+        <li id="horizontal_lines">
+          <span class="icon">
             <i class="fas fa-align-justify"></i>
           </span>Horizontal Lines</li>
 
-        <li id="diagonal_lines">Diagonal Lines</li>
+        <li id="diagonal_lines">
+          <ion-icon name="trending-up"></ion-icon>Diagonal Lines</li>
 
-        <li id="yellow_casino"> <span class="icon">
+        <li id="yellow_casino">
+          <span class="icon">
             <i class="fas fa-dice has-text-warning"></i>
           </span>Yellow Casino</li>
-        <li id="green_diagonal_lines">Green Diagonal Lines</li>
-        <li id="pane">Pane</li>
-        <li id="specks">Specks</li>
-        <li id="invert"><span class="icon">
+        <li id="pane">
+          
+          <span class="icon">
+            <i class="fas fa-barcode"></i>
+          </span>Pane</li>
+        <li id="specks">
+          <ion-icon name="keypad"></ion-icon>Specks</li>
+        <li id="invert">
+          <span class="icon">
             <i class="fas fa-undo"></i>
           </span>Invert</li>
-          <li class="menu-label">1920s Glamour</li>
-        <li id="twenties">Twenties</li>
-        <li id="rose">Rose</li>
-        <li id="slate">Slate</li>
-        <li id="purplescale"> <span class="icon">
+        <li class="menu-label">1920s Glamour</li>
+        <li id="twenties">
+          <span class="icon">
+            <i class="fas fa-film"></i>
+          </span>Twenties</li>
+        <li id="rose">
+          <ion-icon name="rose" class="has-text-danger"></ion-icon>Rose</li>
+        <li id="slate">
+          <span class="icon">
+            <i class="fas fa-square"></i>
+          </span>Slate</li>
+        <li id="purplescale">
+          <span class="icon">
             <i class="fas fa-square has-text-danger"></i>
           </span>Purple Scale</li>
-        <li id="radio"><span class="icon">
+        <li id="radio">
+          <span class="icon">
             <i class="fas fa-broadcast-tower"></i>
           </span>Radio</li>
-        <li id="ocean"><span class="icon">
+        <li id="solange">
+          <span class="icon">
+            <i class="fas fa-sun has-text-warning"></i>
+          </span>Solange</li>
+        <li id="ocean">
+          <span class="icon">
             <i class="fas fa-swimmer has-text-link"></i>
           </span>Ocean</li>
 
-        <li id="pixelate">Pixelate</li>
+        <li id="pixelate">
+          <span class="icon">
+            <i class="fas fa-magic has-text-info"></i>
+          </span>Pixelate</li>
 
-        <li id="solange">Solange</li>
-        <li id="zapt"><span class="icon">
+
+        <li id="zapt">
+          <span class="icon">
             <i class="fas fa-bolt has-text-warning"></i>
           </span>Zapt</li>
-        <li id="neue">Neue</li>
-        <li id="ryo">Ryo</li>
+        <li id="neue">
+          <span class="icon">
+            <i class="fas fa-cube"></i>
+          </span>Neue</li>
         <li class="menu-label">Cyberpunk</li>
-        <li id="lix">Lix</li>
-        <li id="eon">Eon</li>
-        <li id="aeon">Aeon</li>
-        <li id="cosmic">Cosmic</li>
-        <li id="retro_violet">Retro Violet</li>
-        <li id="specks_redscale">Specks Redscale</li>
-        <li id="noise_centre">Noise Centre</li>
-        <li id="perfume"> <span class="icon">
-            <i class="fas fa-spray-can has-text-danger"></i>
-          </span>Perfume</li>
-        <li id="serenity">Serenity</li>
-        <li id="pink_aura">Pink Aura</li>
-        <li id="haze">Haze</li>
-        <li id="mellow">Mellow</li>
-        <li class="menu-label">Post-War US (Fallout)</li>
+        <li id="lix">
+          <span class="icon">
+            <i class="fas fa-palette has-text-info"></i>
+          </span>
+          Lix
+        </li>
+        <li id="eon">
+          <span class="icon">
+            <i class="fas fa-cube"></i>
+          </span>
+        Eon
+        </li>
+          <li id="aeon">
+            <span class="icon">
+              <i class="fas fa-file-code has-text-blue"></i>
+            </span>Aeon</li>
+            
+        <li id="ryo">
+          <span class="icon">
+            <i class="fas fa-cube"></i>
+          </span>Ryo</li>
+          <li id="cosmic">
+            <span class="icon">
+              <i class="fas fa-user-astronaut has-text-info"></i>
+            </span>Cosmic</li>
+          <li id="retro_violet">
+              <span class="icon">
+                <i class="fas fa-qrcode"></i>
+              </span>Retro Violet</li>
+          <li id="specks_redscale">
+            
+            <span class="icon">
+              <i class="fas fa-cog has-text-danger"></i>
+            </span>Specks Redscale</li>
+          <li id="noise_centre">
+            <span class="icon">
+              <i class="fas fa-volume-up"></i>
+            </span>Noise Centre</li>
+          <li id="perfume">
+            <span class="icon">
+              <i class="fas fa-spray-can has-text-danger"></i>
+            </span>Perfume</li>
+          <li id="serenity">
+            <span class="icon">
+              <i class="far fa-heart"></i>
+            </span>Serenity</li>
+          <li id="pink_aura">
+            <span class="icon">
+              <i class="fas fa-fill"></i>
+            </span>Pink Aura</li>
 
-        <li id="green_specks">Green Specks</li>
-        <li id="matrix">Matrix</li>
-        <li id="eclectic">Eclectic</li>
-        <li id="confetti">Confetti</li>
-        <li id="vintage">Vintage</li>
-        <li id="evening">Evening</li>
-        <li id="horizon">Horizon</li>
-        <li id="min_noise"><span class="icon">
-            <i class="fas fa-file-medical-alt has-text-link"></i>
-          </span>Minimal Noise</li>
-        <li id="lemon"><span class="icon">
-            <i class="fas fa-lemon has-text-warning"></i>
-          </span>Lemon</li>
-        <li id="coral">Coral</li>
-        <li class="menu-label">Noise Generators</li>
-        <li id="dark_purple_min_noise">Dark Purple Min. Noise</li>
-        <li id="green_med_noise">Green Medium Noise</li>
-        <li id="teal_min_noise">Teal Min. Noise</li>
-        <li id="blue_min_noise">Blue Min. Noise</li>
-        <li id="green_min_noise">Green Min. Noise</li>
-        <li id="pink_min_noise">Pink Min. Noise</li>
-        <li id="red_min_noise">Red Min. Noise</li>
+          <li id="haze">
+              <span class="icon">
+                <i class="fas fa-barcode"></i>
+              </span>Haze</li>
+          <li id="mellow">
+            <span class="icon">
+              <i class="fas fa-laugh-beam"></i>
+            </span>Mellow</li>
+          <span class="icon">
+            <i class="ion cog has-text-danger"></i>
+          </span>
+        </li>
+          <li class="menu-label">Post-War US (Fallout)</li>
+          <li id="green_diagonal_lines">
+            <span class="icon">
+              <i class="fas fa-terminal  has-text-success"></i>
+            </span>Green Diagonal Lines</li>
+
+          <li id="green_specks">Green Specks</li>
+          <li id="matrix">
+            <span class="icon">
+              <i class="fas fa-laptop-code has-text-info"></i>
+            </span>Matrix</li>
+          <li id="eclectic">
+            <span class="icon">
+              <i class="fas fa-certificate"></i>
+            </span>Eclectic</li>
+          <li id="confetti">
+            <span class="icon">
+              <i class="fas fa-spinner has-text-info"></i>
+            </span>Confetti</li>
+          <li id="vintage">
+            <span class="icon">
+              <i class="fas fa-film"></i>
+            </span>Vintage</li>
+          <li id="evening">
+            <ion-icon name="time"></ion-icon>Evening</li>
+          <li id="horizon">Horizon</li>
+          <li id="min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-link"></i>
+            </span>Minimal Noise</li>
+          <li id="lemon">
+            <span class="icon">
+              <i class="fas fa-lemon has-text-warning"></i>
+            </span>Lemon</li>
+          <li id="coral">
+            <span class="icon">
+              <i class="fas fa-burn"></i>
+            </span>Coral</li>
+          <li class="menu-label">Noise Generators</li>
+          <li id="dark_purple_min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-link"></i>
+            </span>Dark Purple Min. Noise</li>
+          <li id="green_med_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-link"></i>
+            </span>Green Medium Noise</li>
+          <li id="teal_min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-link"></i>
+            </span>Teal Min. Noise</li>
+          <li id="blue_min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-link"></i>
+            </span>Blue Min. Noise</li>
+          <li id="green_min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-success"></i>
+            </span>Green Min. Noise</li>
+          <li id="pink_min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-link"></i>
+            </span>Pink Min. Noise</li>
+          <li id="red_min_noise">
+            <span class="icon">
+              <i class="fas fa-file-medical-alt has-text-danger"></i>
+            </span>Red Min. Noise</li>
 
 
       </ul>
@@ -625,6 +760,7 @@
 
   </article>
   <script defer src="script.js"></script>
+
 </body>
 
 </html>
