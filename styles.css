@@ -2,14 +2,7 @@
 	box-sizing: border-box;
 }
 
-#sidebar {
-    overflow-y: scroll;
-	max-height: 80vh;
-}
-#sidebar li {
-	cursor: pointer;
-	
-}
+
 
 #steps li {
 	max-width: 80%;
@@ -20,13 +13,13 @@ ul li {
 }
 
 ul li:hover {
-
+	color: blue;
 }
 
-#canvas {
-	margin-left: 5em;
+.menu-label:hover {
+	cursor: text;
+	color: black;
 }
-
 
 .media-left ul {
 }
@@ -67,6 +60,16 @@ ul li:hover {
 	
 	}
 
+	#sidebar {
+		overflow-y: scroll;
+		max-height: 80vh;
+		max-width: 10em;
+	}
+	#sidebar li {
+		cursor: pointer;
+		
+	}
+
 	footer {
 		width: 100%;
 		display: grid;
@@ -89,18 +92,29 @@ ul li:hover {
 		padding-left: 1.1em;
 		text-decoration: underline;
 	}
+
+	#canvas {
+		margin-left: 0em;
+	}
+
+	#app_editing_area {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 14% 86%;
+		grid-template-rows: auto;
+		grid-template-areas: "midleft midright";
+	}
+
+	#sidebar {
+		grid-area: "midleft";
+	}
+
+	#grid {
+		grid-area: "midright";
+	}
+
+
 	
-
-}
-
-
-.fas {
-	margin-right: 1em;
-}
-
-#img_uploader {
-	background-color: "black"
-}
 #live_area {
 	width: 100%;
 	display: grid;
@@ -116,13 +130,34 @@ ul li:hover {
 #live_area section {
 	grid-area: "steps_area";
 }
+	
+#grid {
+	margin-left: 1em;
+}
+
+#live_area {
+	margin-bottom: 3em;
+}
+
+}
+
+
+.fas {
+	margin-right: 1em;
+}
+
+#img_uploader {
+	background-color: "black"
+}
 
 #dark_theme {
 	margin-left: 1em;
 	margin-bottom: 0.2em;
 }
 
-
+#app_editing_area {
+	margin-left: 0.5em;
+}
 
   /* width */
   ::-webkit-scrollbar {
