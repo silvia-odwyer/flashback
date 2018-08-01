@@ -89,8 +89,14 @@
 
     function addFilterButtonEventListeners() {
 
-        var enable_filter_stacking = document.getElementById("enable_filter_stacking");
-        enable_filter_stacking.addEventListener("click", switchFilterStackingOn(), false);
+        var pixelate_two_elem = document.getElementById("pixelate_two")
+        pixelate_two_elem.addEventListener("click", function () { pixelate(60) }, false);
+
+        var pixelate_three_elem = document.getElementById("pixelate_three")
+        pixelate_three_elem.addEventListener("click", function () { pixelate(40) }, false);
+
+        var pixelate_four_elem = document.getElementById("pixelate_four")
+        pixelate_four_elem.addEventListener("click", function () { pixelate(20) }, false);
 
         var blue_grey_scale = document.getElementById('blue_greyscale');
         blue_grey_scale.addEventListener("click", function () { updateMainCanvas("bluegreyscale") }, false);
@@ -157,7 +163,7 @@
         ocean_el.addEventListener("click", function () { updateMainCanvas("ocean") }, false);
 
         var pixelate_elem = document.getElementById("pixelate");
-        pixelate_elem.addEventListener("click", function () { pixelate(img) }, false);
+        pixelate_elem.addEventListener("click", function () { pixelate(27) }, false);
 
         var solange_elem = document.getElementById("solange");
         solange_elem.addEventListener("click", function () { updateMainCanvas("solange") }, false);
@@ -1270,32 +1276,12 @@
         }
         return imgData;
     }
+
     
-    var filter_dict = { "a": a, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "pink_min_noise_imgdata" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
-
-
-    function updateMainCanvas(chosenFilter) {
-        filter_dict = { "a": a, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "pink_min_noise_imgdata" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
-
-        ctx.drawImage(img, 0, 0, 220, 277);
-        if (isFilterStackingOn) {
-            var imgData = ctx.getImageData(0, 0, c.width, c.height);
-        }
-        else {
-            imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
-
-        }
-
-        var resultingImgData = filter_dict[chosenFilter]();
-        console.log(resultingImgData)
-        ctx.putImageData(resultingImgData, 0, 0);
-    }
-
-
-
     // Canvas-specific functions
-    function pixelate() {
-        var size = 27 / 100,
+    // These functions involve changing the size of the canvas and resizing that, so pixelations are possible.
+    function pixelate(degree) {
+        var size = degree / 100,
             w = c.width * size,
             h = c.height * size;
 
@@ -1306,7 +1292,28 @@
         ctx.imageSmoothingEnabled = false;
 
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
+        
     }
+
+
+    
+    var filter_dict = { "a": a, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "pink_min_noise" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
+
+
+    function updateMainCanvas(chosenFilter) {
+        filter_dict = { "a": a, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "pink_min_noise" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
+
+        ctx.drawImage(img, 0, 0, 220, 277);
+
+            imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
+
+        var resultingImgData = filter_dict[chosenFilter]();
+        console.log(resultingImgData)
+        ctx.putImageData(resultingImgData, 0, 0);
+    }
+
+
+
 
     function getRandomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
