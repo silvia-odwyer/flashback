@@ -8,8 +8,6 @@
     var imgData;
     var original_img_data;
     var change = 0;
-    var isFilterStackingOn = false;
-    var totalFiltersApplied = 0;
     var tiles = document.getElementsByClassName("tile is-child box check");
     console.log(tiles);
     document.addEventListener('DOMContentLoaded', init, false);
@@ -64,22 +62,6 @@
         }
     }
 
-    function switchFilterStackingOn() {
-        if (isFilterStackingOn) {
-            console.log("Filter stacking was true, but switched to false.")
-            isFilterStackingOn = false;
-        }
-        else {
-            console.log("Filter stacking was false, but switched to true.")
-
-            isFilterStackingOn = true;
-
-            // re-initialising total filters applied back to zero.
-            totalFiltersApplied = 0;
-        }
-
-    }
-
 
     function assembleFilteredPhotos() {
 
@@ -106,6 +88,9 @@
     }
 
     function addFilterButtonEventListeners() {
+
+        var enable_filter_stacking = document.getElementById("enable_filter_stacking");
+        enable_filter_stacking.addEventListener("click", switchFilterStackingOn(), false);
 
         var blue_grey_scale = document.getElementById('blue_greyscale');
         blue_grey_scale.addEventListener("click", function () { updateMainCanvas("bluegreyscale") }, false);
@@ -275,7 +260,9 @@
 
     }
 
-
+    function switchFilterStackingOn() {
+        isFilterStackingOn = true;
+    }
 
     // 48 filters total - 24th July 2018 <silviaod>
 
@@ -1288,24 +1275,11 @@
 
 
     function updateMainCanvas(chosenFilter) {
-        console.log("Total filters", totalFiltersApplied);
-
         filter_dict = { "a": a, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "pink_min_noise_imgdata" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata }
 
         ctx.drawImage(img, 0, 0, 220, 277);
         if (isFilterStackingOn) {
-            if (totalFiltersApplied === 4) {
-                totalFiltersApplied = 0;
-                var imgData = original_img_data;
-                ctx.putImageData(imgData, 0, 0);
-                return console.log("You can only apply 4 filters at a time.")
-            }
-            else {
-                totalFiltersApplied += 1;
-                console.log("Updated number of filters:", totalFiltersApplied);
-                var imgData = ctx.getImageData(0, 0, c.width, c.height);    
-            }
-
+            var imgData = ctx.getImageData(0, 0, c.width, c.height);
         }
         else {
             imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
