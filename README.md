@@ -2,8 +2,9 @@
 ## A web app for retro image filtering, powered by pure JS. 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
-![GitHub top language](https://img.shields.io/github/languages/top/badges/shields.svg)
+![Powered by JS](https://img.shields.io/badge/powered%20by-JS-yellow.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)
+![Total no. of filters](https://img.shields.io/badge/total%20filters-55-blue.svg)
 
 ![Flashback logo.](https://github.com/silvia-odwyer/flashback/blob/master/media/logo-waves.gif "Flashback logo.")
 
@@ -24,18 +25,20 @@ Take a look:
 ![Flashback can transform even this image of a city into a scene from a cyberpunk film!](https://github.com/silvia-odwyer/flashback/blob/master/media/flashback-app-city.gif "Flashback can transform even this image of a city into a scene from a cyberpunk film!")
 
 ## Try It Out
-Flashback is live here. 
+[Flashback is live here.](https://silvia-odwyer.github.io/flashback/)
 
 ## [TOFIX]
 - Portrait images are only considered by the web app at the moment.
 - Retaining aspect ratio of the image is on the way.
 
-## Filters
+## Image Effects Available
+- Pixelated effects
+- Noise generators
 - Vintage: 1920s chic, sepia, hazy vintage, perfumed imagery
 - Wear & Tear: Make your images look like time's taken their toll on them. 
-- 1980s: Bright, poppy filters.
+- 1980s filters: Bright, poppy filters.
 - Retro: Reduced image quality, colour tints, and more.
-- Cyberpunk: Some hacker-esque 1980s synthwavey filters are available. :eyes:
+- Cyberpunk: Some futuristic filters are available. :eyes:
 
 ## Powered By
 All the filters are processed with pure vanilla JS. No jQuery is involved, either.
