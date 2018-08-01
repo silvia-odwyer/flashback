@@ -1,7 +1,6 @@
 # Flashback
 ## A web app for retro image filtering, powered by pure JS. 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) 
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 ![Powered by JS](https://img.shields.io/badge/powered%20by-JS-yellow.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/google/skia.svg)
 ![Total no. of filters](https://img.shields.io/badge/total%20filters-55-blue.svg)
@@ -12,7 +11,7 @@
 Flashback is a powerful image filtering web app that sends your photos back in time. 
 
 Whether you're looking for chic 80s filters, electric cyberpunk filters, or want to add some 1920s glamour
-to your pics, Flashback has you covered.
+to your pics, Flashback will help you do just that!
 
 Flashback contains 55 filters, with more on the way. 
 
