@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="media/favico.ico" type="image/x-icon">
+    <link rel="icon" href="media/favico.ico" type="image/x-icon">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123141952-1"></script>
@@ -23,18 +25,17 @@
 <body>
 
     <section class="hero is-large has-background-link has-background-white">
-        <!-- Hero head: will stick at the top -->
         <div class="hero-head">
             <nav class="navbar">
                 <div class="container">
                     <div class="navbar-brand">
                         <a class="navbar-item">
-                            <p>flashback</p>
+                            <p class="logo">   <span class="icon">
+                                <i class="far fa-clone"></i>
+                              </span> <span>flashback</span></p>
                         </a>
                         <span class="navbar-burger burger" data-target="navbarMenuHeroA">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+
                         </span>
                     </div>
                     <div id="navbarMenuHeroA" class="navbar-menu">
@@ -53,9 +54,6 @@
                                 <span>App</span>
                             </a>
 
-                            <a class="navbar-item" href="filters.html">
-                                Filters
-                            </a>
                             <span class="navbar-item">
                                 <a class="button is-primary is-inverted" href="https://github.com/silvia-odwyer/flashback">
                                     <span class="icon">
@@ -70,7 +68,6 @@
             </nav>
         </div>
 
-        <!-- Hero content: will be in the middle -->
         <div id="landing1">
             <div class="has-text-centered" id="landing_text">
                 <h1 class="title">
@@ -90,7 +87,13 @@
                     <li>
                         <span class="icon">
                             <i class="fas fa-heart has-text-danger"></i>
-                        </span>Cyberpunk, 1920s, 1960s, Fallout</li>
+                        </span>Cyberpunk, 1920s, 1960s, 1980s</li>
+
+                    <li>
+                            <span class="icon">
+                                <i class="fas fa-magic has-text-link"></i>
+                    </span>Plus noise generation & pixelation
+                    </li>
                 </ul>
                 <section id="landing_buttons">
                     <a class="button is-info is-medium" href="app.html">Try it out</a>
@@ -164,7 +167,6 @@
             <a href="index.html">Home</a>
             <a href="app.html">App</a>
             <a href="https://github.com/silvia-odwyer/flashback">View On GitHub</a>
-            <button id="dark_theme" class="button is-info is-small">Dark Theme</button>
         </ul>
 
     </footer>

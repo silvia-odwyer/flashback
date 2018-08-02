@@ -172,7 +172,7 @@
         neue_element.addEventListener("click", function () { updateMainCanvas("neue") }, false);
 
         var ryo_element = document.getElementById("ryo");
-        ryo_element.addEventListener("click", function () { updateMainCanvas("ryo") }, false);
+        ryo_element.addEventListener("click", function () { updateMainCanvas("ryo_conv") }, false);
 
         var lix_element = document.getElementById("lix");
         lix_element.addEventListener("click", function () { updateMainCanvas("lix") }, false);
@@ -716,26 +716,13 @@
     const noise_centre_imgdata = function () {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
-
-            if (i < imgData.data.length / 2) {
-                imgData.data[i] += 80
-                imgData.data[i + 1] += 40
-                imgData.data[i + 2] += 120
-            }
-
-            else if (i > (imgData.data.length / 2) + 100 && (i < (imgData.data.length / 2) + 2900)) {
-                imgData.data[i] = getRandomNumber(0, 255)
-                imgData.data[i + 1] = getRandomNumber(0, 255)
-                imgData.data[i + 2] = getRandomNumber(0, 255)
-            }
-
-            else {
-                imgData.data[i] += 10
+                imgData.data[i] += getRandomNumber(0, 100);
                 imgData.data[i + 1] += 20
-                imgData.data[i + 2] += 90
-            }
-            return imgData;
+                imgData.data[i + 2] += getRandomNumber(0, 255)
+
         }
+                    
+        return imgData;
     }
 
     const perfume_imgdata = function () {
