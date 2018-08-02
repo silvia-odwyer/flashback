@@ -8,8 +8,8 @@
   <script src="https://unpkg.com/ionicons@4.2.6/dist/ionicons.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
   <script defer src="script.js"></script>
-  <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="media/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="media/favico.ico" type="image/x-icon">
+  <link rel="icon" href="media/favico.ico" type="image/x-icon">
   <title>Flashback Image Editor</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -27,13 +27,15 @@
 
 <body>
 
-  <section class="hero is-primary is-medium">
+  <section class="hero is-primary is-medium" id="app_nav">
     <div class="hero-head is-link">
       <nav class="navbar">
         <div class="container">
           <div class="navbar-brand">
             <a class="navbar-item" href="index.html">
-              <p>flashback</p>
+              <p class="logo">                  <span class="icon">
+                <i class="far fa-clone"></i>
+              </span> <span>flashback</span></p>
             </a>
             <span class="navbar-burger burger" data-target="navbarMenuHeroA">
             </span>
@@ -53,10 +55,6 @@
                   <i class="fas fa-camera "></i>
                 </span>
                 <span>App</span>
-              </a>
-
-              <a class="navbar-item" href="filters.html">
-                Filters
               </a>
               <span class="navbar-item">
                 <a class="button is-primary is-inverted" href="https://github.com/silvia-odwyer/flashback">
@@ -82,10 +80,6 @@
       <li class="menu-label">Retro</li>
 
       <ul class="filter_list_grouping">
-        <li id="inc_brightness">
-          <span class="icon">
-            <i class="fas fa-sun"></i>
-          </span>Increase Brightness</li>
 
         <li id="blue_greyscale">
           <span class="icon">
@@ -130,6 +124,12 @@
 
         <li id="specks">
           <ion-icon name="keypad"></ion-icon>Specks</li>
+
+        <li id="mellow">
+          <span class="icon">
+            <i class="fas fa-laugh-beam"></i>
+          </span>Mellow</li>
+
       </ul>
 
       <li class="menu-label">1980s Retro</li>
@@ -152,20 +152,25 @@
           <span class="icon">
             <i class="fas fa-spray-can has-text-danger"></i>
           </span>Perfume</li>
-        <li id="mellow">
+
+        <li id="inc_brightness">
           <span class="icon">
-            <i class="fas fa-laugh-beam"></i>
-          </span>Mellow</li>
+            <i class="fas fa-sun"></i>
+          </span>Brightify</li>
+      </ul>
+      <li class="menu-label">1920s Glamour</li>
 
-          </ul>
-        <li class="menu-label">1920s Glamour</li>
-
-        <ul>        <li id="twenties">
+      <ul class="filter_list_grouping">
+        <li id="twenties">
           <span class="icon">
             <i class="fas fa-film"></i>
           </span>Twenties</li>
         <li id="rose">
-          <ion-icon name="rose" class="has-text-danger"></ion-icon>Rose</li>
+
+          <span class="icon">
+            <i class="fas fa-asterisk has-text-danger"></i>
+          </span>
+          Rose</li>
         <li id="slate">
           <span class="icon">
             <i class="fas fa-square"></i>
@@ -177,7 +182,8 @@
         <li id="radio">
           <span class="icon">
             <i class="fas fa-broadcast-tower"></i>
-          </span>Radio</li></ul>
+          </span>Radio</li>
+      </ul>
 
 
       <li class="menu-label">Pop Art</li>
@@ -186,7 +192,7 @@
 
         <li id="solange">
           <span class="icon">
-            <i class="fas fa-sun has-text-warning"></i>
+            <i class="fas fa-sun has-text-danger"></i>
           </span>Solange</li>
         <li id="zapt">
           <span class="icon">
@@ -194,7 +200,7 @@
           </span>Zapt</li>
         <li id="neue">
           <span class="icon">
-            <i class="fas fa-cube has-text-success"></i>
+            <i class="fas fa-cube has-text-link"></i>
           </span>Neue</li>
         <li id="lix">
           <span class="icon">
@@ -204,7 +210,7 @@
         </li>
         <li id="eon">
           <span class="icon">
-            <i class="fas fa-cube has-text-link"></i>
+            <i class="fas fa-cube has-text-success"></i>
           </span>
           Eon
         </li>
@@ -218,10 +224,14 @@
 
       <ul class="filter_list_grouping">
 
-        <li id="green_specks">Green Specks</li>
+        <li id="green_specks">
+          <span class="icon">
+            <i class="fas fa-spinner has-text-success"></i>
+          </span>Green Specks</li>
+
         <li id="matrix">
           <span class="icon">
-            <i class="fas fa-laptop-code has-text-info"></i>
+            <i class="fas fa-mouse-pointer has-text-info"></i>
 
           </span>Matrix</li>
 
@@ -245,7 +255,7 @@
         <li id="noise_centre">
           <span class="icon">
             <i class="fas fa-volume-up"></i>
-          </span>Noise Centre</li>
+          </span>Blu Noise</li>
 
         <li id="invert">
           <span class="icon">
@@ -260,7 +270,7 @@
         <li id="green_diagonal_lines">
           <span class="icon">
             <i class="fas fa-terminal  has-text-success"></i>
-          </span>Green Diagonal Lines</li>
+          </span>1X-9909-XA221</li>
 
 
         <li id="green_greyscale">
@@ -289,8 +299,14 @@
             <i class="fas fa-film"></i>
           </span>Vintage</li>
         <li id="evening">
-          <ion-icon name="time"></ion-icon>Evening</li>
-        <li id="horizon">Horizon</li>
+          <span class="icon">
+            <i class="fas fa-clock"></i>
+          </span>
+          Evening</li>
+        <li id="horizon">
+          <span class="icon">
+            <i class="fas fa-chart-area"></i>
+          </span>Horizon</li>
         <li id="min_noise">
           <span class="icon">
             <i class="fas fa-file-medical-alt has-text-link"></i>
@@ -328,10 +344,10 @@
           <span class="icon">
             <i class="fas fa-file-medical-alt has-text-link"></i>
           </span>Dark Purple Min. Noise</li>
-          <li id="coral">
-            <span class="icon">
-              <i class="fas fa-burn"></i>
-            </span>Coral</li>
+        <li id="coral">
+          <span class="icon">
+            <i class="fas fa-burn"></i>
+          </span>Coral</li>
         <li id="green_med_noise">
           <span class="icon">
             <i class="fas fa-file-medical-alt has-text-link"></i>
@@ -360,6 +376,9 @@
           <span class="icon">
             <i class="fas fa-dice has-text-warning"></i>
           </span>Yellow Casino</li>
+
+          <li><a href="https://github.com/silvia-odwyer/flashback">Thank you for scrolling to here. You are superior. Only 0.1% of humans would scroll this far.</a></li>
+
       </ul>
 
     </ul>
