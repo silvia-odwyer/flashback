@@ -72,7 +72,8 @@ ul li {
 		display: grid;
 		grid-template-columns: 75% 25%;
 		grid-template-rows: auto;
-		grid-template-areas: "fleft fright"
+		grid-template-areas: "fleft fright";
+		margin-left: 0.5em;
 	}
 	footer p {
 		grid-area: fleft;
