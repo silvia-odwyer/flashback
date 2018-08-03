@@ -279,7 +279,7 @@
  * gains would be very minimal, since the images are static, and are not animating, etc.,
  */
 
-    const lix_conv = function () {
+    const lix_conv = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
@@ -287,7 +287,7 @@
         return imgData;
     }
 
-    const ryo_conv = function () {
+    const ryo_conv = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
@@ -295,7 +295,7 @@
         return imgData;
     }
 
-    const blue_greyscale_imgdata = function () {
+    const blue_greyscale_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 20
@@ -304,14 +304,14 @@
         }
         return imgData;
     }
-    const solange_imgdata = function () {
+    const solange_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
         }
         return imgData;
     }
 
-    const solange_grey_imgdata = function () {
+    const solange_grey_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = imgData.data[i + 2];
             imgData.data[i + 1] = imgData.data[i + 1]
@@ -322,7 +322,7 @@
     }
 
 
-    const min_noise_imgdata = function () {
+    const min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 53;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -340,7 +340,7 @@
         return imgData;
     }
 
-    const red_min_noise_imgdata = function () {
+    const red_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -358,21 +358,21 @@
         return imgData;
     }
 
-    const cool_twilight_imgdata = function () {
+    const cool_twilight_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
         }
         return imgData;
     }
 
-    const blues_imgdata = function () {
+    const blues_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
         return imgData;
     }
 
-    const darkify_imgdata = function () {
+    const darkify_imgdata = () => {
         var BRIGHTNESS_ADJ = 20;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= BRIGHTNESS_ADJ
@@ -382,7 +382,7 @@
         return imgData;
     }
 
-    const incbrightness_imgdata = function () {
+    const incbrightness_imgdata = () => {
         var BRIGHTNESS_ADJ = 50;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += BRIGHTNESS_ADJ
@@ -392,7 +392,7 @@
         return imgData;
     }
 
-    const greyscale_imgdata = function () {
+    const greyscale_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg
@@ -402,7 +402,7 @@
         return imgData;
     }
 
-    const redgreyscale_imgdata = function () {
+    const redgreyscale_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 100
@@ -412,7 +412,7 @@
         return imgData;
     }
 
-    const greengreyscale_imgdata = function () {
+    const greengreyscale_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 20
@@ -423,7 +423,7 @@
     }
 
 
-    const add_horizontal_line_imgdata = function () {
+    const add_horizontal_line_imgdata = () => {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 1;
@@ -438,7 +438,7 @@
         return imgData;
     }
 
-    const add_diagonal_lines_imgdata = function () {
+    const add_diagonal_lines_imgdata = () => {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 20;
@@ -453,7 +453,7 @@
         return imgData;
     }
 
-    const add_green_diagonal_lines_imgdata = function () {
+    const add_green_diagonal_lines_imgdata = () => {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 20;
@@ -468,7 +468,7 @@
         return imgData;
     }
 
-    const pane_imgdata = function () {
+    const pane_imgdata = () => {
         var inc = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
             inc += 200;
@@ -483,8 +483,7 @@
         return imgData;
     }
 
-
-    const casino_imgdata = function () {
+    const casino_imgdata = () => {
 
         var inc = 0;
 
@@ -502,7 +501,7 @@
         return imgData;
     }
 
-    const yellow_casino_imgdata = function () {
+    const yellow_casino_imgdata = () => {
 
         var inc = 0;
         var inc2 = 0;
@@ -523,7 +522,7 @@
         return imgData;
     }
 
-    const specks_imgdata = function () {
+    const specks_imgdata = () => {
         var inc = 0;
         var inc2 = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -543,7 +542,7 @@
         return imgData;
     }
 
-    const incbrightness_two_imgdata = function () {
+    const incbrightness_two_imgdata = () => {
         var inc = 0;
         var inc2 = 0;
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -563,7 +562,7 @@
         return imgData;
     }
 
-    const invert_imgdata = function () {
+    const invert_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
@@ -572,7 +571,7 @@
         return imgData;
     }
 
-    const solange_dark_imgdata = function () {
+    const solange_dark_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 200 - imgData.data[i];
 
@@ -582,7 +581,7 @@
         return imgData;
     }
 
-    const zapt_imgdata = function () {
+    const zapt_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             // imgData.data[i] = 255 - imgData.data[i];
@@ -592,7 +591,7 @@
         return imgData;
     }
 
-    const neue_imgdata = function () {
+    const neue_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             // imgData.data[i] = 255 - imgData.data[i];
@@ -602,7 +601,7 @@
         return imgData;
     }
 
-    const eon_imgdata = function () {
+    const eon_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             //imgData.data[i] = 255 - imgData.data[i];
@@ -612,7 +611,7 @@
         return imgData;
     }
 
-    const aeon_imgdata = function () {
+    const aeon_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             //imgData.data[i] = 255 - imgData.data[i];
@@ -622,7 +621,7 @@
         return imgData;
     }
 
-    const rosetint_imgdata = function () {
+    const rosetint_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -633,7 +632,7 @@
         return imgData;
     }
 
-    const slate_imgdata = function () {
+    const slate_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -644,7 +643,7 @@
         return imgData;
     }
 
-    const purplescale_imgdata = function () {
+    const purplescale_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -655,7 +654,7 @@
         return imgData;
     }
 
-    const radio_imgdata = function () {
+    const radio_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -666,7 +665,7 @@
         return imgData;
     }
 
-    const twenties_imgdata = function () {
+    const twenties_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
@@ -677,7 +676,7 @@
         return imgData;
     }
 
-    const ocean_imgdata = function () {
+    const ocean_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 10
             imgData.data[i + 1] += 20
@@ -686,7 +685,7 @@
         return imgData;
     }
 
-    const sat_adj_imgdata = function () {
+    const sat_adj_imgdata = () => {
         var SAT_ADJ = 150;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
@@ -696,7 +695,7 @@
         return imgData;
     }
 
-    const specksredscale_imgdata = function () {
+    const specksredscale_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             var randomNumber = getRandomNumber(0, 100);
             if (randomNumber > 10 && randomNumber < 13) {
@@ -713,7 +712,7 @@
         return imgData;
     }
 
-    const noise_centre_imgdata = function () {
+    const noise_centre_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
                 imgData.data[i] += getRandomNumber(0, 100);
@@ -725,7 +724,7 @@
         return imgData;
     }
 
-    const perfume_imgdata = function () {
+    const perfume_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 80
@@ -735,7 +734,7 @@
         return imgData;
     }
 
-    const serenity_imgdata = function () {
+    const serenity_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 10
@@ -745,7 +744,7 @@
         return imgData;
     }
 
-    const pink_aura_imgdata = function () {
+    const pink_aura_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 90
             imgData.data[i + 1] += 10
@@ -754,7 +753,7 @@
         return imgData;
     }
 
-    const haze_imgdata = function () {
+    const haze_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 90
             imgData.data[i + 1] += 90
@@ -763,7 +762,7 @@
         return imgData;
     }
 
-    const mellow_imgdata = function () {
+    const mellow_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 2] = 120 - imgData.data[i + 2];
@@ -771,7 +770,7 @@
         return imgData;
     }
 
-    const green_specks_imgdata = function () {
+    const green_specks_imgdata = () => {
 
         var randomNumber;
 
@@ -799,7 +798,7 @@
         return imgData;
     }
 
-    const eclectic_imgdata = function () {
+    const eclectic_imgdata = () => {
 
         var randomNumber;
 
@@ -837,7 +836,7 @@
         return imgData;
     }
 
-    const matrix_imgdata = function () {
+    const matrix_imgdata = () => {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -873,7 +872,7 @@
         return imgData;
     }
 
-    const matrix2 =  function() {
+    const matrix2 = () => {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -909,7 +908,7 @@
         return imgData;
     }
 
-    const cosmic_imgdata = function () {
+    const cosmic_imgdata = () => {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -945,7 +944,7 @@
         return imgData;
     }
 
-    const retroviolet_imgdata = function () {
+    const retroviolet_imgdata = () => {
 
         var randomNumber;
 
@@ -984,7 +983,7 @@
         return imgData;
     }
 
-    const vintage_imgdata = function () {
+    const vintage_imgdata = () => {
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 120
@@ -995,7 +994,7 @@
         return imgData;
     }
 
-    const confetti_imgdata = function () {
+    const confetti_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
 
             var randomNumber = getRandomNumber(0, 200);
@@ -1016,7 +1015,7 @@
         return imgData;
     }
 
-    const horizon_imgdata = function () {
+    const horizon_imgdata = () => {
         var SAT_ADJ = 150;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
@@ -1026,7 +1025,7 @@
         return imgData;
     }
 
-    const evening_imgdata = function () {
+    const evening_imgdata = () => {
         var SAT_ADJ = 60;
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
@@ -1074,7 +1073,7 @@
         return imgData;
     }
 
-    const pixel_blue_imgdata = function () {
+    const pixel_blue_imgdata = () => {
         var randomNumber;
 
         for (i = 0; i < imgData.data.length; i += 4) {
@@ -1111,21 +1110,21 @@
     }
 
     
-    const lemon_imgdata = function () {
+    const lemon_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 1] = imgData.data[i] + 50;
         }
         return imgData;
     }
 
-    const coral_imgdata = function () {
+    const coral_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 2] = imgData.data[i + 1] + 50;
         }
         return imgData;
     }
 
-    const frontward_imgdata = function () {
+    const frontward_imgdata = () => {
         for (var i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = imgData.data[i + 2];
             imgData.data[i + 2] = imgData.data[i + 1] + 50;
@@ -1133,7 +1132,7 @@
         return imgData;
     }
 
-    const green_med_noise_imgdata = function () {
+    const green_med_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 9;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -1151,7 +1150,7 @@
         return imgData;
     }
 
-    const dark_purple_min_noise_imgdata = function () {
+    const dark_purple_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 9;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -1169,7 +1168,7 @@
         return imgData;
     }
 
-    const teal_min_noise_imgdata = function () {
+    const teal_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -1187,7 +1186,7 @@
         return imgData;
     }
 
-    const purple_min_noise_imgdata = function () {
+    const purple_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -1205,7 +1204,7 @@
         return imgData;
     }
 
-    const blue_min_noise_imgdata = function () {
+    const blue_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -1223,7 +1222,7 @@
         return imgData;
     }
 
-    const green_min_noise_imgdata = function () {
+    const green_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -1241,7 +1240,7 @@
         return imgData;
     }
 
-    const pink_min_noise_imgdata = function() {
+    const pink_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
         for (var i = 0; i < imgData.data.length; i += 4) {
