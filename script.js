@@ -8,6 +8,7 @@
     var imgData;
     var original_img_data;
     var change = 0;
+    var i;
     var tiles = document.getElementsByClassName("tile is-child box check");
     console.log(tiles);
     document.addEventListener('DOMContentLoaded', init, false);
@@ -37,10 +38,10 @@
         // Create for loop which creates canvases and then appends them to a list. 
 
         for (i = 0; i < tiles.length; i++) {
-            var appended_canvas = document.createElement("canvas");
+            let appended_canvas = document.createElement("canvas");
             appended_canvas.width = c.width;
             appended_canvas.height = c.height;
-            var tile_elem = tiles[i];
+            let tile_elem = tiles[i];
             canvas_list.push(appended_canvas);
             tile_elem.appendChild(appended_canvas);
         }
@@ -48,9 +49,9 @@
     }
 
     function readURL() {
-        var file = document.getElementById("img_uploader").files[0];
+        let file = document.getElementById("img_uploader").files[0];
 
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onloadend = function () {
             img.src = reader.result; // Set the global image to the path of the file on the client's PC.
         }
@@ -64,20 +65,15 @@
 
     function assembleFilteredPhotos() {
         const group = [haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, red_min_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata, lemon_imgdata, coral_imgdata, darkify_imgdata]
-        var listdata = [];
-        var tile_elem;
-
-        var resImgData;
-        var current_canvas;
 
         for (let j = 0; j < canvas_list.length; j += 1) {
-            current_canvas = canvas_list[j];
+            let current_canvas = canvas_list[j];
             console.log(current_canvas);
 
-            var getctx = current_canvas.getContext("2d");
+            let getctx = current_canvas.getContext("2d");
             imgData = ctx.getImageData(0, 0, c.width, c.height);
 
-            resImgData = group[j]();
+            let resImgData = group[j]();
             console.log(resImgData);
             getctx.putImageData(resImgData, 0, 0);
         }
@@ -85,55 +81,55 @@
 
     function addFilterButtonEventListeners() {
 
-        var pixelate_two_elem = document.getElementById("pixelate_two")
+        let pixelate_two_elem = document.getElementById("pixelate_two")
         pixelate_two_elem.addEventListener("click", function () { pixelate(60) }, false);
 
-        var pixelate_three_elem = document.getElementById("pixelate_three")
+        let pixelate_three_elem = document.getElementById("pixelate_three")
         pixelate_three_elem.addEventListener("click", function () { pixelate(40) }, false);
 
-        var pixelate_four_elem = document.getElementById("pixelate_four")
+        let pixelate_four_elem = document.getElementById("pixelate_four")
         pixelate_four_elem.addEventListener("click", function () { pixelate(20) }, false);
 
-        var blue_grey_scale = document.getElementById('blue_greyscale');
+        let blue_grey_scale = document.getElementById('blue_greyscale');
         blue_grey_scale.addEventListener("click", function () { updateMainCanvas("bluegreyscale") }, false);
 
-        var inc_brightness_elem = document.getElementById('inc_brightness');
+        let inc_brightness_elem = document.getElementById('inc_brightness');
         inc_brightness_elem.addEventListener("click", function () { updateMainCanvas("incbrightness") }, false);
 
-        var darkify_el = document.getElementById('darkify');
+        let darkify_el = document.getElementById('darkify');
         darkify_el.addEventListener("click", function () { updateMainCanvas("darkify") }, false);
 
-        var greyscale_elem = document.getElementById('greyscale');
+        let greyscale_elem = document.getElementById('greyscale');
         greyscale_elem.addEventListener("click", function () { updateMainCanvas("greyscale") }, false);
 
-        var red_greyscale_elem = document.getElementById('red_greyscale');
+        let red_greyscale_elem = document.getElementById('red_greyscale');
         red_greyscale_elem.addEventListener("click", function () { updateMainCanvas("redgreyscale") }, false);
 
-        var green_greyscale_elem = document.getElementById('green_greyscale');
+        let green_greyscale_elem = document.getElementById('green_greyscale');
         green_greyscale_elem.addEventListener("click", function () { updateMainCanvas("greengreyscale") }, false);
 
-        var horizontal_lines_elem = document.getElementById('horizontal_lines');
+        let horizontal_lines_elem = document.getElementById('horizontal_lines');
         horizontal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_horizontal_lines") }, false);
 
-        var diagonal_lines_elem = document.getElementById('diagonal_lines');
+        let diagonal_lines_elem = document.getElementById('diagonal_lines');
         diagonal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_diagonal_lines") }, false);
 
-        var green_diagonal_lines_elem = document.getElementById('green_diagonal_lines');
+        let green_diagonal_lines_elem = document.getElementById('green_diagonal_lines');
         green_diagonal_lines_elem.addEventListener("click", function () { updateMainCanvas("add_green_diagonal_lines") }, false);
 
-        var pane_elem = document.getElementById('pane');
+        let pane_elem = document.getElementById('pane');
         pane_elem.addEventListener("click", function () { updateMainCanvas("pane") }, false);
 
-        var casino_elem = document.getElementById('casino');
+        let casino_elem = document.getElementById('casino');
         casino_elem.addEventListener("click", function () { updateMainCanvas("casino") }, false);
 
-        var yellow_casino_elem = document.getElementById('yellow_casino');
+        let yellow_casino_elem = document.getElementById('yellow_casino');
         yellow_casino_elem.addEventListener("click", function () { updateMainCanvas("yellow_casino") }, false);
 
-        var specks_elem = document.getElementById('specks');
+        let specks_elem = document.getElementById('specks');
         specks_elem.addEventListener("click", function () { updateMainCanvas("specks") }, false);
 
-        var invert_elem = document.getElementById('invert');
+        let invert_elem = document.getElementById('invert');
         invert_elem.addEventListener("click", function () { updateMainCanvas("invert") }, false);
 
         // Experimental li element for dev use only
@@ -141,124 +137,124 @@
         // var a_el = document.getElementById('a');
         // a_el.addEventListener("click", function () { updateMainCanvas("a") }, false);
 
-        var twenties_el = document.getElementById('twenties');
+        let twenties_el = document.getElementById('twenties');
         twenties_el.addEventListener("click", function () { updateMainCanvas("twenties") }, false);
 
-        var rose_el = document.getElementById("rose");
+        let rose_el = document.getElementById("rose");
         rose_el.addEventListener("click", function () { updateMainCanvas("rosetint") }, false);
 
-        var slate_el = document.getElementById("slate");
+        let slate_el = document.getElementById("slate");
         slate_el.addEventListener("click", function () { updateMainCanvas("slate") }, false);
 
-        var purplescale_el = document.getElementById("purplescale");
+        let purplescale_el = document.getElementById("purplescale");
         purplescale_el.addEventListener("click", function () { updateMainCanvas("purplescale") }, false);
 
-        var radio_el = document.getElementById("radio");
+        let radio_el = document.getElementById("radio");
         radio_el.addEventListener("click", function () { updateMainCanvas("radio") }, false);
 
-        var ocean_el = document.getElementById("ocean");
+        let ocean_el = document.getElementById("ocean");
         ocean_el.addEventListener("click", function () { updateMainCanvas("ocean") }, false);
 
-        var pixelate_elem = document.getElementById("pixelate");
+        let pixelate_elem = document.getElementById("pixelate");
         pixelate_elem.addEventListener("click", function () { pixelate(27) }, false);
 
-        var solange_elem = document.getElementById("solange");
+        let solange_elem = document.getElementById("solange");
         solange_elem.addEventListener("click", function () { updateMainCanvas("solange") }, false);
 
-        var zapt_element = document.getElementById("zapt");
+        let zapt_element = document.getElementById("zapt");
         zapt_element.addEventListener("click", function () { updateMainCanvas("zapt") }, false);
 
-        var neue_element = document.getElementById("neue");
+        let neue_element = document.getElementById("neue");
         neue_element.addEventListener("click", function () { updateMainCanvas("neue") }, false);
 
-        var ryo_element = document.getElementById("ryo");
+        let ryo_element = document.getElementById("ryo");
         ryo_element.addEventListener("click", function () { updateMainCanvas("ryo_conv") }, false);
 
-        var lix_element = document.getElementById("lix");
+        let lix_element = document.getElementById("lix");
         lix_element.addEventListener("click", function () { updateMainCanvas("lix") }, false);
 
-        var eon_element = document.getElementById("eon");
+        let eon_element = document.getElementById("eon");
         eon_element.addEventListener("click", function () { updateMainCanvas("eon") }, false);
 
-        var aeon_element = document.getElementById("aeon");
+        let aeon_element = document.getElementById("aeon");
         aeon_element.addEventListener("click", function () { updateMainCanvas("aeon") }, false);
 
-        var cosmic_element = document.getElementById("cosmic");
+        let cosmic_element = document.getElementById("cosmic");
         cosmic_element.addEventListener("click", function () { updateMainCanvas("cosmic") }, false);
 
-        var retro_violet_elem = document.getElementById("retro_violet");
+        let retro_violet_elem = document.getElementById("retro_violet");
         retro_violet_elem.addEventListener("click", function () { updateMainCanvas("retroviolet") }, false);
 
-        var haze_elem = document.getElementById("haze");
+        let haze_elem = document.getElementById("haze");
         haze_elem.addEventListener("click", function () { updateMainCanvas("haze") }, false);
 
-        var pink_aura_elem = document.getElementById("pink_aura");
+        let pink_aura_elem = document.getElementById("pink_aura");
         pink_aura_elem.addEventListener("click", function () { updateMainCanvas("pink_aura") }, false);
 
-        var serenity_elem = document.getElementById("serenity");
+        let serenity_elem = document.getElementById("serenity");
         serenity_elem.addEventListener("click", function () { updateMainCanvas("serenity") }, false);
 
-        var perfume_elem = document.getElementById("perfume");
+        let perfume_elem = document.getElementById("perfume");
         perfume_elem.addEventListener("click", function () { updateMainCanvas("perfume") }, false);
 
-        var specks_redscale_elem = document.getElementById("specks_redscale");
+        let specks_redscale_elem = document.getElementById("specks_redscale");
         specks_redscale_elem.addEventListener("click", function () { updateMainCanvas("specks_redscale") }, false);
 
-        var noise_centre_elem = document.getElementById("noise_centre");
+        let noise_centre_elem = document.getElementById("noise_centre");
         noise_centre_elem.addEventListener("click", function () { updateMainCanvas("noise_centre") }, false);
 
-        var mellow_elem = document.getElementById("mellow");
+        let mellow_elem = document.getElementById("mellow");
         mellow_elem.addEventListener("click", function () { updateMainCanvas("mellow") }, false);
 
-        var matrix_elem = document.getElementById("matrix");
+        let matrix_elem = document.getElementById("matrix");
         matrix_elem.addEventListener("click", function () { updateMainCanvas("matrix") }, false);
 
-        var green_specks_elem = document.getElementById("green_specks");
+        let green_specks_elem = document.getElementById("green_specks");
         green_specks_elem.addEventListener("click", function () { updateMainCanvas("greenspecks") }, false);
 
-        var eclectic_elem = document.getElementById("eclectic");
+        let eclectic_elem = document.getElementById("eclectic");
         eclectic_elem.addEventListener("click", function () { updateMainCanvas("eclectic") }, false);
 
-        var confetti_elem = document.getElementById("confetti");
+        let confetti_elem = document.getElementById("confetti");
         confetti_elem.addEventListener("click", function () { updateMainCanvas("confetti") }, false);
 
-        var vintage_elem = document.getElementById("vintage");
+        let vintage_elem = document.getElementById("vintage");
         vintage_elem.addEventListener("click", function () { updateMainCanvas("vintage") }, false);
 
-        var horizon_elem = document.getElementById("horizon");
+        let horizon_elem = document.getElementById("horizon");
         horizon_elem.addEventListener("click", function () { updateMainCanvas("horizon") }, false);
 
-        var evening_elem = document.getElementById("evening");
+        let evening_elem = document.getElementById("evening");
         evening_elem.addEventListener("click", function () { updateMainCanvas("evening") }, false);
 
-        var min_noise_elem = document.getElementById("min_noise");
+        let min_noise_elem = document.getElementById("min_noise");
         min_noise_elem.addEventListener("click", function () { updateMainCanvas("min_noise") }, false);
 
-        var lemon_elem = document.getElementById("lemon");
+        let lemon_elem = document.getElementById("lemon");
         lemon_elem.addEventListener("click", function () { updateMainCanvas("lemon") }, false);
 
-        var coral_elem = document.getElementById("coral");
+        let coral_elem = document.getElementById("coral");
         coral_elem.addEventListener("click", function () { updateMainCanvas("coral") }, false);
 
-        var dark_purple_min_noise_elem = document.getElementById("coral");
+        let dark_purple_min_noise_elem = document.getElementById("coral");
         dark_purple_min_noise_elem.addEventListener("click", function () { updateMainCanvas("dark_purple_min_noise") }, false);
 
-        var green_med_noise_elem = document.getElementById("green_med_noise");
+        let green_med_noise_elem = document.getElementById("green_med_noise");
         green_med_noise_elem.addEventListener("click", function () { updateMainCanvas("green_med_noise") }, false);
 
-        var teal_min_noise = document.getElementById("teal_min_noise");
+        let teal_min_noise = document.getElementById("teal_min_noise");
         teal_min_noise.addEventListener("click", function () { updateMainCanvas("teal_min_noise") }, false);
 
-        var blue_min_noise_elem = document.getElementById("blue_min_noise");
+        let blue_min_noise_elem = document.getElementById("blue_min_noise");
         blue_min_noise_elem.addEventListener("click", function () { updateMainCanvas("blue_min_noise") }, false);
 
-        var green_min_noise_elem = document.getElementById("green_min_noise");
+        let green_min_noise_elem = document.getElementById("green_min_noise");
         green_min_noise_elem.addEventListener("click", function () { updateMainCanvas("green_min_noise") }, false);
 
-        var pink_min_noise_elem = document.getElementById("pink_min_noise");
+        let pink_min_noise_elem = document.getElementById("pink_min_noise");
         pink_min_noise_elem.addEventListener("click", function () { updateMainCanvas("pink_min_noise") }, false);
 
-        var red_min_noise_elem = document.getElementById("red_min_noise");
+        let red_min_noise_elem = document.getElementById("red_min_noise");
         red_min_noise_elem.addEventListener("click", function () { updateMainCanvas("red_min_noise") }, false);
 
     }
@@ -296,8 +292,8 @@
     }
 
     const blue_greyscale_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 20
             imgData.data[i + 1] = avg + 30
             imgData.data[i + 2] = avg + 60
@@ -305,14 +301,14 @@
         return imgData;
     }
     const solange_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
         }
         return imgData;
     }
 
     const solange_grey_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = imgData.data[i + 2];
             imgData.data[i + 1] = imgData.data[i + 1]
             imgData.data[i + 2] = imgData.data[i]
@@ -325,12 +321,12 @@
     const min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 53;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.4;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.4;
 
-            var randomColor2 = 0.6 + Math.random() * 0.4;
+            let randomColor2 = 0.6 + Math.random() * 0.4;
 
-            var randomColor3 = 0.6 + Math.random() * 0.4;
+            let randomColor3 = 0.6 + Math.random() * 0.4;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -343,12 +339,12 @@
     const red_min_noise_imgdata = () => {
         var rand = (0.5 - Math.random()) * 1;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.6;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.6;
 
-            var randomColor2 = 0.6 + Math.random() * 0.4;
+            let randomColor2 = 0.6 + Math.random() * 0.4;
 
-            var randomColor3 = 0.6 + Math.random() * 0.4;
+            let randomColor3 = 0.6 + Math.random() * 0.4;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -359,22 +355,22 @@
     }
 
     const cool_twilight_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 1] = 255 - imgData.data[i + 1];
         }
         return imgData;
     }
 
     const blues_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
         return imgData;
     }
 
     const darkify_imgdata = () => {
-        var BRIGHTNESS_ADJ = 20;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let BRIGHTNESS_ADJ = 20;
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= BRIGHTNESS_ADJ
             imgData.data[i + 1] -= BRIGHTNESS_ADJ
             imgData.data[i + 2] -= BRIGHTNESS_ADJ
@@ -383,8 +379,8 @@
     }
 
     const incbrightness_imgdata = () => {
-        var BRIGHTNESS_ADJ = 50;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let BRIGHTNESS_ADJ = 50;
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += BRIGHTNESS_ADJ
             imgData.data[i + 1] += BRIGHTNESS_ADJ
             imgData.data[i + 2] += BRIGHTNESS_ADJ
@@ -403,8 +399,8 @@
     }
 
     const redgreyscale_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 100
             imgData.data[i + 1] = avg + 40
             imgData.data[i + 2] = avg + 20
@@ -413,8 +409,8 @@
     }
 
     const greengreyscale_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 20
             imgData.data[i + 1] = avg + 70
             imgData.data[i + 2] = avg + 20
@@ -424,13 +420,13 @@
 
 
     const add_horizontal_line_imgdata = () => {
-        var inc = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let inc = 0;
+        for (i = 0; i < imgData.data.length; i += 4) {
             inc += 1;
             if (inc > 255) {
                 inc = 0;
             }
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + inc;
             imgData.data[i + 1] = avg + 70
             imgData.data[i + 2] = avg + 20
@@ -439,13 +435,13 @@
     }
 
     const add_diagonal_lines_imgdata = () => {
-        var inc = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let inc = 0;
+        for (i = 0; i < imgData.data.length; i += 4) {
             inc += 20;
             if (inc > 255) {
                 inc = 0;
             }
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + inc;
             imgData.data[i + 1] = avg + 70
             imgData.data[i + 2] = avg + 20
@@ -454,8 +450,8 @@
     }
 
     const add_green_diagonal_lines_imgdata = () => {
-        var inc = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let inc = 0;
+        for (i = 0; i < imgData.data.length; i += 4) {
             inc += 20;
             if (inc > 255) {
                 inc = 0;
@@ -469,13 +465,13 @@
     }
 
     const pane_imgdata = () => {
-        var inc = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let inc = 0;
+        for (i = 0; i < imgData.data.length; i += 4) {
             inc += 200;
             if (inc > 255) {
                 inc = 0;
             }
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 5;
             imgData.data[i + 1] = avg + inc;
             imgData.data[i + 2] = avg + 20
@@ -485,15 +481,15 @@
 
     const casino_imgdata = () => {
 
-        var inc = 0;
+        let inc = 0;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             inc = getRandomNumber(0, 255);
             if (inc > 255) {
                 inc = 0;
             }
 
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + inc;
             imgData.data[i + 1] = avg + 2;
             imgData.data[i + 2] = avg + 5;
@@ -503,9 +499,9 @@
 
     const yellow_casino_imgdata = () => {
 
-        var inc = 0;
-        var inc2 = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let inc = 0;
+        let inc2 = 0;
+        for (i = 0; i < imgData.data.length; i += 4) {
             inc = getRandomNumber(0, 255);
             inc2 = getRandomNumber(0, 255);
 
@@ -513,7 +509,7 @@
                 inc = 0;
             }
 
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + inc;
             imgData.data[i + 1] = avg + inc2;
             imgData.data[i + 2] = avg + 5;
@@ -525,7 +521,7 @@
     const specks_imgdata = () => {
         var inc = 0;
         var inc2 = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             i = getRandomNumber(0, imgData.data.length);
             inc = getRandomNumber(0, 255);
             inc2 = getRandomNumber(0, 255);
@@ -543,9 +539,9 @@
     }
 
     const incbrightness_two_imgdata = () => {
-        var inc = 0;
-        var inc2 = 0;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let inc = 0;
+        let inc2 = 0;
+        for (i = 0; i < imgData.data.length; i += 4) {
             i = getRandomNumber(0, imgData.data.length);
             inc = getRandomNumber(0, 255);
             inc2 = getRandomNumber(0, 255);
@@ -594,8 +590,6 @@
     const neue_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
-            // imgData.data[i] = 255 - imgData.data[i];
-            // imgData.data[i + 1] = 255 - imgData.data[i + 1];
             imgData.data[i + 2] = 255 - imgData.data[i + 2];
         }
         return imgData;
@@ -604,7 +598,6 @@
     const eon_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
-            //imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 120 - imgData.data[i + 1];
             imgData.data[i + 2] = 100 - imgData.data[i + 2];
         }
@@ -614,7 +607,6 @@
     const aeon_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
-            //imgData.data[i] = 255 - imgData.data[i];
             imgData.data[i + 1] = 60 - imgData.data[i + 1];
             imgData.data[i + 2] = 100 - imgData.data[i + 2];
         }
@@ -623,8 +615,8 @@
 
     const rosetint_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 80
             imgData.data[i + 1] = avg + 20
             imgData.data[i + 2] = avg + 31
@@ -634,8 +626,8 @@
 
     const slate_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 4
             imgData.data[i + 1] = avg + 3
             imgData.data[i + 2] = avg + 12
@@ -645,8 +637,8 @@
 
     const purplescale_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 90
             imgData.data[i + 1] = avg + 40
             imgData.data[i + 2] = avg + 80
@@ -656,8 +648,8 @@
 
     const radio_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 5
             imgData.data[i + 1] = avg + 40
             imgData.data[i + 2] = avg + 20
@@ -667,8 +659,8 @@
 
     const twenties_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
             imgData.data[i] = avg + 18
             imgData.data[i + 1] = avg + 12
             imgData.data[i + 2] = avg + 20
@@ -677,7 +669,7 @@
     }
 
     const ocean_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 10
             imgData.data[i + 1] += 20
             imgData.data[i + 2] += 90
@@ -686,8 +678,8 @@
     }
 
     const sat_adj_imgdata = () => {
-        var SAT_ADJ = 150;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let SAT_ADJ = 150;
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
             imgData.data[i + 1] -= SAT_ADJ
             imgData.data[i + 2] -= SAT_ADJ
@@ -696,14 +688,14 @@
     }
 
     const specksredscale_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomNumber = getRandomNumber(0, 100);
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomNumber = getRandomNumber(0, 100);
             if (randomNumber > 10 && randomNumber < 13) {
                 imgData.data[i] = 120
                 imgData.data[i + 1] = 120
                 imgData.data[i + 2] = 120
             }
-            var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
+            let avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3
 
             imgData.data[i] = avg + 100
             imgData.data[i + 1] = avg + 40
@@ -714,7 +706,7 @@
 
     const noise_centre_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
                 imgData.data[i] += getRandomNumber(0, 100);
                 imgData.data[i + 1] += 20
                 imgData.data[i + 2] += getRandomNumber(0, 255)
@@ -726,7 +718,7 @@
 
     const perfume_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 80
             imgData.data[i + 1] += 40
             imgData.data[i + 2] += 120
@@ -736,7 +728,7 @@
 
     const serenity_imgdata = () => {
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 10
             imgData.data[i + 1] += 40
             imgData.data[i + 2] += 90
@@ -745,7 +737,7 @@
     }
 
     const pink_aura_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 90
             imgData.data[i + 1] += 10
             imgData.data[i + 2] += 90
@@ -754,7 +746,7 @@
     }
 
     const haze_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 90
             imgData.data[i + 1] += 90
             imgData.data[i + 2] += 10
@@ -776,7 +768,7 @@
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+            let addition = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 20;
                 addition2 = 30;
@@ -800,11 +792,11 @@
 
     const eclectic_imgdata = () => {
 
-        var randomNumber;
+        let randomNumber = 0;
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+            let addition = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 20;
                 addition2 = 30;
@@ -831,7 +823,6 @@
             } else {
                 imgData.data[i] += addition2;
             }
-            // imgData.data[i + 2] += addition2;
         }
         return imgData;
     }
@@ -877,7 +868,7 @@
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+            let addition = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 20;
                 addition2 = 30;
@@ -909,11 +900,11 @@
     }
 
     const cosmic_imgdata = () => {
-        var randomNumber;
+        let randomNumber = 0;
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+            let addition = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 0;
                 addition2 = 30;
@@ -946,13 +937,13 @@
 
     const retroviolet_imgdata = () => {
 
-        var randomNumber;
+        let randomNumber = 0;
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
 
-            var addition1;
-            var addition2;
+            let addition1 = 0;
+            let addition2 = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 20;
                 addition2 = 30;
@@ -984,8 +975,7 @@
     }
 
     const vintage_imgdata = () => {
-
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] += 120
             imgData.data[i + 1] += 70
             imgData.data[i + 2] += 13
@@ -995,9 +985,9 @@
     }
 
     const confetti_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
 
-            var randomNumber = getRandomNumber(0, 200);
+            let randomNumber = getRandomNumber(0, 200);
 
             if (randomNumber > 0 && randomNumber < 10) {
                 imgData.data[i] = getRandomNumber(0, 255)
@@ -1016,8 +1006,8 @@
     }
 
     const horizon_imgdata = () => {
-        var SAT_ADJ = 150;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let SAT_ADJ = 150;
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
             imgData.data[i + 1] -= SAT_ADJ
             imgData.data[i + 2] -= SAT_ADJ
@@ -1026,8 +1016,8 @@
     }
 
     const evening_imgdata = () => {
-        var SAT_ADJ = 60;
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        let SAT_ADJ = 60;
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] -= SAT_ADJ
             imgData.data[i + 1] -= SAT_ADJ
             imgData.data[i + 2] -= SAT_ADJ
@@ -1038,11 +1028,11 @@
 
     // An experimental function that is used for the testing of image filtering.
     const a = function () {
-        var randomNumber;
+        let randomNumber = 0;
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+            let addition = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 0;
                 addition2 = 30;
@@ -1074,11 +1064,11 @@
     }
 
     const pixel_blue_imgdata = () => {
-        var randomNumber;
+        let randomNumber = 0;
 
         for (i = 0; i < imgData.data.length; i += 4) {
             randomNumber = getRandomNumber(0, 200);
-            var addition;
+            let addition = 0;
             if (randomNumber > 0 && randomNumber < 50) {
                 addition1 = 0;
                 addition2 = 30;
@@ -1111,21 +1101,21 @@
 
     
     const lemon_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 1] = imgData.data[i] + 50;
         }
         return imgData;
     }
 
     const coral_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 2] = imgData.data[i + 1] + 50;
         }
         return imgData;
     }
 
     const frontward_imgdata = () => {
-        for (var i = 0; i < imgData.data.length; i += 4) {
+        for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = imgData.data[i + 2];
             imgData.data[i + 2] = imgData.data[i + 1] + 50;
         }
@@ -1133,14 +1123,14 @@
     }
 
     const green_med_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 9;
+        let rand = (0.5 - Math.random()) * 9;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.5;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.5;
 
-            var randomColor2 = 0.6 + Math.random() * 0.5;
+            let randomColor2 = 0.6 + Math.random() * 0.5;
 
-            var randomColor3 = 0.6 + Math.random() * 0.5;
+            let randomColor3 = 0.6 + Math.random() * 0.5;
 
             imgData.data[i] = imgData.data[i + 1] * 0.5 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 2 ] * 0.99 * randomColor2;
@@ -1151,14 +1141,14 @@
     }
 
     const dark_purple_min_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 9;
+        let rand = (0.5 - Math.random()) * 9;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.5;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.5;
 
-            var randomColor2 = 0.6 + Math.random() * 0.5;
+            let randomColor2 = 0.6 + Math.random() * 0.5;
 
-            var randomColor3 = 0.6 + Math.random() * 0.5;
+            let randomColor3 = 0.6 + Math.random() * 0.5;
 
             imgData.data[i] = imgData.data[i] * 0.5 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.3 * randomColor2;
@@ -1169,14 +1159,14 @@
     }
 
     const teal_min_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 1;
+        let rand = (0.5 - Math.random()) * 1;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.1;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.1;
 
-            var randomColor2 = 0.6 + Math.random() * 0.5;
+            let randomColor2 = 0.6 + Math.random() * 0.5;
 
-            var randomColor3 = 0.6 + Math.random() * 0.5;
+            let randomColor3 = 0.6 + Math.random() * 0.5;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -1187,14 +1177,14 @@
     }
 
     const purple_min_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 1;
+        let rand = (0.5 - Math.random()) * 1;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.5;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.5;
 
-            var randomColor2 = 0.6 + Math.random() * 0.2;
+            let randomColor2 = 0.6 + Math.random() * 0.2;
 
-            var randomColor3 = 0.6 + Math.random() * 0.8;
+            let randomColor3 = 0.6 + Math.random() * 0.8;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -1205,14 +1195,14 @@
     }
 
     const blue_min_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 1;
+        let rand = (0.5 - Math.random()) * 1;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.1;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.1;
 
-            var randomColor2 = 0.6 + Math.random() * 0.2;
+            let randomColor2 = 0.6 + Math.random() * 0.2;
 
-            var randomColor3 = 0.6 + Math.random() * 0.7;
+            let randomColor3 = 0.6 + Math.random() * 0.7;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -1223,14 +1213,14 @@
     }
 
     const green_min_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 1;
+        let rand = (0.5 - Math.random()) * 1;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.1;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.1;
 
-            var randomColor2 = 0.6 + Math.random() * 0.5;
+            let randomColor2 = 0.6 + Math.random() * 0.5;
 
-            var randomColor3 = 0.6 + Math.random() * 0.4;
+            let randomColor3 = 0.6 + Math.random() * 0.4;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -1241,14 +1231,14 @@
     }
 
     const pink_min_noise_imgdata = () => {
-        var rand = (0.5 - Math.random()) * 1;
+        let rand = (0.5 - Math.random()) * 1;
 
-        for (var i = 0; i < imgData.data.length; i += 4) {
-            var randomColor1 = 0.6 + Math.random() * 0.6;
+        for (i = 0; i < imgData.data.length; i += 4) {
+            let randomColor1 = 0.6 + Math.random() * 0.6;
 
-            var randomColor2 = 0.6 + Math.random() * 0.1;
+            let randomColor2 = 0.6 + Math.random() * 0.1;
 
-            var randomColor3 = 0.6 + Math.random() * 0.4;
+            let randomColor3 = 0.6 + Math.random() * 0.4;
 
             imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
@@ -1262,7 +1252,7 @@
     // Canvas-specific functions
     // These functions involve changing the size of the canvas and resizing that, so pixelations are possible.
     function pixelate(degree) {
-        var size = degree / 100,
+        let size = degree / 100,
             w = c.width * size,
             h = c.height * size;
 
@@ -1285,7 +1275,7 @@
 
             imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
 
-        var resultingImgData = filter_dict[chosenFilter]();
+        let resultingImgData = filter_dict[chosenFilter]();
         console.log(resultingImgData)
         ctx.putImageData(resultingImgData, 0, 0);
     }
