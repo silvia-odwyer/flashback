@@ -257,6 +257,12 @@
         let red_min_noise_elem = document.getElementById("red_min_noise");
         red_min_noise_elem.addEventListener("click", function () { updateMainCanvas("red_min_noise") }, false);
 
+        let frontward_elem = document.getElementById("frontward");
+        frontward_elem.addEventListener("click", function () { updateMainCanvas("frontward") }, false);
+
+        let solange_grey_elem = document.getElementById("solange_grey");
+        solange_grey_elem.addEventListener("click", function () { updateMainCanvas("solange_grey") }, false);
+
     }
 
     function switchFilterStackingOn() {
