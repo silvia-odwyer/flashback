@@ -64,7 +64,7 @@
     }
 
     function assembleFilteredPhotos() {
-        const group = [offset_imgdata, offset_blue_imgdata, offset_green_imgdata, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, red_min_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata, lemon_imgdata, coral_imgdata, darkify_imgdata, frontward_imgdata, solange_grey_imgdata]
+        const group = [a, offset_imgdata, offset_blue_imgdata, offset_green_imgdata, phase, grime, warmth, crimson, wood, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, red_min_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata, lemon_imgdata, coral_imgdata, darkify_imgdata, frontward_imgdata, solange_grey_imgdata]
 
         for (let j = 0; j < canvas_list.length; j += 1) {
             let current_canvas = canvas_list[j];
@@ -290,6 +290,70 @@
  * gains would be very minimal, since the images are static, and are not animating, etc.,
  */
 
+
+    // An experimental function that is used for the testing of image filtering.
+    const a = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = imgData.data[i] + 10
+            imgData.data[i + 1] = imgData.data[i + 1] + 15
+        }
+        return imgData;
+    }
+
+    const warmth = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = imgData.data[i] + 10
+            imgData.data[i + 1] = imgData.data[i + 1] + 18
+        }
+        return imgData;
+    }
+
+    const crimson = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = imgData.data[i] + 20
+            imgData.data[i + 1] = imgData.data[i + 2] + 20
+        }
+        return imgData;
+    }
+
+    
+
+    const phase = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = imgData.data[i] + getRandomNumber(10, 20)
+            imgData.data[i + 1] = imgData.data[i + 2] + getRandomNumber(10, 20)
+
+            imgData.data[i + 2] = imgData.data[i + 2] + getRandomNumber(10, 20)
+        }
+        return imgData;
+    }
+
+    const grime = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i + 1] = imgData.data[i] + 5;
+            imgData.data[i] = imgData.data[i] + 1;
+        }
+        return imgData;
+    }
+
+    
+
+    const sunset = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i + 1] = imgData.data[i] + 50;
+            imgData.data[i + 2] = imgData.data[i + 2] + 12;
+        }
+        return imgData;
+    }
+
+    const wood = () => {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            imgData.data[i] = imgData.data[i] + 30
+            imgData.data[i + 1] = imgData.data[i + 1] + 12;
+        }
+        return imgData;
+    }
+
     const lix_conv = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i] = 255 - imgData.data[i];
@@ -319,7 +383,7 @@
     const offset_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             var offset = 5;
-            imgData.data[i] = imgData.data[i+4*offset *offset] == undefined ? 0 : imgData.data[i+4*offset];
+            imgData.data[i] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
         }
         return imgData;
     }
@@ -327,7 +391,7 @@
     const offset_green_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             var offset = 5;
-            imgData.data[i + 1] = imgData.data[i+4*offset *offset] == undefined ? 0 : imgData.data[i+4*offset];
+            imgData.data[i + 1] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
         }
         return imgData;
     }
@@ -335,7 +399,7 @@
     const offset_blue_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             var offset = 5;
-            imgData.data[i + 2] = imgData.data[i+4*offset *offset] == undefined ? 0 : imgData.data[i+4*offset];
+            imgData.data[i + 2] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
         }
         return imgData;
     }
@@ -368,10 +432,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.4;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -386,10 +450,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.4;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -747,12 +811,12 @@
     const noise_centre_imgdata = () => {
 
         for (i = 0; i < imgData.data.length; i += 4) {
-                imgData.data[i] += getRandomNumber(0, 100);
-                imgData.data[i + 1] += 20
-                imgData.data[i + 2] += getRandomNumber(0, 255)
+            imgData.data[i] += getRandomNumber(0, 100);
+            imgData.data[i + 1] += 20
+            imgData.data[i + 2] += getRandomNumber(0, 255)
 
         }
-                    
+
         return imgData;
     }
 
@@ -1066,42 +1130,6 @@
     }
 
 
-    // An experimental function that is used for the testing of image filtering.
-    const a = function () {
-        let randomNumber = 0;
-
-        for (i = 0; i < imgData.data.length; i += 4) {
-            randomNumber = getRandomNumber(0, 200);
-            let addition = 0;
-            if (randomNumber > 0 && randomNumber < 50) {
-                addition1 = 0;
-                addition2 = 30;
-            }
-            else if (randomNumber > 49 && randomNumber < 100) {
-                addition1 = 100;
-                addition2 = 90;
-            }
-
-            else {
-                addition1 = 70;
-                addition2 = 10;
-            }
-
-            if (imgData.data[i] - addition > 255) {
-                imgData.data[i] -= addition
-            }
-            else {
-                imgData.data[i] += addition
-            }
-
-            if (imgData.data[i + 1] + addition > 255) {
-                imgData.data[i + 1] -= addition2;
-            } else {
-                imgData.data[i + 2] += addition2;
-            }
-        }
-        return imgData;
-    }
 
     const pixel_blue_imgdata = () => {
         let randomNumber = 0;
@@ -1139,7 +1167,7 @@
         return imgData;
     }
 
-    
+
     const lemon_imgdata = () => {
         for (i = 0; i < imgData.data.length; i += 4) {
             imgData.data[i + 1] = imgData.data[i] + 50;
@@ -1172,10 +1200,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.5;
 
-            imgData.data[i] = imgData.data[i + 1] * 0.5 * randomColor1; 
-            imgData.data[i + 1] = imgData.data[i + 2 ] * 0.99 * randomColor2;
+            imgData.data[i] = imgData.data[i + 1] * 0.5 * randomColor1;
+            imgData.data[i + 1] = imgData.data[i + 2] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -1190,10 +1218,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.5;
 
-            imgData.data[i] = imgData.data[i] * 0.5 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.5 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.3 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -1208,10 +1236,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.5;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -1226,10 +1254,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.8;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -1244,10 +1272,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.7;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -1262,10 +1290,10 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.4;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
@@ -1280,15 +1308,15 @@
 
             let randomColor3 = 0.6 + Math.random() * 0.4;
 
-            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1; 
+            imgData.data[i] = imgData.data[i] * 0.99 * randomColor1;
             imgData.data[i + 1] = imgData.data[i + 1] * 0.99 * randomColor2;
 
-            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3; 
+            imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
         }
         return imgData;
     }
 
-    
+
     // Canvas-specific functions
     // These functions involve changing the size of the canvas and resizing that, so pixelations are possible.
     function pixelate(degree) {
@@ -1303,17 +1331,17 @@
         ctx.imageSmoothingEnabled = false;
 
         ctx.drawImage(c, 0, 0, w, h, 0, 0, c.width, c.height);
-        
+
     }
 
-    var filter_dict = { "a": a, "offset_blue" : offset_blue_imgdata, "offset_green" : offset_green_imgdata, "offset" : offset_imgdata, "solange_grey" : solange_grey_imgdata, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "pink_min_noise" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata, "frontward" : frontward_imgdata }
+    var filter_dict = { "a": a, "offset_blue": offset_blue_imgdata, "offset_green": offset_green_imgdata, "offset": offset_imgdata, "solange_grey": solange_grey_imgdata, "invert": invert_imgdata, "lemon": lemon_imgdata, "coral": coral_imgdata, "dark_purple_min_noise": dark_purple_min_noise_imgdata, "green_med_noise": green_med_noise_imgdata, "teal_min_noise": teal_min_noise_imgdata, "blue_min_noise": blue_min_noise_imgdata, "green_min_noise": green_min_noise_imgdata, "green_med_noise": green_med_noise_imgdata, "pink_min_noise": pink_min_noise_imgdata, "red_min_noise": red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata, "frontward": frontward_imgdata }
 
     function updateMainCanvas(chosenFilter) {
-        filter_dict = { "a": a, "offset_blue" : offset_blue_imgdata, "offset_green" : offset_green_imgdata, "offset" : offset_imgdata, "solange_grey" : solange_grey_imgdata, "invert": invert_imgdata, "lemon" : lemon_imgdata, "coral" : coral_imgdata, "dark_purple_min_noise" : dark_purple_min_noise_imgdata, "green_med_noise" : green_med_noise_imgdata, "teal_min_noise" : teal_min_noise_imgdata, "blue_min_noise" : blue_min_noise_imgdata, "green_min_noise" : green_min_noise_imgdata, "pink_min_noise" : pink_min_noise_imgdata, "red_min_noise" : red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata, "frontward" : frontward_imgdata }
+        filter_dict = { "a": a, "offset_blue": offset_blue_imgdata, "offset_green": offset_green_imgdata, "offset": offset_imgdata, "solange_grey": solange_grey_imgdata, "invert": invert_imgdata, "lemon": lemon_imgdata, "coral": coral_imgdata, "dark_purple_min_noise": dark_purple_min_noise_imgdata, "green_med_noise": green_med_noise_imgdata, "teal_min_noise": teal_min_noise_imgdata, "blue_min_noise": blue_min_noise_imgdata, "green_min_noise": green_min_noise_imgdata, "pink_min_noise": pink_min_noise_imgdata, "red_min_noise": red_min_noise_imgdata, "min_noise": min_noise_imgdata, "pane": pane_imgdata, "add_horizontal_lines": add_horizontal_line_imgdata, "add_diagonal_lines": add_diagonal_lines_imgdata, "add_green_diagonal_lines": add_green_diagonal_lines_imgdata, "greengreyscale": greengreyscale_imgdata, "darkify": darkify_imgdata, "incbrightness": incbrightness_imgdata, "cool_twilight": cool_twilight_imgdata, "blues": blues_imgdata, "ryo_conv": ryo_conv, "lix": lix_conv, "casino": casino_imgdata, "yellow_casino": yellow_casino_imgdata, "specks": specks_imgdata, "sat_adj": sat_adj_imgdata, "noise_centre": noise_centre_imgdata, "greenspecks": green_specks_imgdata, "eclectic": eclectic_imgdata, "matrix": matrix_imgdata, "cosmic": cosmic_imgdata, "solange_dark": solange_dark_imgdata, "solange": solange_imgdata, "zapt": zapt_imgdata, "neue": neue_imgdata, "eon": eon_imgdata, "aeon": aeon_imgdata, "ocean": ocean_imgdata, "confetti": confetti_imgdata, "horizon": horizon_imgdata, "rosetint": rosetint_imgdata, "slate": slate_imgdata, "purplescale": purplescale_imgdata, "redgreyscale": redgreyscale_imgdata, "radio": radio_imgdata, "specks_redscale": specksredscale_imgdata, "twenties": twenties_imgdata, "greyscale": greyscale_imgdata, "mellow": mellow_imgdata, "vintage": vintage_imgdata, "evening": evening_imgdata, "bluegreyscale": blue_greyscale_imgdata, "perfume": perfume_imgdata, "pink_aura": pink_aura_imgdata, "serenity": serenity_imgdata, "bluegreyscale": blue_greyscale_imgdata, "retroviolet": retroviolet_imgdata, "haze": haze_imgdata, "frontward": frontward_imgdata }
 
         ctx.drawImage(img, 0, 0, 220, 277);
 
-            imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
+        imgData = ctx.getImageData(0, 0, c.width, c.height); // add var in front to use imgData from previous filter effect.
 
         let resultingImgData = filter_dict[chosenFilter]();
         console.log(resultingImgData)
