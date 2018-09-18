@@ -64,7 +64,7 @@
     }
 
     function assembleFilteredPhotos() {
-        const group = [a, offset_imgdata, offset_blue_imgdata, offset_green_imgdata, phase, grime, warmth, crimson, wood, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, red_min_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata, lemon_imgdata, coral_imgdata, darkify_imgdata, frontward_imgdata, solange_grey_imgdata]
+        const group = [a, offset_imgdata, offset_blue_imgdata, offset_green_imgdata, phase, grime, warmth, sunset, crimson, wood, haze_imgdata, pink_aura_imgdata, serenity_imgdata, perfume_imgdata, vintage_imgdata, evening_imgdata, mellow_imgdata, red_min_noise_imgdata, greyscale_imgdata, specksredscale_imgdata, blue_greyscale_imgdata, twenties_imgdata, radio_imgdata, redgreyscale_imgdata, purplescale_imgdata, slate_imgdata, cosmic_imgdata, matrix_imgdata, eclectic_imgdata, green_specks_imgdata, rosetint_imgdata, horizon_imgdata, pink_min_noise_imgdata, confetti_imgdata, retroviolet_imgdata, ocean_imgdata, incbrightness_two_imgdata, noise_centre_imgdata, sat_adj_imgdata, specks_imgdata, yellow_casino_imgdata, casino_imgdata, aeon_imgdata, eon_imgdata, neue_imgdata, zapt_imgdata, solange_imgdata, solange_dark_imgdata, lix_conv, ryo_conv, blues_imgdata, cool_twilight_imgdata, incbrightness_imgdata, greengreyscale_imgdata, add_green_diagonal_lines_imgdata, add_diagonal_lines_imgdata, add_horizontal_line_imgdata, pane_imgdata, min_noise_imgdata, green_med_noise_imgdata, green_min_noise_imgdata, blue_min_noise_imgdata, dark_purple_min_noise_imgdata, lemon_imgdata, coral_imgdata, darkify_imgdata, frontward_imgdata, solange_grey_imgdata]
 
         for (let j = 0; j < canvas_list.length; j += 1) {
             let current_canvas = canvas_list[j];
@@ -294,8 +294,56 @@
     // An experimental function that is used for the testing of image filtering.
     const a = function () {
         for (i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i] = imgData.data[i] + 10
-            imgData.data[i + 1] = imgData.data[i + 1] + 15
+            var offset = 15;
+            imgData.data[i + 1] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+        }
+        return imgData;
+    }
+
+    const extreme_offset_blue = () => {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var offset = 35;
+            imgData.data[i + 2] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+        }
+        return imgData;
+    }
+    
+    const extra_offset_blue = () => {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var offset = 15;
+            imgData.data[i + 2] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+        }
+        return imgData;
+    }
+
+    const extreme_offset_green = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var offset = 35;
+            imgData.data[i + 1] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+        }
+        return imgData;
+    }
+
+    const extra_offset_green = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var offset = 15;
+            imgData.data[i + 1] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+        }
+        return imgData;
+    }
+
+    const extreme_offset = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var offset = 35;
+            imgData.data[i] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+        }
+        return imgData;
+    }
+
+    const extra_offset_red = function () {
+        for (i = 0; i < imgData.data.length; i += 4) {
+            var offset = 15;
+            imgData.data[i] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
         }
         return imgData;
     }
@@ -335,6 +383,14 @@
         }
         return imgData;
     }
+
+    // const offset_imgdata = () => {
+    //     for (i = 0; i < imgData.data.length; i += 4) {
+    //         var offset = 15;
+    //         imgData.data[i] = imgData.data[i + 4 * offset * offset] == undefined ? 0 : imgData.data[i + 4 * offset];
+    //     }
+    //     return imgData;
+    // }
 
     
 
